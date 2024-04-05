@@ -634,6 +634,11 @@ TEM        & transverse eletromagnetic
 \acrodef{PDF}[PDF]{Portable Document Format}
 \acrodef{PDFs}[PDFs]{Portable Document Formats}
 \acrodef{OCR}[OCR]{Optical Character Recognition}
+\acrodef{LLMs}[LLMs]{Large Language Models}
+\acrodef{LLM}[LLM]{Large Language Model}
+\acrodef{GPT}[GPT]{Generative Pre-trained Transformer}
+\acrodef{BERT}[BERT]{Bidirectional Encoder Representations from Transformers}
+\acrodef{KPIs}[KPIs]{Key Performance Indicators}
 
 \begin{acronym}
 	\acro{AI}{Artificial Intelligence}
@@ -646,6 +651,11 @@ TEM        & transverse eletromagnetic
 	\acro{PDF}{Portable Document Format}
 	\acro{PDFs}{Portable Document Formats}
 	\acro{OCR}{Optical Character Recognition}
+	\acro{LLMs}{Large Language Models}
+	\acro{LLM}{Large Language Model}
+	\acro{GPT}{Generative Pre-trained Transformer}
+	\acro{BERT}{Bidirectional Encoder Representations from Transformers}
+	\acro{KPIs}{Key Performance Indicators}
 \end{acronym}
 
 %% Text body begins. Note that since the text body is mostly in Finnish the
@@ -662,22 +672,22 @@ TEM        & transverse eletromagnetic
 
 \subsection{Background of the Field of Study}
 
-The field of data extraction from financial reports has evolved significantly with advancements in text processing and machine learning technologies. Historically, this task involved manual data entry or rule-based systems that were labor-intensive and prone to errors. The emergence of Large Language Models (LLMs), such as GPT (Generative Pre-trained Transformer) and BERT (Bidirectional Encoder Representations from Transformers), has revolutionized this domain. These models have the ability to understand and extract complex financial information from unstructured data, thereby increasing accuracy and efficiency. Recent studies have demonstrated the potential of LLMs in automating financial data extraction, highlighting improvements in processing time and data accuracy over traditional methods.
+The field of data extraction from financial reports has evolved significantly with advancements in text processing and machine learning technologies. Historically, this task involved manual data entry or rule-based systems that were labor-intensive and prone to errors. The emergence of \ac{LLMs}, such as \ac{GPT} and \ac{BERT}, has revolutionized this domain. These models have the ability to understand and extract complex financial information from unstructured data, thereby increasing accuracy and efficiency. Recent studies have demonstrated the potential of \ac{LLMs} in automating financial data extraction, highlighting improvements in processing time and data accuracy over traditional methods.
 
 \subsection{General Objective}
 
 This study aims to extend the current capabilities of data extraction systems by incorporating advanced \ac{LLMs} and exploring novel methodologies in the field.
 The primary goals include: ellaborating a comprehensive comparison of methods for extracting information from financial reports, with a focus on non-standard reports,
 
-enhancing the precision and efficiency of data extraction from financial reports, developing a scalable system capable of processing large volumes of data, and comparing the effectiveness of various LLMs and extraction techniques. By achieving these goals, the study seeks to contribute to the broader understanding of automated data extraction and its application in financial analysis.
+enhancing the precision and efficiency of data extraction from financial reports, developing a scalable system capable of processing large volumes of data, and comparing the effectiveness of various \ac{LLMs} and extraction techniques. By achieving these goals, the study seeks to contribute to the broader understanding of automated data extraction and its application in financial analysis.
 
 \subsection{Primary Research Question and Sub-Problems}
 
-The primary research question of this study focuses on: ``How can Large Language Models (LLMs) be optimized for more accurate and efficient extraction of financial data from unstructured reports?" Sub-problems in this line of inquiry include: identifying the most effective LLM architectures for financial data recognition, developing methodologies for context-aware data extraction, enhancing the system's ability to handle diverse report formats, and evaluating the impact of training data quality and volume on model performance. These sub-problems are essential for understanding the intricacies of applying LLMs to financial data extraction and for developing a comprehensive solution.
+The primary research question of this study focuses on: ``\ac{LLMs} be optimized for more accurate and efficient extraction of financial data from unstructured reports?" Sub-problems in this line of inquiry include: identifying the most effective LLM architectures for financial data recognition, developing methodologies for context-aware data extraction, enhancing the system's ability to handle diverse report formats, and evaluating the impact of training data quality and volume on model performance. These sub-problems are essential for understanding the intricacies of applying \ac{LLMs} to financial data extraction and for developing a comprehensive solution.
 
 \subesection{Scope and Constraints}
 
-The scope of this study is limited to the extraction of financial data from English-language reports, focusing on publicly available annual and quarterly financial statements. Key constraints include the variability in report formats, the complexity of financial terminology, and the inherent limitations of current LLM technologies in understanding domain-specific contexts. The study primarily revolves around the use of GPT and BERT models, considering their widespread adoption and state-of-the-art performance in text processing tasks. Main concepts involved include natural language processing (NLP), machine learning, data extraction, and financial analysis, with a particular emphasis on the adaptation and optimization of LLMs for specialized data extraction tasks.
+The scope of this study is limited to the extraction of financial data from English-language reports, focusing on publicly available annual and quarterly financial statements. Key constraints include the variability in report formats, the complexity of financial terminology, and the inherent limitations of current LLM technologies in understanding domain-specific contexts. The study primarily revolves around the use of GPT and BERT models, considering their widespread adoption and state-of-the-art performance in text processing tasks. Main concepts involved include \ac{NLP}, machine learning, data extraction, and financial analysis, with a particular emphasis on the adaptation and optimization of LLMs for specialized data extraction tasks.
 
 
 % %% An example of an unordered (itemised) list. Instead on the default bullet
@@ -699,7 +709,7 @@ The scope of this study is limited to the extraction of financial data from Engl
 
 % Extracting information from PDF files has been an explored area of research for both academia and industry
 % TODO cite 1993
-Ever since \ac{PDFs} were created by Adobe in 1993, they have been used to store and share information. These document standard quickly became a way of companies reporting their financial information for the public as well as KPIs and other important information internally. This has led to a large amount of information being stored in \ac{PDFs}, which has led to a need to extract information from these files. A series of professions have arised from this need, such as data entry, data extraction, and data analysis. The extraction of information from \ac{PDFs} has been a manual process for most of the tasks until recent years, when \ac{OCR} and \ac{NLP} technologies have been developed to automate processes involving processing \ac{PDFs}.
+Ever since \ac{PDFs} were created by Adobe in 1993, they have been used to store and share information. These document standard quickly became a way of companies reporting their financial information for the public as well as \ac{KPI}s and other important information internally. This has led to a large amount of information being stored in \ac{PDFs}, which has led to a need to extract information from these files. A series of professions have arised from this need, such as data entry, data extraction, and data analysis. The extraction of information from \ac{PDFs} has been a manual process for most of the tasks until recent years, when \ac{OCR} and \ac{NLP} technologies have been developed to automate processes involving processing \ac{PDFs}.
 
 % TODO cite
 Extracting information from a document, recently referred to ``Document AI'' is a complex problem that often involves cross-modal interactions where information is represented in both text and visual form. This is particularly true for financial reports, where information is often presented in tables, charts, and text. The problem is further complicated by the fact that financial reports are often not standardized, and the information is presented in diverse range of formats.
