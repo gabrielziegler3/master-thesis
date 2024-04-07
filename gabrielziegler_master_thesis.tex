@@ -723,7 +723,9 @@ This method has shown significant promise in improving the accuracy and depth of
 
 Despite their many advantages, \ac{LLMs} have known limitations when applied to Document AI tasks.
 One issue that is introduced with the generative nature of these models is the potential for generating incorrect or misleading information, especially when the input data is ambiguous or incomplete.
-These are oftentimes referred to as hallucinations
+These mistakes --- oftentimes referred to as hallucinations --- occur when the generative model create plausible and convincing responses that are incorrect \cite{xu2024hallucination}.
+The fact that these mistakes are realistic increases the difficulty of detecting them and bring uncertainty about the reliability of the information provided by the model in a productive environment.
+There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrieval}, fine-tuning a model on a specific domain \cite{brown2020language} or by retrying the generation process multiple times while validating the output against a defined model such as the tools LangChain \cite{Chase_LangChain_2022} and instructor \cite{Instructor2023} propose.
 
 \clearpage
 \section{Financial Reports Dataset}
