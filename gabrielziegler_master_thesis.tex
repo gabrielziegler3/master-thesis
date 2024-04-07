@@ -595,6 +595,7 @@ Otaniemi, 31 August 2024\\
 \acrodef{BERT}[BERT]{Bidirectional Encoder Representations from Transformers}
 \acrodef{KPI}[KPI]{Key Performance Indicator}
 \acrodef{KPIs}[KPIs]{Key Performance Indicators}
+\acrodef{RAG}[RAG]{Retrieval Augmented Generation}
 
 \begin{acronym}
 	\acro{AI}{Artificial Intelligence}
@@ -613,6 +614,7 @@ Otaniemi, 31 August 2024\\
 	\acro{BERT}{Bidirectional Encoder Representations from Transformers}
 	\acro{KPI}{Key Performance Indicator}
 	\acro{KPIs}{Key Performance Indicators}
+	\acro{RAG}{Retrieval Augmented Generation}
 \end{acronym}
 
 %% Text body begins. Note that since the text body is mostly in Finnish the
@@ -649,7 +651,7 @@ The scope of this study is limited to the extraction of financial data from Engl
 %% In a thesis, every section/chapter starts a new page, hence the \clearpage
 \clearpage
 
-\section{Literature review}
+\section{Concepts and State of the Art}
 
 % Extracting information from PDF files has been an explored area of research for both academia and industry
 % TODO cite 1993
@@ -660,13 +662,45 @@ Extracting information from a document, recently referred to ``Document AI'' is 
 % The document domain has been explored in different paradigms such as document question answering (QA) ~\cite{}, classification ~\cite{}, information extraction ~\cite{}, document summarization ~\cite{}, layout detection ~\cite{}, etc.
 % There have been studies using only the text information ~\cite{}, and others focusing on visual information ~\cite{}. However, the most recent trend is to use multimodal models that can handle both text and visual information as the literature has shown in recent years ~\cite{}.
 %
-% TODO NOTE
-methods:
+% TODO
 
-vector search
-gpt4 multimodal vision
-Q\&A with RAG
+\subsection{\ac{LLMs}}
 
+Large Language Models (\ac{LLMs}) are a class of artificial intelligence models that have been designed to understand, generate, and interact with human language at a large scale.
+These models are trained on vast amounts of text data, allowing them to learn language patterns, grammar, context, and even domain-specific knowledge.
+As a result, \ac{LLMs} can perform a wide range of language-related tasks, such as translation, summarization, question answering, and more, with remarkable proficiency. The development and evolution of \ac{LLMs} have been instrumental in advancing the field of natural language processing (\ac{NLP}), enabling more natural and effective human-computer interactions.
+The capabilities of \ac{LLMs} have found applications in various sectors, including but not limited to customer service, content creation, and, notably, in extracting and analyzing information from documents in the field known as Document AI \cite{}.
+
+\subsection{\ac{GPT}}
+
+\subsection{GPT-4}
+
+GPT-4 --- the fourth \ac{GPT} release by OpenAI, brought a significant leap in the capabilities of \ac{LLMs} when compared to its predecessor \ac{GPT}-3.
+This model builds upon the architecture and training methodologies of its predecessors, incorporating lessons learned and innovations to achieve unprecedented performance across a broad spectrum of language tasks.
+GPT-4 is characterized by its deep learning architecture, which allows it to generate human-like text, comprehend complex instructions, and provide accurate information and analysis based on the context provided to it.
+Its training involved feeding the model with diverse and extensive datasets, enabling it to grasp nuances across different languages, cultures, and domains.
+GPT-4's versatility and adaptability have made it a valuable tool in numerous applications, from creative writing assistance to sophisticated data analysis and interpretation in academic research \cite{}.
+
+\subsection{GPT-4V}
+
+GPT-4 Vision represents an extension of the capabilities of traditional \ac{LLMs} into the realm of visual understanding and analysis.
+By integrating vision-based artificial intelligence technologies with the language processing prowess of GPT-4, this model can interpret and analyze images, diagrams, and visual data in conjunction with textual information. This multimodal approach enables GPT-4 Vision to perform tasks that require an understanding of both visual and textual content, such as extracting data from charts and graphs in financial reports, identifying key information in documents with complex layouts, and answering questions that depend on visual cues. The development of GPT-4 Vision is a testament to the ongoing advancements in AI, highlighting the move towards more integrated and comprehensive models that can navigate the complexities of human communication and information processing \cite{}.
+
+\subsection{\ac{LLMs} for Document AI}
+
+\ac{LLMs} have become a popular strategy in the field of Document AI, transforming how information is extracted, processed, and analyzed from documents.
+In the context of Document AI, \ac{LLMs} are utilized to understand the content within documents, ranging from simple text to complex structures like tables and charts, and the relationships between different pieces of information.
+These models leverage their extensive training on diverse datasets to adapt to the specific challenges posed by document analysis, such as varying formats, layouts, and the integration of multimodal data.
+Through techniques such as transfer learning and fine-tuning, \ac{LLMs} can be specialized to perform tasks including but not limited to information extraction, document summarization, and semantic search within documents.
+Their ability to process and analyze documents at scale significantly reduces the time and effort required for data entry, extraction, and analysis, enabling more efficient and accurate handling of document-based information \cite{}.
+
+\subsection{Question answering with \ac{RAG}}
+
+\ac{RAG} represents a novel approach in leveraging \ac{LLMs} for the task of question answering.
+\ac{RAG} combines the generative capabilities of models like GPT with retrieval-based methods, which search a large corpus of documents to find relevant information that can aid in generating accurate and informative answers.
+This technique involves two main components: a retriever, which identifies relevant documents or passages given a query, and a generator, which synthesizes the retrieved information into a coherent response.
+By integrating these two processes, RAG is able to produce answers that are not only contextually relevant but also enriched with details and insights drawn from a wide range of sources.
+This method has shown significant promise in improving the accuracy and depth of responses provided by AI systems in question answering applications, particularly in domains where detailed and specific knowledge is required, such as academic research and technical support \cite{}.
 
 \subsection{Structure of the thesis}
 
@@ -725,6 +759,10 @@ chapter or later in the discussions part. You may have the discussion in a
 chapter of its own, separate from the summary or conclusions.
 
 
+\subsection{Limitations of the data extraction systems}
+
+Explain what are the observed limitations
+
 \clearpage
 
 \section{Summary/Conclusions}
@@ -746,24 +784,6 @@ your school. This template aims to help you meet these requirements.
 \thesisbibliography
 
 \begin{thebibliography}{99}
-
-%% A quick-and-dirty hack to add text between the bibliography section title
-%% and the first reference. You don't need this in your thesis, so remove it.
-  \item[]
-  \hskip-\leftmargin
-  \begin{minipage}{\textwidth}
-	This is the list of references to the sources cited in
-	appendix~\ref{app:layout}. The list more or less follows the Vancouver
-	style (IEEE). See appendix~\ref{app:reference} for a detailed exposition
-	on cross-referencing and bibliography styles. Follow the description there.
-  \end{minipage}
-  \bigskip
-%% End of hack.
-
-  \bibitem{aaltolib} Citation Guide: Making a bibliography, \textit{Aalto
-  	University Learning Centre}. Online article. Available
-    \url{https://libguides.aalto.fi/c.php?g=410674&p=2797572}
-    (accessed on 14.7.2021)
 
 \end{thebibliography}
 
