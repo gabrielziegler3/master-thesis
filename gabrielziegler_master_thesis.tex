@@ -401,7 +401,7 @@ of basic education. Students educated in languages other than Finnish or Swedish
 write the abstract only in English. Students may include a second or third
 abstract in their native language, if they wish.
 The abstract text of this thesis is written on the readable abstract page as
-well as into the pdf file's metadata via the thesisabstract macro (see the
+well as into the pdf file\'s metadata via the thesisabstract macro (see the
 comment in the TeX file). Write here the text that goes into the metadata. The
 metadata cannot contain special characters, linebreak or paragraph break
 characters, so these must not be used here. If your abstract does not contain
@@ -458,7 +458,7 @@ metadata abstract text must be identical to the text on the abstract page.
   or third abstract in their native language, if they wish.
 
   The abstract text of this thesis is written on the readable abstract page as
-  well as into the pdf file's metadata via the \verb+\thesisabstract+ macro
+  well as into the pdf file\'s metadata via the \verb+\thesisabstract+ macro
   (see comment in this \TeX{} file above). Write here the text that goes onto
   the readable abstract page. You can have special characters, linebreaks, and
   paragraphs here. Otherwise, this abstract text must be identical to the
@@ -655,9 +655,11 @@ enhancing the precision and efficiency of data extraction from financial reports
 
 \subsection{Research Question and Sub-Problems}
 
-The primary research question of this study focuses on: ``\ac{LLMs} be optimized for more accurate and efficient extraction of financial data from unstructured reports?" Sub-problems in this line of inquiry include: identifying the most effective LLM architectures for financial data recognition, developing methodologies for context-aware data extraction, enhancing the system's ability to handle diverse report formats, and evaluating the impact of training data quality and volume on model performance. These sub-problems are essential for understanding the intricacies of applying \ac{LLMs} to financial data extraction and for developing a comprehensive solution.
+The primary research question of this study focuses on: ``What are the best strategies for using \ac{LLMs} for more accurate and efficient extraction of financial data from unstructured reports?".
+Sub-problems in this line of inquiry include: identifying the most effective LLM architectures for financial data recognition, developing methodologies for context-aware data extraction, enhancing the system\'s ability to handle diverse report formats, and evaluating the impact of training data quality and volume on model performance.
+These sub-problems are essential for understanding the intricacies of applying \ac{LLMs} to financial data extraction and for developing a comprehensive solution.
 
-\subesection{Scope and Constraints}
+\subsection{Scope and Constraints}
 
 The scope of this study is limited to the extraction of financial data from English-language reports, focusing on publicly available annual and quarterly financial statements. Key constraints include the variability in report formats, the complexity of financial terminology, and the inherent limitations of current LLM technologies in understanding domain-specific contexts. The study primarily revolves around the use of GPT and BERT models, considering their widespread adoption and state-of-the-art performance in text processing tasks. Main concepts involved include \ac{NLP}, machine learning, data extraction, and financial analysis, with a particular emphasis on the adaptation and optimization of LLMs for specialized data extraction tasks.
 
@@ -692,12 +694,14 @@ GPT-4 --- the fourth \ac{GPT} release by OpenAI, brought a significant leap in t
 This model builds upon the architecture and training methodologies of its predecessors, incorporating lessons learned and innovations to achieve unprecedented performance across a broad spectrum of language tasks.
 GPT-4 is characterized by its deep learning architecture, which allows it to generate human-like text, comprehend complex instructions, and provide accurate information and analysis based on the context provided to it.
 Its training involved feeding the model with diverse and extensive datasets, enabling it to grasp nuances across different languages, cultures, and domains.
-GPT-4's versatility and adaptability have made it a valuable tool in numerous applications, from creative writing assistance to sophisticated data analysis and interpretation in academic research \cite{}.
+GPT-4\'s versatility and adaptability have made it a valuable tool in numerous applications, from creative writing assistance to sophisticated data analysis and interpretation in academic research \cite{OpenAI2023GPT4}.
 
 \subsection{GPT-4V}
 
 GPT-4 Vision represents an extension of the capabilities of traditional \ac{LLMs} into the realm of visual understanding and analysis.
-By integrating vision-based artificial intelligence technologies with the language processing prowess of GPT-4, this model can interpret and analyze images, diagrams, and visual data in conjunction with textual information. This multimodal approach enables GPT-4 Vision to perform tasks that require an understanding of both visual and textual content, such as extracting data from charts and graphs in financial reports, identifying key information in documents with complex layouts, and answering questions that depend on visual cues. The development of GPT-4 Vision is a testament to the ongoing advancements in AI, highlighting the move towards more integrated and comprehensive models that can navigate the complexities of human communication and information processing \cite{}.
+By integrating vision-based artificial intelligence technologies with the language processing prowess of GPT-4, this model can interpret and analyze images, diagrams, and visual data in conjunction with textual information.
+This multimodal approach enables GPT-4 Vision to perform tasks that require an understanding of both visual and textual content, such as extracting data from charts and graphs in financial reports, identifying key information in documents with complex layouts, and answering questions that depend on visual cues.
+The development of GPT-4 Vision is a testament to the ongoing advancements in AI, highlighting the move towards more integrated and comprehensive models that can navigate the complexities of human communication and information processing \cite{2023GPT4VisionSC}.
 
 \subsection{\ac{LLMs} for Document AI}
 
@@ -714,6 +718,12 @@ Their ability to process and analyze documents at scale significantly reduces th
 This technique involves two main components: a retriever, which identifies relevant documents or passages given a query, and a generator, which synthesizes the retrieved information into a coherent response.
 By integrating these two processes, RAG is able to produce answers that are not only contextually relevant but also enriched with details and insights drawn from a wide range of sources.
 This method has shown significant promise in improving the accuracy and depth of responses provided by AI systems in question answering applications, particularly in domains where detailed and specific knowledge is required, such as academic research and technical support \cite{}.
+
+\subsection{Issues with \ac{LLMs} for Document AI}
+
+Despite their many advantages, \ac{LLMs} have known limitations when applied to Document AI tasks.
+One issue that is introduced with the generative nature of these models is the potential for generating incorrect or misleading information, especially when the input data is ambiguous or incomplete.
+These are oftentimes referred to as hallucinations
 
 \clearpage
 \section{Financial Reports Dataset}
@@ -782,9 +792,9 @@ your school. This template aims to help you meet these requirements.
 %%
 \thesisbibliography
 
-\begin{thebibliography}{99}
-
-\end{thebibliography}
+%reference bib file
+\bibliographystyle{IEEEtranDOI}
+\bibliography{references}
 
 %% Appendices
 %% If you don't have appendices, your thesis ends here. Remove \clearpage,
