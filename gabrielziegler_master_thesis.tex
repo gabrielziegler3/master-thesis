@@ -200,6 +200,7 @@
 %% Add here the packges you need
 %%
 \usepackage{graphicx}
+\usepackage{textcomp}
 
 
 \usepackage[printonlyused,withpage]{acronym}
@@ -401,7 +402,7 @@ of basic education. Students educated in languages other than Finnish or Swedish
 write the abstract only in English. Students may include a second or third
 abstract in their native language, if they wish.
 The abstract text of this thesis is written on the readable abstract page as
-well as into the pdf file\'s metadata via the thesisabstract macro (see the
+well as into the pdf file’ metadata via the thesisabstract macro (see the
 comment in the TeX file). Write here the text that goes into the metadata. The
 metadata cannot contain special characters, linebreak or paragraph break
 characters, so these must not be used here. If your abstract does not contain
@@ -458,7 +459,7 @@ metadata abstract text must be identical to the text on the abstract page.
   or third abstract in their native language, if they wish.
 
   The abstract text of this thesis is written on the readable abstract page as
-  well as into the pdf file\'s metadata via the \verb+\thesisabstract+ macro
+  well as into the pdf file’ metadata via the \verb+\thesisabstract+ macro
   (see comment in this \TeX{} file above). Write here the text that goes onto
   the readable abstract page. You can have special characters, linebreaks, and
   paragraphs here. Otherwise, this abstract text must be identical to the
@@ -579,6 +580,7 @@ Otaniemi, 31 August 2024\\
 
 \cleardoublepage
 
+% TODO remove plural acronyms
 \acrodef{AI}[AI]{Artificial Intelligence}
 \acrodef{ML}[ML]{Machine Learning}
 \acrodef{DL}[DL]{Deep Learning}
@@ -622,6 +624,8 @@ Otaniemi, 31 August 2024\\
 %% in explaining Finnish-language specific thesis conventions in English.
 %% This text will be translated to English soon.
 %%
+
+\newpage
 \section{Introduction}
 \label{sec:intro}
 
@@ -636,7 +640,7 @@ The thesis is composed by a comprehensive comparison of methods for extracting i
 \begin{enumerate}
 	\item \label{list:intro} Introduction (Context, Problem Definition, Objectives)
 	\item Literature review (Concepts, State of the Art)
-	\item Methodology (Detail how experiments were conducted)
+	\item Methodology (Dataset, Detail how experiments were conducted)
 	\item Results (Present the results of the experiments)
 	\item Conclusion (Interpretation of results, implications, limitations)
 	\item References
@@ -656,7 +660,7 @@ enhancing the precision and efficiency of data extraction from financial reports
 \subsection{Research Question and Sub-Problems}
 
 The primary research question of this study focuses on: ``What are the best strategies for using \ac{LLMs} for more accurate and efficient extraction of financial data from unstructured reports?".
-Sub-problems in this line of inquiry include: identifying the most effective LLM architectures for financial data recognition, developing methodologies for context-aware data extraction, enhancing the system\'s ability to handle diverse report formats, and evaluating the impact of training data quality and volume on model performance.
+Sub-problems in this line of inquiry include: identifying the most effective LLM architectures for financial data recognition, developing methodologies for context-aware data extraction, enhancing the system’ ability to handle diverse report formats, and evaluating the impact of training data quality and volume on model performance.
 These sub-problems are essential for understanding the intricacies of applying \ac{LLMs} to financial data extraction and for developing a comprehensive solution.
 
 \subsection{Scope and Constraints}
@@ -694,7 +698,7 @@ GPT-4 --- the fourth \ac{GPT} release by OpenAI, brought a significant leap in t
 This model builds upon the architecture and training methodologies of its predecessors, incorporating lessons learned and innovations to achieve unprecedented performance across a broad spectrum of language tasks.
 GPT-4 is characterized by its deep learning architecture, which allows it to generate human-like text, comprehend complex instructions, and provide accurate information and analysis based on the context provided to it.
 Its training involved feeding the model with diverse and extensive datasets, enabling it to grasp nuances across different languages, cultures, and domains.
-GPT-4\'s versatility and adaptability have made it a valuable tool in numerous applications, from creative writing assistance to sophisticated data analysis and interpretation in academic research \cite{OpenAI2023GPT4}.
+GPT-4’s versatility and adaptability have made it a valuable tool in numerous applications, from creative writing assistance to sophisticated data analysis and interpretation in academic research \cite{OpenAI2023GPT4}.
 
 \subsection{GPT-4V}
 
@@ -723,9 +727,36 @@ This method has shown significant promise in improving the accuracy and depth of
 
 Despite their many advantages, \ac{LLMs} have known limitations when applied to Document AI tasks.
 One issue that is introduced with the generative nature of these models is the potential for generating incorrect or misleading information, especially when the input data is ambiguous or incomplete.
-These mistakes --- oftentimes referred to as hallucinations --- occur when the generative model create plausible and convincing responses that are incorrect \cite{xu2024hallucination}.
+These mistakes --- oftentimes referred to as hallucinations --- occur when the generative model create plausible and convincing responses that are incorrect.
+Although, it is possible to identify and mitigate these so-called hallucinations, studies have shown via learning theory that these mistakes are inherent to the generative nature of \ac{LLMs} and cannot be completely extinguished \cite{xu2024hallucination}.
 The fact that these mistakes are realistic increases the difficulty of detecting them and bring uncertainty about the reliability of the information provided by the model in a productive environment.
-There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrieval}, fine-tuning a model on a specific domain \cite{brown2020language} or by retrying the generation process multiple times while validating the output against a defined model such as the tools LangChain \cite{Chase_LangChain_2022} and instructor \cite{Instructor2023} propose.
+Comprehensive studies have been conducted to understand the causes of hallucinations and found that these come from a variety of reasons including noisy data, poor
+parametric choices, incorrect attention mechanism, improper training procedure, among others.
+There are two distinct categories of hallucinations identified in the literature: intrinsic hallucination and extrinsic hallucination and they require different strategies to be mitigated \cite{survey_hallucination_natural_language_generation}.
+Consider that we have the following source data:
+
+\begin{quote}
+	\textit{The company reported revenues of \$1 million in Q1 2022, and \$2 million in Q2 2022.}
+\end{quote}
+
+\begin{itemize}
+	\item \textbf{Intrinsic hallucination}: This type of hallucination occurs when the model generates information that contradicts the input data.
+	A case of intrinsic hallucination would be if the model generated the following output:
+	\begin{quote}
+		\textit{The company reported revenues of \$1 million in Q1 2022, and \$3 million in Q2 2022.}
+	\end{quote}
+	Here, the model has generated information that is inconsistent with the input data since the revenue reported in Q2 2022 is incorrect according to the source data.
+	This type of hallucination can be particularly problematic in document analysis and is the one that this study dives the most into.
+	\item \textbf{Extrinsic hallucination}: Extrinsic hallucination occurs when the model generates incorrect information that is not present in the input data but is plausible given the context.
+	For example, if the model generated the following output:
+	\begin{quote}
+		\textit{The company is projected to report revenues of \$3 million in Q3 2022.}
+	\end{quote}
+	This information is not present in the input data and cannot be inferred from the given context, therefore it is classified as an extrinsic hallucination.
+\end{itemize}
+
+There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrieval}, fine-tuning a model on a specific domain \cite{brown2020language} or by retrying the generation process multiple times while validating the output against a defined model such as the tools \textit{LangChain} \cite{Chase_LangChain_2022} and \textit{instructor} \cite{Instructor2023} propose.
+In this study, we show applications of how using defined models with \textit{instructor} can help in mitigating hallucinations in the context of document data extraction.
 
 \clearpage
 \section{Financial Reports Dataset}
