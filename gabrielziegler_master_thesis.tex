@@ -815,6 +815,45 @@ def extract_data_from_pdf(pdf_file: str):
 This pre-processing step is used to iterate over the pages in the \ac{PDF} document and find the pages of interest so that the core engine is only applied to these pages.
 This is an important step to reduce the processing time and to avoid unnecessary processing of pages that do not contain relevant information, however it is also crucial to make sure that no false negatives are generated, as this could lead to missing pages of interest.
 
+\subsubsection{Consolidating information from different pages}
+
+In an ideal world, all the information that we are looking for would be contained in one and only one page of the \ac{PDF} document and our system would be able to find the page, extract and return.
+However, this is not the case in practice, as different companies choose different designs to display their information and sometimes the indicators are spread across different pages, or even repeated in different sections of the report.
+Since our system needs to be able to resolve conflicts in the scenario of having multiple pages with the same information (potentially with different values due to different local regulations, units, and so forth), a strategy for consolidating the information is needed.
+After testing out different strategies like frequency bags, picking the output with most found values, and \ac{LLM}s, we have decided to stick with the \ac{LLM}, more especially the \ac{GPT}-4 model, to consolidate the information from different pages.
+Here is a demonstration of how this can be done:
+
+\begin{minted}{python}
+def consolidate_data(data: list[str]) -> str:
+  """
+  Consolidate data from different pages
+
+  Args:
+    data: List of JSON strings containing the data
+          extracted from different pages
+
+  Returns:
+    consolidated_data: Unique JSON string containing
+                       the consolidated data
+  """
+  # Load the GPT-4 model
+  consolidated_data = openai.chat.completions.create(
+    model=self.model,
+      response_format={"type": "json"},
+      messages=[
+        {
+          "role": "system",
+          "content": """Consolidate the following data
+                        into only one JSON string...""",
+        },
+        {"role": "user", "content": data},
+      ]
+    )
+  return consolidated_data
+\end{minted}
+
+This is a simple example of how the \ac{GPT}-4 model can be used to consolidate information from different pages of the \ac{PDF} document and can definitely be improved by adding more context and validation steps, such as checking for inconsistencies in the data, before returning the consolidated information.
+
 \subsection{Metrics and Evaluation Criteria}
 
 \subsection{System Specifications}
