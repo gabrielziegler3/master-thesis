@@ -783,6 +783,18 @@ Different strategies for extracting information from financial reports have been
 The study brings a strategy that is focused solely on text information, an image-analysis approach that extracts information from images contained in the reports, and a multimodal approach that combines image and text information to validate extracted data from more than one source of truth.
 For these different experiments, we consider that the core engine changes, but we maintain the same pre-processing steps across them to ensure that the comparison only takes into account the core feature of extracting data from a given input.
 
+\subsection{System Specifications}
+
+All the mentioned experiments were conducted within the same operating system environment and with the same hardware.
+For transparency and reproducibility, we here list the hardware and software specifications used in the experiments:
+
+\begin{itemize}
+    \item CPU: AMD Ryzen 7 3700X 16 threads at 3.600 GHz
+    \item Memory: 32GB at 3200 MHz
+    \item Operating System: Linux Manjaro 6.1.55-1
+    \item Python: 3.11.5
+\end{itemize}
+
 \subsection{Common processing steps}
 
 For all of the experiments, the system receives a \ac{PDF} as input and common pre and post-processing steps are applied to the data to ensure that the system is able to extract the information from the reports.
@@ -836,7 +848,7 @@ def consolidate_data(data: list[str]) -> str:
     consolidated_data: Unique JSON string containing
                        the consolidated data
   """
-  # Load the GPT-4 model
+  # Send request with data and instructions to GPT4
   consolidated_data = openai.chat.completions.create(
     model=self.model,
       response_format={"type": "json"},
@@ -856,15 +868,16 @@ This is a simple example of how the \ac{GPT}-4 model can be used to consolidate 
 
 \subsection{Metrics and Evaluation Criteria}
 
-\subsection{System Specifications}
+\subsection{Text-only approach with \ac{LLM}s}
 
-Define the system specifications and requirements used to run the experiments
+In this experiment, we use the \ac{GPT}-4 model to extract information from the text contained in the financial reports without considering any images or visual data.
+Evidently, this approach is limited to the information that is present in the text and does not take into account any charts or important visual cues that the report might contain, thus it is expected that this system may fail for cases where the indicator are presented in a visual form.
 
-\subsection{\ac{LLM} to make sense of text}
+\subsection{Image-only approach with \ac{LLM}s}
 
-LLM model using only text to identify key indicators reported in PDF files.
+In this experiment, we use the \ac{GPT}-4 Vision model to extract information from the images contained in the financial reports without considering any text data.
+Since OpenAI's visual model is highly accurate in extracting information from images, this approach is expected to have an overall performance superior to the text-only approach because it will be able to generalize the information from images but it is also expected to have an increased proclivity to hallucinations, as the model is not able to validate the information extracted from the images with the text data.
 
-\subsection{Multimodal \ac{LLM}s to extract information from images}
 
 \subsection{Multimodal \ac{LLM}s to extract information from images and text}
 
