@@ -725,6 +725,8 @@ This method has shown significant promise in improving the accuracy and depth of
 
 \subsection{Issues with \ac{LLMs} for Document AI}
 
+\subsubsection{Hallucinations}
+
 Despite their many advantages, \ac{LLMs} have known limitations when applied to Document AI tasks.
 One issue that is introduced with the generative nature of these models is the potential for generating incorrect or misleading information, especially when the input data is ambiguous or incomplete.
 These mistakes --- oftentimes referred to as hallucinations --- occur when the generative model create plausible and convincing responses that are incorrect.
@@ -733,7 +735,7 @@ The fact that these mistakes are realistic increases the difficulty of detecting
 Comprehensive studies have been conducted to understand the causes of hallucinations and found that these come from a variety of reasons including noisy data, poor
 parametric choices, incorrect attention mechanism, improper training procedure, among others.
 There are two distinct categories of hallucinations identified in the literature: intrinsic hallucination and extrinsic hallucination and they require different strategies to be mitigated \cite{survey_hallucination_natural_language_generation}.
-Consider that we have the following source data:
+Consider that we have the following source data used as input to an \ac{LLM} model:
 
 \begin{quote}
 	\textit{The company reported revenues of \$1 million in Q1 2022, and \$2 million in Q2 2022.}
@@ -755,8 +757,19 @@ Consider that we have the following source data:
 	This information is not present in the input data and cannot be inferred from the given context, therefore it is classified as an extrinsic hallucination.
 \end{itemize}
 
-There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrieval}, fine-tuning a model on a specific domain \cite{brown2020language} or by retrying the generation process multiple times while validating the output against a defined model such as the tools \textit{LangChain} \cite{Chase_LangChain_2022} and \textit{instructor} \cite{Instructor2023} propose.
-In this study, we show applications of how using defined models with \textit{instructor} can help in mitigating hallucinations in the context of document data extraction.
+There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrievalaugmented}, fine-tuning a model on a specific domain \cite{brown2020language} or by retrying the generation process multiple times while validating the output against a defined model such as the tools \textit{LangChain} \cite{Chase_LangChain_2022} and \textit{instructor} \cite{Instructor2023} propose.
+In this study, we show applications of how using defined models with \textit{pydantic} \cite{pydantic} and \textit{instructor} can help in mitigating hallucinations in the context of document data extraction.
+
+\subsubsection{Interpretability and Explainability}
+
+Ever since \ac{DL} models gained popularity in productive environments, many concerns have been raised regarding the interpretability and explainability of these models, particularly in high-stakes applications such as healthcare, finance, and law where accountability and transparency are crucial.
+As already demonstrated in several studies, \ac{DL} models are often treated as black boxes, because of the complex and non-linear nature of their architectures, making it difficult to understand how they arrive at their decisions and generate their outputs \cite{castelvecchi2016can, 2018_survey_explaining_black_box}.
+\ac{LLMs} are no exception to this issue, as their complex attention mechasnisms and deep learning architectures make it challenging to interpret the reasoning behind their predictions and the information they generate.
+
+The lack of interpretability and explainability can be a significant barrier to the adoption of \ac{LLMs} in critical applications, as it not only raises concerns about the reliability, trustworthiness, and ethical implications of the decisions made by these models, but also increases complexity when debugging and improving the models.
+The uncertainty involving \ac{LLMs} outputs poses a challenge for users who need to understand what kinds of inputs lead to incorrect outputs.
+This is particularly important in the context of this study as the information extracted from financial reports is used to make critical business decisions, and the reliability and accuracy of the extracted data are paramount.
+For these reasons, we investigate nuances on the documents that lead to errouneous predictions so that they can be avoided in the future.
 
 \clearpage
 \section{Financial Reports Dataset}
