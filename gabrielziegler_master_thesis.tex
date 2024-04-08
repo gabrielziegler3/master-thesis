@@ -201,6 +201,8 @@
 %%
 \usepackage{graphicx}
 \usepackage{textcomp}
+\usepackage{minted}
+% \usepackage{fontspec}
 
 
 \usepackage[printonlyused,withpage]{acronym}
@@ -371,9 +373,9 @@
 %% via package options in \usepackage[options]{dolicense} above; see the
 %% dolicense package documentation for other license texts and icons):
 \copyrighttext{\noexpand\textcopyright\ \number\year. This work is
-	licensed under a Creative Commons "Attribution-NonCommercial-ShareAlike 4.0
-	International" (BY-NC-SA 4.0) license.}{\noindent\textcopyright\ \number
-	\year \ \doclicenseThis}
+    licensed under a Creative Commons "Attribution-NonCommercial-ShareAlike 4.0
+    International" (BY-NC-SA 4.0) license.}{\noindent\textcopyright\ \number
+    \year \ \doclicenseThis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -598,20 +600,20 @@ Otaniemi, 31 August 2024\\
 \acrodef{RAG}[RAG]{Retrieval Augmented Generation}
 
 \begin{acronym}
-	\acro{AI}{Artificial Intelligence}
-	\acro{ML}{Machine Learning}
-	\acro{DL}{Deep Learning}
-	\acro{NLP}{Natural Language Processing}
-	\acro{CV}{Computer Vision}
-	\acro{ANN}{Artificial Neural Networks}
-	\acro{CNN}{Convolutional Neural Networks}
-	\acro{PDF}{Portable Document Format}
-	\acro{OCR}{Optical Character Recognition}
-	\acro{LLM}{Large Language Model}
-	\acro{GPT}{Generative Pre-trained Transformer}
-	\acro{BERT}{Bidirectional Encoder Representations from Transformers}
-	\acro{KPI}{Key Performance Indicator}
-	\acro{RAG}{Retrieval Augmented Generation}
+    \acro{AI}{Artificial Intelligence}
+    \acro{ML}{Machine Learning}
+    \acro{DL}{Deep Learning}
+    \acro{NLP}{Natural Language Processing}
+    \acro{CV}{Computer Vision}
+    \acro{ANN}{Artificial Neural Networks}
+    \acro{CNN}{Convolutional Neural Networks}
+    \acro{PDF}{Portable Document Format}
+    \acro{OCR}{Optical Character Recognition}
+    \acro{LLM}{Large Language Model}
+    \acro{GPT}{Generative Pre-trained Transformer}
+    \acro{BERT}{Bidirectional Encoder Representations from Transformers}
+    \acro{KPI}{Key Performance Indicator}
+    \acro{RAG}{Retrieval Augmented Generation}
 \end{acronym}
 
 %% Text body begins. Note that since the text body is mostly in Finnish the
@@ -633,12 +635,12 @@ Otaniemi, 31 August 2024\\
 The thesis is composed by a comprehensive comparison of methods for extracting information from financial reports, with a focus on non-standard reports. The thesis is structured as follows:
 
 \begin{enumerate}
-	\item \label{list:intro} Introduction (Context, Problem Definition, Objectives)
-	\item Literature review (Concepts, State of the Art)
-	\item Methodology (Dataset, Detail how experiments were conducted)
-	\item Results (Present the results of the experiments)
-	\item Conclusion (Interpretation of results, implications, limitations)
-	\item References
+    \item \label{list:intro} Introduction (Context, Problem Definition, Objectives)
+    \item Literature review (Concepts, State of the Art)
+    \item Methodology (Dataset, Detail how experiments were conducted)
+    \item Results (Present the results of the experiments)
+    \item Conclusion (Interpretation of results, implications, limitations)
+    \item References
 \end{enumerate}
 
 \subsection{Background of the Field of Study}
@@ -734,23 +736,23 @@ There are two distinct categories of hallucinations identified in the literature
 Consider that we have the following source data used as input to an \ac{LLM} model:
 
 \begin{quote}
-	\textit{The company reported revenues of \$1 million in Q1 2022, and \$2 million in Q2 2022.}
+    \textit{The company reported revenues of \$1 million in Q1 2022, and \$2 million in Q2 2022.}
 \end{quote}
 
 \begin{itemize}
-	\item \textbf{Intrinsic hallucination}: This type of hallucination occurs when the model generates information that contradicts the input data.
-	A case of intrinsic hallucination would be if the model generated the following output:
-	\begin{quote}
-		\textit{The company reported revenues of \$1 million in Q1 2022, and \$3 million in Q2 2022.}
-	\end{quote}
-	Here, the model has generated information that is inconsistent with the input data since the revenue reported in Q2 2022 is incorrect according to the source data.
-	This type of hallucination can be particularly problematic in document analysis and is the one that this study dives the most into.
-	\item \textbf{Extrinsic hallucination}: Extrinsic hallucination occurs when the model generates incorrect information that is not present in the input data but is plausible given the context.
-	For example, if the model generated the following output:
-	\begin{quote}
-		\textit{The company is projected to report revenues of \$3 million in Q3 2022.}
-	\end{quote}
-	This information is not present in the input data and cannot be inferred from the given context, therefore it is classified as an extrinsic hallucination.
+    \item \textbf{Intrinsic hallucination}: This type of hallucination occurs when the model generates information that contradicts the input data.
+    A case of intrinsic hallucination would be if the model generated the following output:
+    \begin{quote}
+        \textit{The company reported revenues of \$1 million in Q1 2022, and \$3 million in Q2 2022.}
+    \end{quote}
+    Here, the model has generated information that is inconsistent with the input data since the revenue reported in Q2 2022 is incorrect according to the source data.
+    This type of hallucination can be particularly problematic in document analysis and is the one that this study dives the most into.
+    \item \textbf{Extrinsic hallucination}: Extrinsic hallucination occurs when the model generates incorrect information that is not present in the input data but is plausible given the context.
+    For example, if the model generated the following output:
+    \begin{quote}
+        \textit{The company is projected to report revenues of \$3 million in Q3 2022.}
+    \end{quote}
+    This information is not present in the input data and cannot be inferred from the given context, therefore it is classified as an extrinsic hallucination.
 \end{itemize}
 
 There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrievalaugmented}, fine-tuning a model on a specific domain \cite{brown2020language} or by retrying the generation process multiple times while validating the output against a defined model such as the tools \textit{LangChain} \cite{Chase_LangChain_2022} and \textit{instructor} \cite{Instructor2023} propose.
@@ -779,7 +781,39 @@ Dataset used to benchmark different methods.
 
 Different strategies for extracting information from financial reports have been implemented in order to compare their effectiveness across diverse report formats and content types.
 The study brings a strategy that is focused solely on text information, an image-analysis approach that extracts information from images contained in the reports, and a multimodal approach that combines image and text information to validate extracted data from more than one source of truth.
+For these different experiments, we consider that the core engine changes, but we maintain the same pre-processing steps across them to ensure that the comparison only takes into account the core feature of extracting data from a given input.
 
+\subsection{Common processing steps}
+
+For all of the experiments, the system receives a \ac{PDF} as input and common pre and post-processing steps are applied to the data to ensure that the system is able to extract the information from the reports.
+
+\subsubsection{Finding pages of interest}
+
+A common pre-processing step is to find the pages of interest --- those that might contain the information that we are looking for --- in the \ac{PDF} document.
+
+\begin{minted}{python}
+def extract_data_from_pdf(pdf_file: str):
+  # Load the PDF file
+  doc = fitz.open(pdf_file)
+
+  for page in doc:
+    # extract text from page
+    text = page.get_text("text")
+
+    # function that will look for matches
+    # for the indicators of interest
+    matches = search_for_keywords(text)
+
+    # this page does not contain
+    # any relevant information
+    if matches is None:
+        return
+
+    # Then different strategies follow...
+\end{minted}
+
+This pre-processing step is used to iterate over the pages in the \ac{PDF} document and find the pages of interest so that the core engine is only applied to these pages.
+This is an important step to reduce the processing time and to avoid unnecessary processing of pages that do not contain relevant information, however it is also crucial to make sure that no false negatives are generated, as this could lead to missing pages of interest.
 
 \subsection{Metrics and Evaluation Criteria}
 
