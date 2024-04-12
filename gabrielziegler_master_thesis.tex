@@ -762,7 +762,7 @@ In this study, we show applications of how using defined models with \textit{pyd
 
 Ever since \ac{DL} models gained popularity in productive environments, many concerns have been raised regarding the interpretability and explainability of these models, particularly in high-stakes applications such as healthcare, finance, and law where accountability and transparency are crucial.
 As already demonstrated in several studies, \ac{DL} models are often treated as black boxes, because of the complex and non-linear nature of their architectures, making it difficult to understand how they arrive at their decisions and generate their outputs \cite{castelvecchi2016can, 2018_survey_explaining_black_box}.
-\ac{LLM}s are no exception to this issue, as their complex attention mechasnisms and deep learning architectures make it challenging to interpret the reasoning behind their predictions and the information they generate.
+\ac{LLM}s are no exception to this, as their complex attention mechasnisms and deep learning architectures make it challenging to interpret the reasoning behind their predictions and the information they generate.
 
 The lack of interpretability and explainability can be a significant barrier to the adoption of \ac{LLM}s in critical applications, as it not only raises concerns about the reliability, trustworthiness, and ethical implications of the decisions made by these models, but also increases complexity when debugging and improving the models.
 The uncertainty involving \ac{LLM}s outputs poses a challenge for users who need to understand what kinds of inputs lead to incorrect outputs.
@@ -878,6 +878,23 @@ Evidently, this approach is limited to the information that is present in the te
 In this experiment, we use the \ac{GPT}-4 Vision model to extract information from the images contained in the financial reports without considering any text data.
 Since OpenAI's visual model is highly accurate in extracting information from images, this approach is expected to have an overall performance superior to the text-only approach because it will be able to generalize the information from images but it is also expected to have an increased proclivity to hallucinations, as the model is not able to validate the information extracted from the images with the text data.
 
+For this experiment, after the preprocessing step, for each of the pages of interest, the system applies the following image-processing transforms:
+
+\begin{itemize}
+    \item DPI: The image is set to 300 DPI to ensure that the model can extract the information with high quality. This setting has shown to be one of the optimal settings for \ac{OCR} tasks \cite{ocr_preprocessing2007}.
+    \item Grayscale: The image is converted to grayscale to reduce the amount of information that the model needs to process.
+    \item Downscaling: The image is downscaled such that they fit OpenAI's \ac{GPT}-4 Vision criteria:
+    \begin{quote}
+        \textit{...images are first scaled to fit within a 2048 x 2048 square, maintaining their aspect ratio. Then, they are scaled such that the shortest side of the image is 768px long \cite{OpenAIVisionAPI}.}
+    \end{quote}
+    \item Compression: The image is compressed to a 90\% quality to significantly reduce the size of the image while keeping sufficient quality for image analysis.
+\end{itemize}
+
+These transforms have the goal of reducing the amount of information that the model needs to process, while maintaining the quality of the information extracted from the images.
+This is important not only for model performance, but also to keep the number of tokens processed lower, reducing the cost of the operation.
+
+The system sends a request to OpenAI's \ac{GPT}-4 Vision model with the pre-processed image and the instructions where the model is asked to extract the key indicators from the image into a predefined JSON schema.
+This is necessary and important because not only does the model need to be able to extract the information from the images, but it also needs to produce the information in a format that can be parsed by the system, otherwise it might raise unexpected errors on the client side.
 
 \subsection{Multimodal \ac{LLM}s to extract information from images and text}
 
