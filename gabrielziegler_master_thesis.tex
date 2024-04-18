@@ -202,6 +202,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{minted}
+\usepackage[version=4]{mhchem}
 % \usepackage{fontspec}
 
 
@@ -598,6 +599,9 @@ Otaniemi, 31 August 2024\\
 \acrodef{BERT}[BERT]{Bidirectional Encoder Representations from Transformers}
 \acrodef{KPI}[KPI]{Key Performance Indicator}
 \acrodef{RAG}[RAG]{Retrieval Augmented Generation}
+\acrodef{ESG}[ESG]{Environmental, Social, and Governance}
+\acrodef{GHG}[GHG]{Greenhouse Gas}
+\acrodef{JSON}[JSON]{JavaScript Object Notation}
 
 \begin{acronym}
     \acro{AI}{Artificial Intelligence}
@@ -614,6 +618,9 @@ Otaniemi, 31 August 2024\\
     \acro{BERT}{Bidirectional Encoder Representations from Transformers}
     \acro{KPI}{Key Performance Indicator}
     \acro{RAG}{Retrieval Augmented Generation}
+    \acro{ESG}{Environmental, Social, and Governance}
+    \acro{GHG}{Greenhouse Gas}
+    \acro{JSON}{JavaScript Object Notation}
 \end{acronym}
 
 %% Text body begins. Note that since the text body is mostly in Finnish the
@@ -783,16 +790,77 @@ Different strategies for extracting information from financial reports have been
 The study brings a strategy that is focused solely on text information, an image-analysis approach that extracts information from images contained in the reports, and a multimodal approach that combines image and text information to validate extracted data from more than one source of truth.
 For these different experiments, we consider that the core engine changes, but we maintain the same pre-processing steps across them to ensure that the comparison only takes into account the core feature of extracting data from a given input.
 
+\subsection{Experiments definition}
+
+For the sake of setting up an \ac{OCR} challenge that that is relevant to business cases and provides the opportunity to compare different strategies for extracting information from financial reports, we establish a simple set of indicators of interest, a desired schema for the extracted data, and a set of metrics to evaluate the performance of the different strategies.
+
+\subsubsection{Indicators of interest}
+
+Given Datia's strong presence in the \ac{ESG} domain, we have chosen to focus on a set of \ac{ESG} indicators that are commonly reported in financial statements.
+Therefore, this challenge focuses on correctly extracting values for the following indicators:
+
+\begin{itemize}
+    \item \textbf{\ac{GHG} Scope 1 emissions}: The total amount of \ac{GHG} emissions directly produced by a company.
+    \item \textbf{\ac{GHG} Scope 2 emissions}: The total amount of \ac{GHG} emissions indirectly produced by a company.
+            \begin{itemize}
+                \item \textbf{Location-based}: Emissions calculated based on the location of the company's operations.
+                \item \textbf{Market-based}: Emissions calculated based on the market where the company sells its products.
+                \item \textbf{Undefined}: Emissions that are not clearly defined as location-based or market-based.
+            \end{itemize}
+    \item \textbf{\ac{GHG} Scope 3 emissions}: The total amount of \ac{GHG} emissions produced by in the value chain of a company.
+    \item \textbf{Unit}: The unit of measurement used for the emissions.
+\end{itemize}
+
+These are crucial indicators for assessing a company's environmental impact and sustainability practices, and they are often reported in financial statements as part of the company's \ac{ESG} disclosures.
+It's also important to be able to extract the unit of measurement used for the emissions, because different companies may report their emissions in different units, such as metric tons of \ce{CO2} equivalent, kilograms of \ce{CO2}, or other units.
+
+\subsection{Extracted data schema}
+
+The extracted data from the financial reports should follow a specific schema to ensure consistency and comparability across different strategies.
+Since most of the strategies are \ac{LLM}-based, defining a schema adds complexity to the system, as hallucination could lead to correct data being extracted but in the wrong format.
+For these reasons, we define a schema that is simple and straightforward, focusing on the key indicators of interest and their values for each year reported.
+Here is an example of the \ac{JSON} schema for the extracted data:
+
+\begin{minted}{json}
+{
+    "metrics": {
+        "2022": {
+            "scope_1": 88200000.0,
+            "scope_2": {
+                "location_based": null,
+                "market_based": null,
+                "undefined": 200000.0
+            },
+            "scope_3": 38800000.0
+        },
+        "2023": {
+            "scope_1": 75100000.0,
+            "scope_2": {
+                "location_based": null,
+                "market_based": null,
+                "undefined": 200000.0
+            },
+            "scope_3": 36600000.0
+        }
+    },
+    "reported_unit": "million_metric_tonnes",
+}
+\end{minted}
+
+This schema guarantees that the extracted data can be processed by the system and also be represented in the same unit of measurement, ensuring that the comparison between the different strategies is fair and accurate.
+
+\subsection{Metrics and Evaluation Criteria}
+
 \subsection{System Specifications}
 
 All the mentioned experiments were conducted within the same operating system environment and with the same hardware.
 For transparency and reproducibility, we here list the hardware and software specifications used in the experiments:
 
 \begin{itemize}
-    \item CPU: AMD Ryzen 7 3700X 16 threads at 3.600 GHz
-    \item Memory: 32GB at 3200 MHz
-    \item Operating System: Linux Manjaro 6.1.55-1
-    \item Python: 3.11.5
+    \item \textbf{CPU}: AMD Ryzen 7 3700X 16 threads at 3.600 GHz
+    \item \textbf{Memory}: 32GB at 3200 MHz
+    \item \textbf{Operating System}: Linux Manjaro 6.1.55-1
+    \item \textbf{Python}: 3.11.5
 \end{itemize}
 
 \subsection{Common processing steps}
@@ -832,7 +900,7 @@ This is an important step to reduce the processing time and to avoid unnecessary
 In an ideal world, all the information that we are looking for would be contained in one and only one page of the \ac{PDF} document and our system would be able to find the page, extract and return.
 However, this is not the case in practice, as different companies choose different designs to display their information and sometimes the indicators are spread across different pages, or even repeated in different sections of the report.
 Since our system needs to be able to resolve conflicts in the scenario of having multiple pages with the same information (potentially with different values due to different local regulations, units, and so forth), a strategy for consolidating the information is needed.
-After testing out different strategies like frequency bags, picking the output with most found values, and \ac{LLM}s, we have decided to stick with the \ac{LLM}, more especially the \ac{GPT}-4 model, to consolidate the information from different pages.
+After testing out different strategies like frequency bags, picking the output with most found values, and \ac{LLM}s, we have decided to stick with the \ac{LLM}-approach by using \ac{GPT}-4 model, to consolidate the information from different pages.
 Here is a demonstration of how this can be done:
 
 \begin{minted}{python}
@@ -850,7 +918,7 @@ def consolidate_data(data: list[str]) -> str:
   """
   # Send request with data and instructions to GPT4
   consolidated_data = openai.chat.completions.create(
-    model=self.model,
+    model="gpt-4-turbo-preview",
       response_format={"type": "json"},
       messages=[
         {
@@ -866,11 +934,10 @@ def consolidate_data(data: list[str]) -> str:
 
 This is a simple example of how the \ac{GPT}-4 model can be used to consolidate information from different pages of the \ac{PDF} document and can definitely be improved by adding more context and validation steps, such as checking for inconsistencies in the data, before returning the consolidated information.
 
-\subsection{Metrics and Evaluation Criteria}
 
 \subsection{Text-only approach with \ac{LLM}s}
 
-In this experiment, we use the \ac{GPT}-4 model to extract information from the text contained in the financial reports without considering any images or visual data.
+In this experiment, we use the \ac{GPT}-4 architecture, more especifically \textit{gpt-4-0125-preview} released in December 2023, to extract information from the text contained in the financial reports without considering any images or visual data.
 Evidently, this approach is limited to the information that is present in the text and does not take into account any charts or important visual cues that the report might contain, thus it is expected that this system may fail for cases where the indicator are presented in a visual form.
 
 \subsection{Image-only approach with \ac{LLM}s}
