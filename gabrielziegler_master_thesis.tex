@@ -602,6 +602,7 @@ Otaniemi, 31 August 2024\\
 \acrodef{ESG}[ESG]{Environmental, Social, and Governance}
 \acrodef{GHG}[GHG]{Greenhouse Gas}
 \acrodef{JSON}[JSON]{JavaScript Object Notation}
+\acrodef{MAPE}[MAPE]{Mean Absolute Percentage Error}
 
 \begin{acronym}
     \acro{AI}{Artificial Intelligence}
@@ -621,6 +622,7 @@ Otaniemi, 31 August 2024\\
     \acro{ESG}{Environmental, Social, and Governance}
     \acro{GHG}{Greenhouse Gas}
     \acro{JSON}{JavaScript Object Notation}
+    \acro{MAPE}{Mean Absolute Percentage Error}
 \end{acronym}
 
 %% Text body begins. Note that since the text body is mostly in Finnish the
@@ -747,6 +749,7 @@ Consider that we have the following source data used as input to an \ac{LLM} mod
 \end{quote}
 
 \begin{itemize}
+    \label{list:hallucinations:1}
     \item \textbf{Intrinsic hallucination}: This type of hallucination occurs when the model generates information that contradicts the input data.
     A case of intrinsic hallucination would be if the model generated the following output:
     \begin{quote}
@@ -790,6 +793,17 @@ Different strategies for extracting information from financial reports have been
 The study brings a strategy that is focused solely on text information, an image-analysis approach that extracts information from images contained in the reports, and a multimodal approach that combines image and text information to validate extracted data from more than one source of truth.
 For these different experiments, we consider that the core engine changes, but we maintain the same pre-processing steps across them to ensure that the comparison only takes into account the core feature of extracting data from a given input.
 
+\subsection{System Specifications}
+
+The experiments proposed in this study were conducted on a machine with the following specifications:
+
+\begin{itemize}
+    \item \textbf{CPU}: AMD Ryzen 7 3700X 16 threads at 3.600 GHz
+    \item \textbf{Memory}: 32GB at 3200 MHz
+    \item \textbf{Operating System}: Linux Manjaro 6.1.55-1
+    \item \textbf{Python}: 3.11.5
+\end{itemize}
+
 \subsection{Experiments definition}
 
 For the sake of setting up an \ac{OCR} challenge that that is relevant to business cases and provides the opportunity to compare different strategies for extracting information from financial reports, we establish a simple set of indicators of interest, a desired schema for the extracted data, and a set of metrics to evaluate the performance of the different strategies.
@@ -808,7 +822,7 @@ Therefore, this challenge focuses on correctly extracting values for the followi
                 \item \textbf{Undefined}: Emissions that are not clearly defined as location-based or market-based.
             \end{itemize}
     \item \textbf{\ac{GHG} Scope 3 emissions}: The total amount of \ac{GHG} emissions produced by in the value chain of a company.
-    \item \textbf{Unit}: The unit of measurement used for the emissions.
+    \item \textbf{Reported unit}: The unit of measurement used for the emissions.
 \end{itemize}
 
 These are crucial indicators for assessing a company's environmental impact and sustainability practices, and they are often reported in financial statements as part of the company's \ac{ESG} disclosures.
@@ -843,24 +857,59 @@ Here is an example of the \ac{JSON} schema for the extracted data:
             "scope_3": 36600000.0
         }
     },
+    "extracted_pages": [1, 4, 10],
     "reported_unit": "million_metric_tonnes",
 }
 \end{minted}
 
 This schema guarantees that the extracted data can be processed by the system and also be represented in the same unit of measurement, ensuring that the comparison between the different strategies is fair and accurate.
+The \texttt{extracted\_pages} field is used to store the page numbers from which the data was extracted, allowing for traceability and validation of the extracted information.
 
-\subsection{Metrics and Evaluation Criteria}
+\subsection{Evaluation Criteria}
 
-\subsection{System Specifications}
+To thoroughly assess the performance of the proposed systems for extracting indicators from financial reports, a combination of quantitative and qualitative metrics is employed.
+These metrics are designed to measure both the accuracy of the extracted data and the robustness of the extraction process against various types of errors.
+Here, we delineate the key metrics and evaluation criteria used.
 
-All the mentioned experiments were conducted within the same operating system environment and with the same hardware.
-For transparency and reproducibility, we here list the hardware and software specifications used in the experiments:
+\subsubsection{Precision and Recall}
+Precision and Recall are critical metrics for evaluating the effectiveness of the data extraction system:
+\begin{itemize}
+    \item \textbf{Precision} assesses the proportion of data points extracted by the model that are correct and relevant. A high precision rate indicates fewer instances of fabricated metrics and irrelevant data extraction.
+
+    \begin{equation}
+        \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
+    \end{equation}
+
+    \item \textbf{Recall} measures the system's ability to retrieve all relevant data points from the document. High recall is essential to ensure no significant data is missed.
+
+    \begin{equation}
+        \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
+    \end{equation}
+\end{itemize}
+
+% Add formula for precision
+
+
+% \subsubsection{F1 Score}
+% The F1 Score is the harmonic mean of precision and recall, providing a single measure to balance these metrics. It is especially useful when the costs of false positives and false negatives are similar.
+
+\subsubsection{\ac{MAPE}}
+
+For numerical errors, the \ac{MAPE} is used to quantify the accuracy of the extracted values.
+This metric calculates the average percentage difference between the extracted values and the ground truth values, providing insights into the model's performance in capturing the correct numerical data while accounting for scale and magnitude differences.
+
+\begin{equation}
+    \text{MAPE} = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100
+\end{equation}
+
+\subsubsection{Error Types Analysis}
+
+In addition to quantitative metrics, an error analysis is conducted to identify the types of errors made by the system during the extraction process.
 
 \begin{itemize}
-    \item \textbf{CPU}: AMD Ryzen 7 3700X 16 threads at 3.600 GHz
-    \item \textbf{Memory}: 32GB at 3200 MHz
-    \item \textbf{Operating System}: Linux Manjaro 6.1.55-1
-    \item \textbf{Python}: 3.11.5
+    \item \textbf{Missing Data}: Indicates data that should have been extracted but was not. This error impacts the \texttt{recall} metric.
+    \item \textbf{Incorrect Values}: Reflects errors in the value of the data extracted. These are numerical errors that impact the \texttt{MAPE} metric.
+    \item \textbf{Fabricated Metrics}: Metrics that are not present in the document but appear in the extracted output --- also referred to as extrinsic hallucination. This error impacts \texttt{precision}.
 \end{itemize}
 
 \subsection{Common processing steps}
