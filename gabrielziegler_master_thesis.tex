@@ -604,6 +604,7 @@ Otaniemi, 31 August 2024\\
 \acrodef{JSON}[JSON]{JavaScript Object Notation}
 \acrodef{MAPE}[MAPE]{Mean Absolute Percentage Error}
 \acrodef{DPI}[DPI]{Dots Per Inch}
+\acrodef{RLHF}[RLHF]{Reinforcement Learning from Human Feedback}
 
 \begin{acronym}
     \acro{AI}{Artificial Intelligence}
@@ -625,6 +626,7 @@ Otaniemi, 31 August 2024\\
     \acro{JSON}{JavaScript Object Notation}
     \acro{MAPE}{Mean Absolute Percentage Error}
     \acro{DPI}{Dots Per Inch}
+    \acro{RLHF}{Reinforcement Learning from Human Feedback}
 \end{acronym}
 
 %% Text body begins. Note that since the text body is mostly in Finnish the
@@ -703,11 +705,11 @@ The capabilities of \ac{LLM}s have found applications in various sectors, includ
 
 \subsection{GPT-4}
 
-GPT-4 --- the fourth \ac{GPT} release by OpenAI, brought a significant leap in the capabilities of \ac{LLM}s when compared to its predecessor \ac{GPT}-3.
-This model builds upon the architecture and training methodologies of its predecessors, incorporating lessons learned and innovations to achieve unprecedented performance across a broad spectrum of language tasks.
-GPT-4 is characterized by its deep learning architecture, which allows it to generate human-like text, comprehend complex instructions, and provide accurate information and analysis based on the context provided to it.
-Its training involved feeding the model with diverse and extensive datasets, enabling it to grasp nuances across different languages, cultures, and domains.
-GPT-4’s versatility and adaptability have made it a valuable tool in numerous applications, from creative writing assistance to sophisticated data analysis and interpretation in academic research \cite{OpenAI2023GPT4}.
+The fourth \ac{GPT} release by OpenAI, is a large language model with multilingual and multimodal capabilities that allow it to process image and text inputs, producing text outputs.
+The model was developed aiming to improve the ability to comprehend and generate natural language text.
+\ac{GPT}-4 is often evaluated against human performance on tasks like bar exam, LSAT, SAT, among others, and has shown to be competitive with human performance by achieving top 10\% scores on bar exams, compared to \ac{GPT}-3.5 which achieved bottom 10\% scores \cite{OpenAI2023GPT4}.
+The specifics about the model's architecture and training data are not disclosed by OpenAI, but it is known that the model has been pre-trained to predict the next word in a sentence, using publicly available and licensed data fine-tuned with \ac{RLHF}, which has a great impact on the model's performance \cite{OpenAI2023GPT4}.
+While this new model has shown great improvements in language understanding, generation and reduction of hallucinations, it still has limitations in understanding context and generating coherent responses, which is a common issue in large language models \cite{OpenAI2023GPT4}.
 
 \subsection{GPT-4V}
 
