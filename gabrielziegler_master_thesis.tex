@@ -202,6 +202,8 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{minted}
+\usepackage{subcaption}
+
 \usepackage[version=4]{mhchem}
 % \usepackage{fontspec}
 
@@ -605,6 +607,7 @@ Otaniemi, 31 August 2024\\
 \acrodef{MAPE}[MAPE]{Mean Absolute Percentage Error}
 \acrodef{DPI}[DPI]{Dots Per Inch}
 \acrodef{RLHF}[RLHF]{Reinforcement Learning from Human Feedback}
+\acrodef{IR}[IR]{Information Retrieval}
 
 \begin{acronym}
     \acro{AI}{Artificial Intelligence}
@@ -627,6 +630,7 @@ Otaniemi, 31 August 2024\\
     \acro{MAPE}{Mean Absolute Percentage Error}
     \acro{DPI}{Dots Per Inch}
     \acro{RLHF}{Reinforcement Learning from Human Feedback}
+    \acro{IR}{Information Retrieval}
 \end{acronym}
 
 %% Text body begins. Note that since the text body is mostly in Finnish the
@@ -682,8 +686,27 @@ The scope of this study is limited to the extraction of financial data from Engl
 
 \section{Concepts and State of the Art}
 
+\subsection{Information Retrieval}
+
+\ac{IR} is a field of study that focuses on the organization, storage and retrieval of bibliographic information.
+\ac{IR} systems are used to provide a response to a user query with references to documents that contain the information sought by the user.
+Although the field of \ac{IR} has been improved and become more popular in recent years with the usage of \ac{NLP} techniques dominating the field such as \ac{RAG}s, the core task of \ac{IR} has been studied and applied since the 1940s with pioneers like Vannevar Bush, who, in 1945 envisioned the Memex, a theoretical device that would store extensive collections of documents and allow rapid retrieval and cross-referencing of information \cite{Bush1945As}.
+
+\subsection{Document AI}
+
+% TODO Fix the order that PDFs are coming first
+
+The creation of \ac{PDF}s by Adobe in 1993 \cite{adobe2023pdftimeline} established a standard for storing and sharing information in a portable format, but documenting and searching for information is an old practice that can be traced back to as long as 3000 BC, when the Sumerians --- the first civilization in the world --- used clay tablets with cuneiform inscriptions to keep track of legal documents, literature, mythological tales amongst other information.
+They also created different categories to be able to differentiate tablets from its contents \cite{finkel2015cuneiform}.
+Similar practices have remained largely relevant throughout history and with the invention of paper and the printing press, the practice of documenting and storing information evolved allowing for more and more information to be stored and shared physically.
+In the 20th century, the invention of the computer and the internet revolutionized the way information is stored and shared, allowing for information to be stored and shared digitally.
+This allowed for huge amounts of information to be stored and shared.
+This period in time is often referred to as the information age, also known as the third industrial revolution, which marks a time where information became increasingly accessible and also a commodity, especially later in the 21st century with the rise of \ac{AI} and \ac{ML} models that feed on large datasets to learn and make predictions.
+
+The digitalized information stored in \ac{PDF}s soon became a target for information retrieval and data mining techniques, where systems were developed to extract information from these files based on a variety of approaches, such as heuristic-based methods \cite{table_extraction_conditional_pinto_2003, PENG2006963, Fang2004}, vector space models \cite{}, probabilistic models \cite{}, and more recently, deep learning models \cite{}.
+
 % TODO cite 1993
-Ever since \ac{PDF}s were created by Adobe in 1993 \cite{adobe2023pdftimeline}, they have been used to store and share information. These document standard quickly became a way of companies reporting their financial information for the public as well as \ac{KPI}s and other important information internally. This has led to a large amount of information being stored in \ac{PDF}s, which has led to a need to extract information from these files. A series of professions have arised from this need, such as data entry, data extraction, and data analysis. The extraction of information from \ac{PDF}s has been a manual process for most of the tasks until recent years, when \ac{OCR} and \ac{NLP} technologies have been developed to automate processes involving processing \ac{PDF}s.
+Ever since \ac{PDF}s were created by Adobe in 1993 , they have been used to store and share information. These document standard quickly became a way of companies reporting their financial information for the public as well as \ac{KPI}s and other important information internally. This has led to a large amount of information being stored in \ac{PDF}s, which has led to a need to extract information from these files. A series of professions have arised from this need, such as data entry, data extraction, and data analysis. The extraction of information from \ac{PDF}s has been a manual process for most of the tasks until recent years, when \ac{OCR} and \ac{NLP} technologies have been developed to automate processes involving processing \ac{PDF}s.
 
 % TODO cite
 The procedure of extracting information from a document --- recently referred to as ``Document AI'' \cite{Cui2021} --- is a complex problem due to the diverse nature of data that \ac{PDF}s allow to store. Such problem often involves cross-modal interactions where information is represented in both text and visual form.
@@ -788,6 +811,31 @@ For these reasons, we investigate nuances on the documents that lead to errouneo
 \section{Financial Reports Dataset}
 
 Dataset used to benchmark different methods.
+
+% display 3 images. 2 at the top and 1 at the bottom
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/ghg_emissions_bar_chart.png}
+        \caption{Financial report page 1}
+        \label{fig:financial_report_1}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/ghg_emissions_bar_chart.png}
+        \caption{Financial report page 2}
+        \label{fig:financial_report_2}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/ghg_emissions_bar_chart.png}
+        \caption{Financial report page 3}
+        \label{fig:financial_report_3}
+    \end{subfigure}
+    \caption{Sample pages from the financial reports dataset}
+    \label{fig:financial_reports}
+\end{figure}
 
 \clearpage
 
