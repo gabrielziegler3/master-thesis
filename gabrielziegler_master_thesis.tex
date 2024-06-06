@@ -686,6 +686,15 @@ The scope of this study is limited to the extraction of financial data from Engl
 
 \section{Concepts and State of the Art}
 
+Documenting and searching for information is an old human practice that can be traced back to as far as 3000 BC, when the Sumerians --- the first civilization in the world --- used clay tablets with cuneiform inscriptions to keep track of legal documents, transaction records, literature, mythological tales amongst other information.
+They also created different categories to be able to differentiate tablets from its contents in a classification fashion \cite{finkel2015cuneiform}.
+Similar practices have remained largely relevant throughout history and with the invention of paper and the printing press, the practice of documenting and storing information evolved allowing for more and more information to be stored and shared physically.
+Not so long ago, in the 20th century, the invention of the computer and the internet revolutionized the way information is stored and shared, allowing for information to be stored and shared digitally.
+This allowed for huge amounts of information to be stored and shared in a way that was never possible before.
+This period in time is often referred to as the information age, also known as the third industrial revolution, which marks a time where information became increasingly accessible and also a commodity, especially later in the 21st century with the rise of \ac{AI} and \ac{ML} models that feed on large datasets to learn and make predictions.
+Additionally, the creation of \ac{PDF}s by Adobe in 1993 \cite{adobe2023pdftimeline} established a standard for storing and sharing information in a portable format that could be easily shared and printed, which quickly became a standard for sharing information, especially in the business world.
+The digitalized information stored in \ac{PDF}s soon became a target for information retrieval and data mining techniques, where systems were developed to extract information from these files based on a variety of approaches, such as heuristic-based methods \cite{table_extraction_conditional_pinto_2003, PENG2006963, Fang2004}, vector space models \cite{Salton1975, Wong1987}, probabilistic models \cite{}, and more recently, deep learning models \cite{}.
+
 \subsection{Information Retrieval}
 
 \ac{IR} is a field of study that focuses on the organization, storage and retrieval of bibliographic information.
@@ -694,22 +703,13 @@ Although the field of \ac{IR} has been improved and become more popular in recen
 
 \subsection{Document AI}
 
-% TODO Fix the order that PDFs are coming first
+The procedure of extracting information from a document --- recently referred to as ``Document AI'' \cite{Cui2021} --- is a complex problem due to the diverse nature of data that \ac{PDF}s allow to store.
+Such problem often involves cross-modal interactions where information is represented in both natural language text and visual elements such as tables, charts, and images.
+In the visuald domain, document layout analysis has been widely studied and applied using \ac{CV} techniques to detect and extract elements in the document.
+In document images, it is treated as an object detection task where elements such as text, tables, and images are detected and classified \cite{Yang2017, Schreiber2017}.
 
-The creation of \ac{PDF}s by Adobe in 1993 \cite{adobe2023pdftimeline} established a standard for storing and sharing information in a portable format, but documenting and searching for information is an old practice that can be traced back to as long as 3000 BC, when the Sumerians --- the first civilization in the world --- used clay tablets with cuneiform inscriptions to keep track of legal documents, literature, mythological tales amongst other information.
-They also created different categories to be able to differentiate tablets from its contents \cite{finkel2015cuneiform}.
-Similar practices have remained largely relevant throughout history and with the invention of paper and the printing press, the practice of documenting and storing information evolved allowing for more and more information to be stored and shared physically.
-In the 20th century, the invention of the computer and the internet revolutionized the way information is stored and shared, allowing for information to be stored and shared digitally.
-This allowed for huge amounts of information to be stored and shared.
-This period in time is often referred to as the information age, also known as the third industrial revolution, which marks a time where information became increasingly accessible and also a commodity, especially later in the 21st century with the rise of \ac{AI} and \ac{ML} models that feed on large datasets to learn and make predictions.
 
-The digitalized information stored in \ac{PDF}s soon became a target for information retrieval and data mining techniques, where systems were developed to extract information from these files based on a variety of approaches, such as heuristic-based methods \cite{table_extraction_conditional_pinto_2003, PENG2006963, Fang2004}, vector space models \cite{}, probabilistic models \cite{}, and more recently, deep learning models \cite{}.
 
-% TODO cite 1993
-Ever since \ac{PDF}s were created by Adobe in 1993 , they have been used to store and share information. These document standard quickly became a way of companies reporting their financial information for the public as well as \ac{KPI}s and other important information internally. This has led to a large amount of information being stored in \ac{PDF}s, which has led to a need to extract information from these files. A series of professions have arised from this need, such as data entry, data extraction, and data analysis. The extraction of information from \ac{PDF}s has been a manual process for most of the tasks until recent years, when \ac{OCR} and \ac{NLP} technologies have been developed to automate processes involving processing \ac{PDF}s.
-
-% TODO cite
-The procedure of extracting information from a document --- recently referred to as ``Document AI'' \cite{Cui2021} --- is a complex problem due to the diverse nature of data that \ac{PDF}s allow to store. Such problem often involves cross-modal interactions where information is represented in both text and visual form.
 This is particularly true for financial reports, where information is presented in text, tables, charts, and infographics.
 The problem is further complicated by the fact that financial reports are often not standardized, and the information is presented in diverse range of formats.
 % The document domain has been explored in different paradigms such as document question answering (QA) ~\cite{}, classification ~\cite{}, information extraction ~\cite{}, document summarization ~\cite{}, layout detection ~\cite{}, etc.
