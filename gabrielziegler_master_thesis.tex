@@ -705,17 +705,15 @@ Although the field of \ac{IR} has been improved and become more popular in recen
 
 The procedure of extracting information from a document --- recently referred to as ``Document AI'' \cite{Cui2021} --- is a complex problem due to the diverse nature of data that \ac{PDF}s allow to store.
 Such problem often involves cross-modal interactions where information is represented in both natural language text and visual elements such as tables, charts, and images.
-In the visuald domain, document layout analysis has been widely studied and applied using \ac{CV} techniques to detect and extract elements in the document.
-In document images, it is treated as an object detection task where elements such as text, tables, and images are detected and classified \cite{Yang2017, Schreiber2017}.
+In the visual domain, document layout analysis has been widely studied and applied using \ac{CV} techniques to detect and extract elements in the document.
+Document images processing is usually treated as an object detection task where elements such as text, tables, and images are detected and classified \cite{Yang2017, Schreiber2017}.
 
-
-
-This is particularly true for financial reports, where information is presented in text, tables, charts, and infographics.
-The problem is further complicated by the fact that financial reports are often not standardized, and the information is presented in diverse range of formats.
-% The document domain has been explored in different paradigms such as document question answering (QA) ~\cite{}, classification ~\cite{}, information extraction ~\cite{}, document summarization ~\cite{}, layout detection ~\cite{}, etc.
-% There have been studies using only the text information ~\cite{}, and others focusing on visual information ~\cite{}. However, the most recent trend is to use multimodal models that can handle both text and visual information as the literature has shown in recent years ~\cite{}.
-%
-% TODO
+In many scenarios, the information presented in a document requires an approach that can leverage understanding from both the text and visual domains.
+For instance, consider tables where the values in cells only have meaning when associated with the header row that are commonly described in the first row or column of the table.
+Other structures such as charts only convey information when the labels and axes are correctly identified and associated with the data points.
+These problems are particularly true for financial reports, where information is presented in text, tables, charts, infographics, and other visual elements.
+The requirement to be able to handle layout invariance is tackled by general-purpose models that through pre-training of general-purpose models that learn the position information of the elements as well as the visual information presented with the text such as font size, color, and style.
+These visual cues can be learned by visual encoders and combined with the text in pre-training stage significantly improving the model's capability to abstract non-standardized information from documents \cite{Cui2021}.
 
 \subsection{\ac{LLM}s}
 
