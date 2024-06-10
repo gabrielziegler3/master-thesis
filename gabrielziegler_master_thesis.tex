@@ -693,7 +693,7 @@ Not so long ago, in the 20th century, the invention of the computer and the inte
 This allowed for huge amounts of information to be stored and shared in a way that was never possible before.
 This period in time is often referred to as the information age, also known as the third industrial revolution, which marks a time where information became increasingly accessible and also a commodity, especially later in the 21st century with the rise of \ac{AI} and \ac{ML} models that feed on large datasets to learn and make predictions.
 Additionally, the creation of \ac{PDF}s by Adobe in 1993 \cite{adobe2023pdftimeline} established a standard for storing and sharing information in a portable format that could be easily shared and printed, which quickly became a standard for sharing information, especially in the business world.
-The digitalized information stored in \ac{PDF}s soon became a target for information retrieval and data mining techniques, where systems were developed to extract information from these files based on a variety of approaches, such as heuristic-based methods \cite{table_extraction_conditional_pinto_2003, PENG2006963, Fang2004}, vector space models \cite{Salton1975, Wong1987}, probabilistic models \cite{}, and more recently, deep learning models \cite{}.
+The digitalized information stored in \ac{PDF}s soon became a target for information retrieval and data mining techniques, where systems were developed to extract information from these files based on a variety of approaches, such as heuristic-based methods \cite{table_extraction_conditional_pinto_2003, PENG2006963, Fang2004}, vector space models \cite{Salton1975, Wong1987}, probabilistic models \cite{Maron1960}, and more recently, deep learning models \cite{}.
 
 \subsection{Information Retrieval}
 
@@ -712,7 +712,7 @@ In many scenarios, the information presented in a document requires an approach 
 For instance, consider tables where the values in cells only have meaning when associated with the header row that are commonly described in the first row or column of the table.
 Other structures such as charts only convey information when the labels and axes are correctly identified and associated with the data points.
 These problems are particularly true for financial reports, where information is presented in text, tables, charts, infographics, and other visual elements.
-The requirement to be able to handle layout invariance is tackled by general-purpose models that through pre-training of general-purpose models that learn the position information of the elements as well as the visual information presented with the text such as font size, color, and style.
+The requirement to be able to handle layout invariance is tackled by general-purpose models, such as \ac{LLM}s, that through pre-training of general-purpose models that learn the position information of the elements as well as the visual information presented with the text such as font size, color, and style.
 These visual cues can be learned by visual encoders and combined with the text in pre-training stage significantly improving the model's capability to abstract non-standardized information from documents \cite{Cui2021}.
 
 \subsection{\ac{LLM}s}
