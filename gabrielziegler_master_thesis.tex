@@ -693,7 +693,7 @@ Not so long ago, in the 20th century, the invention of the computer and the inte
 This allowed for huge amounts of information to be stored and shared in a way that was never possible before.
 This period in time is often referred to as the information age, also known as the third industrial revolution, which marks a time where information became increasingly accessible and also a commodity, especially later in the 21st century with the rise of \ac{AI} and \ac{ML} models that feed on large datasets to learn and make predictions.
 Additionally, the creation of \ac{PDF}s by Adobe in 1993 \cite{adobe2023pdftimeline} established a standard for storing and sharing information in a portable format that could be easily shared and printed, which quickly became a standard for sharing information, especially in the business world.
-The digitalized information stored in \ac{PDF}s soon became a target for information retrieval and data mining techniques, where systems were developed to extract information from these files based on a variety of approaches, such as heuristic-based methods \cite{table_extraction_conditional_pinto_2003, PENG2006963, Fang2004}, vector space models \cite{Salton1975, Wong1987}, probabilistic models \cite{Maron1960}, and more recently, deep learning models \cite{}.
+The digitalized information stored in \ac{PDF}s soon became a target for information retrieval and data mining techniques, where systems were developed to extract information from these files based on a variety of approaches, such as heuristic-based methods \cite{table_extraction_conditional_pinto_2003, PENG2006963, Fang2004}, vector space models \cite{Salton1975, Wong1987}, probabilistic models \cite{Maron1960}, and more recently, \ac{DL} models, especially those leveraging the transformer architecture \cite{Wang2021, Li2022, Li2023, Xu2020}.
 
 \subsection{Information Retrieval}
 
@@ -703,7 +703,7 @@ Although the field of \ac{IR} has been improved and become more popular in recen
 
 \subsection{Document AI}
 
-The procedure of extracting information from a document --- recently referred to as ``Document AI'' \cite{Cui2021} --- is a complex problem due to the diverse nature of data that \ac{PDF}s allow to store.
+The procedure of extracting information from a document --- recently referred to as ``Document AI'' \cite{Cui2021} or ``Document Understanding'' \cite{Nishant2020} --- is a complex problem due to the diverse nature of data that \ac{PDF}s allow to store.
 Such problem often involves cross-modal interactions where information is represented in both natural language text and visual elements such as tables, charts, and images.
 In the visual domain, document layout analysis has been widely studied and applied using \ac{CV} techniques to detect and extract elements in the document.
 Document images processing is usually treated as an object detection task where elements such as text, tables, and images are detected and classified \cite{Yang2017, Schreiber2017}.
@@ -807,6 +807,8 @@ For these reasons, we investigate nuances on the documents that lead to errouneo
 \clearpage
 
 \section{Financial Reports Dataset}
+
+TODO: describe the dataset that structure and the challenges of the dataset we are dealing internally. The dataset cannot be fully disclosed, but we can describe the structure and the challenges that we face when dealing with it.
 
 Dataset used to benchmark different methods.
 
@@ -1091,17 +1093,14 @@ This system is expected to have the best performance among the three approaches,
 \clearpage
 \section{Results}
 
-
-\subsection{Limitations of the dataset}
-
-\subsection{Limitations of the data extraction systems}
-
-Explain what are the observed limitations
+TODO: describe the results of each experiment given the defined metrics for evaluation
 
 \clearpage
 
 \section{Conclusions}
 \label{sec:summary}
+
+TODO: add conclusion section
 
 
 \clearpage

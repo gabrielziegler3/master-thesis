@@ -408,3 +408,88 @@ numpages = {23}
    pages = {216–244},
    numpages = {29}
 }
+@article{Nishant2020,
+  author       = {Nishant Subramani and
+                  Alexandre Matton and
+                  Malcolm Greaves and
+                  Adrian Lam},
+  title        = {A Survey of Deep Learning Approaches for {OCR} and Document Understanding},
+  journal      = {CoRR},
+  volume       = {abs/2011.13534},
+  year         = {2020},
+  url          = {https://arxiv.org/abs/2011.13534},
+  eprinttype    = {arXiv},
+  eprint       = {2011.13534},
+  timestamp    = {Tue, 01 Dec 2020 14:59:59 +0100},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-2011-13534.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+@inproceedings{Wang2021,
+    title = "{L}ayout{R}eader: Pre-training of Text and Layout for Reading Order Detection",
+    author = "Wang, Zilong  and
+      Xu, Yiheng  and
+      Cui, Lei  and
+      Shang, Jingbo  and
+      Wei, Furu",
+    editor = "Moens, Marie-Francine  and
+      Huang, Xuanjing  and
+      Specia, Lucia  and
+      Yih, Scott Wen-tau",
+    booktitle = "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2021",
+    address = "Online and Punta Cana, Dominican Republic",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.emnlp-main.389",
+    doi = "10.18653/v1/2021.emnlp-main.389",
+    pages = "4735--4744",
+    abstract = "Reading order detection is the cornerstone to understanding visually-rich documents (e.g., receipts and forms). Unfortunately, no existing work took advantage of advanced deep learning models because it is too laborious to annotate a large enough dataset. We observe that the reading order of WORD documents is embedded in their XML metadata; meanwhile, it is easy to convert WORD documents to PDFs or images. Therefore, in an automated manner, we construct ReadingBank, a benchmark dataset that contains reading order, text, and layout information for 500,000 document images covering a wide spectrum of document types. This first-ever large-scale dataset unleashes the power of deep neural networks for reading order detection. Specifically, our proposed LayoutReader captures the text and layout information for reading order prediction using the seq2seq model. It performs almost perfectly in reading order detection and significantly improves both open-source and commercial OCR engines in ordering text lines in their results in our experiments. The dataset and models are publicly available at \url{https://aka.ms/layoutreader}.",
+}
+@inproceedings{Li2022,
+author = {Li, Junlong and Xu, Yiheng and Lv, Tengchao and Cui, Lei and Zhang, Cha and Wei, Furu},
+title = {DiT: Self-supervised Pre-training for Document Image Transformer},
+year = {2022},
+isbn = {9781450392037},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3503161.3547911},
+doi = {10.1145/3503161.3547911},
+abstract = {Image Transformer has recently achieved significant progress for natural image understanding, either using supervised (ViT, DeiT, etc.) or self-supervised (BEiT, MAE, etc.) pre-training techniques. In this paper, we propose DiT, a self-supervised pre-trained Document Image Transformer model using large-scale unlabeled text images for Document AI tasks, which is essential since no supervised counterparts ever exist due to the lack of human-labeled document images. We leverage DiT as the backbone network in a variety of vision-based Document AI tasks, including document image classification, document layout analysis, table detection as well as text detection for OCR. Experiment results have illustrated that the self-supervised pre-trained DiT model achieves new state-of-the-art results on these downstream tasks, e.g. document image classification (91.11 - 92.69), document layout analysis (91.0 - 94.9), table detection (94.23 - 96.55) and text detection for OCR (93.07 - 94.29). The code and pre-trained models are publicly available at https://aka.ms/msdit.},
+booktitle = {Proceedings of the 30th ACM International Conference on Multimedia},
+pages = {3530–3539},
+numpages = {10},
+keywords = {OCR, document image classification, document image transformer, document layout analysis, self-supervised pre-training, table detection, text detection},
+location = {<conf-loc>, <city>Lisboa</city>, <country>Portugal</country>, </conf-loc>},
+series = {MM '22}
+}
+@inproceedings{Li2023,
+author = {Li, Minghao and Lv, Tengchao and Chen, Jingye and Cui, Lei and Lu, Yijuan and Florencio, Dinei and Zhang, Cha and Li, Zhoujun and Wei, Furu},
+title = {TrOCR: transformer-based optical character recognition with pre-trained models},
+year = {2023},
+isbn = {978-1-57735-880-0},
+publisher = {AAAI Press},
+url = {https://doi.org/10.1609/aaai.v37i11.26538},
+doi = {10.1609/aaai.v37i11.26538},
+abstract = {Text recognition is a long-standing research problem for document digitalization. Existing approaches are usually built based on CNN for image understanding and RNN for char-level text generation. In addition, another language model is usually needed to improve the overall accuracy as a post-processing step. In this paper, we propose an end-to-end text recognition approach with pre-trained image Transformer and text Transformer models, namely TrOCR, which leverages the Transformer architecture for both image understanding and word piece-level text generation. The TrOCR model is simple but effective, and can be pre-trained with large-scale synthetic data and fine-tuned with human-labeled datasets. Experiments show that the TrOCR model outperforms the current state-of-the-art models on the printed, handwritten and scene text recognition tasks. The TrOCR models and code are publicly available.},
+booktitle = {Proceedings of the Thirty-Seventh AAAI Conference on Artificial Intelligence and Thirty-Fifth Conference on Innovative Applications of Artificial Intelligence and Thirteenth Symposium on Educational Advances in Artificial Intelligence},
+articleno = {1469},
+numpages = {9},
+series = {AAAI'23/IAAI'23/EAAI'23}
+}
+@inproceedings{Xu2020,
+author = {Xu, Yiheng and Li, Minghao and Cui, Lei and Huang, Shaohan and Wei, Furu and Zhou, Ming},
+title = {LayoutLM: Pre-training of Text and Layout for Document Image Understanding},
+year = {2020},
+isbn = {9781450379984},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3394486.3403172},
+doi = {10.1145/3394486.3403172},
+abstract = {Pre-training techniques have been verified successfully in a variety of NLP tasks in recent years. Despite the widespread use of pre-training models for NLP applications, they almost exclusively focus on text-level manipulation, while neglecting layout and style information that is vital for document image understanding. In this paper, we propose the LayoutLM to jointly model interactions between text and layout information across scanned document images, which is beneficial for a great number of real-world document image understanding tasks such as information extraction from scanned documents. Furthermore, we also leverage image features to incorporate words' visual information into LayoutLM. To the best of our knowledge, this is the first time that text and layout are jointly learned in a single framework for document-level pre-training. It achieves new state-of-the-art results in several downstream tasks, including form understanding (from 70.72 to 79.27), receipt understanding (from 94.02 to 95.24) and document image classification (from 93.07 to 94.42). The code and pre-trained LayoutLM models are publicly available at https://aka.ms/layoutlm.},
+booktitle = {Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+pages = {1192–1200},
+numpages = {9},
+keywords = {LayoutLM, document image understanding, pre-trained models},
+location = {Virtual Event, CA, USA},
+series = {KDD '20}
+}
