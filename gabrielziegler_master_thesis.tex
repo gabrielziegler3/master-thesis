@@ -721,8 +721,10 @@ These visual cues can be learned by visual encoders and combined with the text i
 
 \subsection{Transformers}
 
-In recent \ac{AI} systems, \ac{DL} models have dominated the research and development of new systems and become a standard for many tasks.
+In recent years, \ac{AI} systems with \ac{DL} architectures have been the norm for most of the state-of-the-art models introduced.
+% DL
 The first \ac{DL} models were based on fully-connected neural networks which is composed of layers of neurons that are connected to each other in a feed-forward fashion \cite{Rosenblatt1958, Rosenblatt1961}.
+% CNN
 Decades after the first fully-connected neural networks were published, the \ac{CNN} architecture was proposed by Yann LeCun in 1998 \cite{LeCun1998} and later popularized by the AlexNet model in 2012 after winning the ImageNet competition \cite{Krizhevsky2012}.
 These models represented a significant improvement in the field of \ac{CV} and were able to learn hierarchical features from images, allowing for more complex patterns to be learned.
 % RNN
@@ -732,9 +734,12 @@ The \ac{RNN} architecture was able to learn sequential patterns from text data, 
 However, the \ac{RNN} architecture had limitations in learning long-range dependencies due to the vanishing gradient problem \cite{Hochreiter1991}.
 To address this issue, the \ac{LSTM} architecture was proposed in 1997 by Sepp Hochreiter and Jürgen Schmidhuber \cite{Hochreiter1997}.
 The \ac{LSTM} architecture introduced the concept of memory cells that could store information over time, allowing for the learning of long-range dependencies in sequential data.
+% Transformer
 The next breakthrough in the \ac{AI} field came with the introduction of the transformer architecture in 2017 that revolutionized the field of \ac{NLP} by utilizing self-attention mechanisms to learn intrinsic features \cite{Vaswani2017}.
 The transformer architecture brought significant improvements in the field of \ac{NLP} that was demonstrated by the BERT model in 2019 \cite{Devlin2019} and later by the GPT-3 model in 2020 \cite{Brown2020} that would become the state-of-the-art models in the field of \ac{NLP}.
-
+% Visual Transformers
+Much inspired by the major advancements in the field of \ac{NLP} with the transformer architecture, researchers started applying the transformer architecture to the field of \ac{CV} as an alternative to the long-standing \ac{CNN} architecture that has been the standard for many years \cite{Chen2021}.
+These models, known as visual transformers, have shown to be competitive with \ac{CNN}s in many tasks and have demonstrated the potential to learn hierarchical features from images in a more efficient way than \ac{CNN}s \cite{Dosovitskiy2021}.
 
 
 ---
