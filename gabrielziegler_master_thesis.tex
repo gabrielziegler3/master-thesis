@@ -594,6 +594,8 @@ Otaniemi, 31 August 2024\\
 \acrodef{CV}[CV]{Computer Vision}
 \acrodef{ANN}[ANN]{Artificial Neural Networks}
 \acrodef{CNN}[CNN]{Convolutional Neural Networks}
+\acrodef{RNN}[RNN]{Recurrent Neural Networks}
+\acrodef{LSTM}[LSTM]{Long Short-Term Memory}
 \acrodef{PDF}[PDF]{Portable Document Format}
 \acrodef{OCR}[OCR]{Optical Character Recognition}
 \acrodef{LLM}[LLM]{Large Language Model}
@@ -617,6 +619,8 @@ Otaniemi, 31 August 2024\\
     \acro{CV}{Computer Vision}
     \acro{ANN}{Artificial Neural Networks}
     \acro{CNN}{Convolutional Neural Networks}
+    \acro{RNN}{Recurrent Neural Networks}
+    \acro{LSTM}{Long Short-Term Memory}
     \acro{PDF}{Portable Document Format}
     \acro{OCR}{Optical Character Recognition}
     \acro{LLM}{Large Language Model}
@@ -715,16 +719,32 @@ These problems are particularly true for financial reports, where information is
 The requirement to be able to handle layout invariance is tackled by general-purpose models, such as \ac{LLM}s, that through pre-training of general-purpose models that learn the position information of the elements as well as the visual information presented with the text such as font size, color, and style.
 These visual cues can be learned by visual encoders and combined with the text in pre-training stage significantly improving the model's capability to abstract non-standardized information from documents \cite{Cui2021}.
 
-\subsection{\ac{LLM}s}
+\subsection{Transformers}
+
+In recent \ac{AI} systems, \ac{DL} models have dominated the research and development of new systems and become a standard for many tasks.
+The first \ac{DL} models were based on fully-connected neural networks which is composed of layers of neurons that are connected to each other in a feed-forward fashion \cite{Rosenblatt1958, Rosenblatt1961}.
+Decades after the first fully-connected neural networks were published, the \ac{CNN} architecture was proposed by Yann LeCun in 1998 \cite{LeCun1998} and later popularized by the AlexNet model in 2012 after winning the ImageNet competition \cite{Krizhevsky2012}.
+These models represented a significant improvement in the field of \ac{CV} and were able to learn hierarchical features from images, allowing for more complex patterns to be learned.
+% RNN
+Meanwhile, in the field of \ac{NLP}, the \ac{RNN} architecture was proposed in 1986 bringing the concept of sequential processing to neural networks allowing previous states to be considered in the processing of the current state \cite{Rumelhart1986}.
+The \ac{RNN} architecture was able to learn sequential patterns from text data, allowing for the development of models that could generate text, translate languages, and more.
+% LSTM
+However, the \ac{RNN} architecture had limitations in learning long-range dependencies due to the vanishing gradient problem \cite{Hochreiter1991}.
+To address this issue, the \ac{LSTM} architecture was proposed in 1997 by Sepp Hochreiter and Jürgen Schmidhuber \cite{Hochreiter1997}.
+The \ac{LSTM} architecture introduced the concept of memory cells that could store information over time, allowing for the learning of long-range dependencies in sequential data.
+The next breakthrough in the \ac{AI} field came with the introduction of the transformer architecture in 2017 that revolutionized the field of \ac{NLP} by utilizing self-attention mechanisms to learn intrinsic features \cite{Vaswani2017}.
+The transformer architecture brought significant improvements in the field of \ac{NLP} that was demonstrated by the BERT model in 2019 \cite{Devlin2019} and later by the GPT-3 model in 2020 \cite{Brown2020} that would become the state-of-the-art models in the field of \ac{NLP}.
+
+
+
+---
 
 Large Language Models (\ac{LLM}s) are a class of artificial intelligence models that have been designed to understand, generate, and interact with human language at a large scale.
 These models are trained on vast amounts of text data, allowing them to learn language patterns, grammar, context, and even domain-specific knowledge.
 As a result, \ac{LLM}s can perform a wide range of language-related tasks, such as translation, summarization, question answering, and more, with remarkable proficiency. The development and evolution of \ac{LLM}s have been instrumental in advancing the field of natural language processing (\ac{NLP}), enabling more natural and effective human-computer interactions.
 The capabilities of \ac{LLM}s have found applications in various sectors, including but not limited to customer service, content creation, and, notably, in extracting and analyzing information from documents in the field known as Document AI \cite{}.
 
-\subsection{\ac{GPT}}
-
-\subsection{GPT-4}
+\subsubsection{GPT-4}
 
 The fourth \ac{GPT} release by OpenAI, is a large language model with multilingual and multimodal capabilities that allow it to process image and text inputs, producing text outputs.
 The model was developed aiming to improve the ability to comprehend and generate natural language text.
@@ -732,7 +752,9 @@ The model was developed aiming to improve the ability to comprehend and generate
 The specifics about the model's architecture and training data are not disclosed by OpenAI, but it is known that the model has been pre-trained to predict the next word in a sentence, using publicly available and licensed data fine-tuned with \ac{RLHF}, which has a great impact on the model's performance \cite{OpenAI2023GPT4}.
 While this new model has shown great improvements in language understanding, generation and reduction of hallucinations, it still has limitations in understanding context and generating coherent responses, which is a common issue in large language models \cite{OpenAI2023GPT4}.
 
-\subsection{GPT-4V}
+\subsection{Visual Transformers}
+
+\subsubsection{GPT-4V}
 
 GPT-4 Vision represents an extension of the capabilities of traditional \ac{LLM}s into the realm of visual understanding and analysis.
 By integrating vision-based artificial intelligence technologies with the language processing prowess of GPT-4, this model can interpret and analyze images, diagrams, and visual data in conjunction with textual information.
@@ -790,7 +812,7 @@ Consider that we have the following source data used as input to an \ac{LLM} mod
     This information is not present in the input data and cannot be inferred from the given context, therefore it is classified as an extrinsic hallucination.
 \end{itemize}
 
-There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrievalaugmented}, fine-tuning a model on a specific domain \cite{brown2020language} or by retrying the generation process multiple times while validating the output against a defined model such as the tools \textit{LangChain} \cite{Chase_LangChain_2022} and \textit{instructor} \cite{Instructor2023} propose.
+There are several techniques that aim in mitigating these issues, such as using retrieval-based methods \cite{lewis2020retrievalaugmented}, fine-tuning a model on a specific domain \cite{Brown2020} or by retrying the generation process multiple times while validating the output against a defined model such as the tools \textit{LangChain} \cite{Chase_LangChain_2022} and \textit{instructor} \cite{Instructor2023} propose.
 In this study, we show applications of how using defined models with \textit{pydantic} \cite{pydantic} and \textit{instructor} can help in mitigating hallucinations in the context of document data extraction.
 
 \subsubsection{Interpretability and Explainability}
