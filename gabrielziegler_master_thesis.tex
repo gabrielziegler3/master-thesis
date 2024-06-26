@@ -741,20 +741,46 @@ The transformer architecture brought significant improvements in the field of \a
 Much inspired by the major advancements in the field of \ac{NLP} with the transformer architecture, researchers started applying the transformer architecture to the field of \ac{CV} as an alternative to the long-standing \ac{CNN} architecture that has been the standard for many years \cite{Chen2021}.
 These models, known as visual transformers, have shown to be competitive with \ac{CNN}s in many tasks and have demonstrated the potential to learn hierarchical features from images in a more efficient way than \ac{CNN}s \cite{Dosovitskiy2021}.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{images/transformers_milestones.png}
-    \caption{Fig. 1: Key milestones in the development of transformer. The vision transformer models are marked in red (Image from `A Survey on Vision Transformer' \cite{Han2023}).}
+    \caption{Key milestones in the development of transformer. The vision transformer models are marked in red (Image from `A Survey on Vision Transformer' \cite{Han2023}).}
     \label{fig:transformers_milestones}
 \end{figure}
 
+The original transformer architecture \cite{Vaswani2017} is a sequence-to-sequence model composed of an encoder and a decoder block that are themselves composed of multiple layers of multi-head self-attention mechanisms and feed-forward neural network.
 
----
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/transformer_architecture.png}
+    \caption{Transformer architecture. The model is composed of an encoder and a decoder block that are themselves composed of multiple layers of multi-head self-attention mechanisms and feed-forward neural network \cite{Vaswani2017}.}
+    \label{fig:transformers_architecture}
+\end{figure}
 
-Large Language Models (\ac{LLM}s) are a class of artificial intelligence models that have been designed to understand, generate, and interact with human language at a large scale.
-These models are trained on vast amounts of text data, allowing them to learn language patterns, grammar, context, and even domain-specific knowledge.
-As a result, \ac{LLM}s can perform a wide range of language-related tasks, such as translation, summarization, question answering, and more, with remarkable proficiency. The development and evolution of \ac{LLM}s have been instrumental in advancing the field of natural language processing (\ac{NLP}), enabling more natural and effective human-computer interactions.
-The capabilities of \ac{LLM}s have found applications in various sectors, including but not limited to customer service, content creation, and, notably, in extracting and analyzing information from documents in the field known as Document AI \cite{}.
+The attention function, often described as a map of a query and a set of key-value pairs to an output, outputs a weighted sum of the values based on the similarity of the query to the keys computing a compatibility function between the query and the corresponding key.
+
+% display two images side-by-side
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/attention_qkv.png}
+        \caption{Scaled dot-product attention function \cite{Vaswani2017}.}
+        \label{fig:attention_qkv}
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/multihead_attention.png}
+        \caption{Multi-head attention mechanism \cite{Vaswani2017}.}
+        \label{fig:multihead_attention}
+    \end{minipage}
+\end{figure}
+
+% Large Language Models (\ac{LLM}s) are a class of artificial intelligence models that have been designed to understand, generate, and interact with human language at a large scale.
+% These models are trained on vast amounts of text data, allowing them to learn language patterns, grammar, context, and even domain-specific knowledge.
+% As a result, \ac{LLM}s can perform a wide range of language-related tasks, such as translation, summarization, question answering, and more, with remarkable proficiency. The development and evolution of \ac{LLM}s have been instrumental in advancing the field of natural language processing (\ac{NLP}), enabling more natural and effective human-computer interactions.
+% The capabilities of \ac{LLM}s have found applications in various sectors, including but not limited to customer service, content creation, and, notably, in extracting and analyzing information from documents in the field known as Document AI \cite{}.
 
 \subsubsection{GPT-4}
 
