@@ -777,10 +777,34 @@ The attention function, often described as a map of a query and a set of key-val
     \end{minipage}
 \end{figure}
 
+The attention function is computed on a set of queries in a parallel fashion where the queries are packed into a matrix $Q$, the keys into a matrix $K$, and the values into a matrix $V$.
+The attention function is computed as follows \cite{Vaswani2017}:
+
+\begin{equation}
+    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{equation}
+
+
 % Large Language Models (\ac{LLM}s) are a class of artificial intelligence models that have been designed to understand, generate, and interact with human language at a large scale.
 % These models are trained on vast amounts of text data, allowing them to learn language patterns, grammar, context, and even domain-specific knowledge.
 % As a result, \ac{LLM}s can perform a wide range of language-related tasks, such as translation, summarization, question answering, and more, with remarkable proficiency. The development and evolution of \ac{LLM}s have been instrumental in advancing the field of natural language processing (\ac{NLP}), enabling more natural and effective human-computer interactions.
 % The capabilities of \ac{LLM}s have found applications in various sectors, including but not limited to customer service, content creation, and, notably, in extracting and analyzing information from documents in the field known as Document AI \cite{}.
+
+\subsubsection{Visual Transformers}
+
+\subsection{Large Language Models}
+
+\ac{LLM}s are a class of statistical language models based on neural networks --- oftentimes utilizing the transformers architecture --- that are large in size and pre-trained on vast amounts of text data.
+These models represent a significant advancement in the \ac{NLP} field allowing complex tasks to be performed with high accuracy and efficiency.
+This technology has been widely researched and developed by leading big tech companies such as OpenAI, Google, and Meta, \cite{Brown2020, Devlin2019, Radford2021, OpenAI2023GPT4, Gemini2022, Gemini2024} that have pushed the boundaries of transformers pretrained models to the point that they can generate human-like text, understand context, and even perform tasks that require domain-specific knowledge.
+This milestone meant not only a significant improvement in the field of \ac{NLP} but also a major adoption of artificial intelligence agents by the average user, especially with OpenAI's ChatGPT release in 2022 that delivered a fine-tuned GPT-3.5 model utilizing reinforcement learning from human feedback using the same methods as the InstructGPT model \cite{Ouyang2022}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/llms_milestones.png}
+    \caption{Key milestones of large language models from the task-solving perspective \cite{Zhao2023}.}
+    \label{fig:transformers_milestones}
+\end{figure}
 
 \subsubsection{GPT-4}
 
@@ -790,8 +814,6 @@ The model was developed aiming to improve the ability to comprehend and generate
 The specifics about the model's architecture and training data are not disclosed by OpenAI, but it is known that the model has been pre-trained to predict the next word in a sentence, using publicly available and licensed data fine-tuned with \ac{RLHF}, which has a great impact on the model's performance \cite{OpenAI2023GPT4}.
 While this new model has shown great improvements in language understanding, generation and reduction of hallucinations, it still has limitations in understanding context and generating coherent responses, which is a common issue in large language models \cite{OpenAI2023GPT4}.
 
-\subsection{Visual Transformers}
-
 \subsubsection{GPT-4V}
 
 GPT-4 Vision represents an extension of the capabilities of traditional \ac{LLM}s into the realm of visual understanding and analysis.
@@ -799,7 +821,14 @@ By integrating vision-based artificial intelligence technologies with the langua
 This multimodal approach enables GPT-4 Vision to perform tasks that require an understanding of both visual and textual content, such as extracting data from charts and graphs in financial reports, identifying key information in documents with complex layouts, and answering questions that depend on visual cues.
 The development of GPT-4 Vision is a testament to the ongoing advancements in AI, highlighting the move towards more integrated and comprehensive models that can navigate the complexities of human communication and information processing \cite{2023GPT4VisionSC}.
 
-\subsection{\ac{LLM}s for Document AI}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/gpt_exam_results.png}
+    \caption{}
+    \label{fig:transformers_milestones}
+\end{figure}
+
+\subsection{LLMs for Document AI}
 
 \ac{LLM}s have become a popular strategy in the field of Document AI, transforming how information is extracted, processed, and analyzed from documents.
 In the context of Document AI, \ac{LLM}s are utilized to understand the content within documents, ranging from simple text to complex structures like tables and charts, and the relationships between different pieces of information.
@@ -807,15 +836,15 @@ These models leverage their extensive training on diverse datasets to adapt to t
 Through techniques such as transfer learning and fine-tuning, \ac{LLM}s can be specialized to perform tasks including but not limited to information extraction, document summarization, and semantic search within documents.
 Their ability to process and analyze documents at scale significantly reduces the time and effort required for data entry, extraction, and analysis, enabling more efficient and accurate handling of document-based information \cite{}.
 
-\subsection{Question answering with \ac{RAG}}
+\subsection{Question answering with RAG}
 
 \ac{RAG} represents a novel approach in leveraging \ac{LLM}s for the task of question answering.
 \ac{RAG} combines the generative capabilities of models like GPT with retrieval-based methods, which search a large corpus of documents to find relevant information that can aid in generating accurate and informative answers.
 This technique involves two main components: a retriever, which identifies relevant documents or passages given a query, and a generator, which synthesizes the retrieved information into a coherent response.
 By integrating these two processes, RAG is able to produce answers that are not only contextually relevant but also enriched with details and insights drawn from a wide range of sources.
-This method has shown significant promise in improving the accuracy and depth of responses provided by AI systems in question answering applications, particularly in domains where detailed and specific knowledge is required, such as academic research and technical support \cite{}.
+This method has shown significant promise in improving the accuracy and depth of responses provided by AI systems in question answering applications, particularly in domains where detailed and specific knowledge is required, such as academic research and technical support % \cite{}.
 
-\subsection{Issues with \ac{LLM}s for Document AI}
+\subsection{Issues with LLMs for Document AI}
 
 \subsubsection{Hallucinations}
 
@@ -1005,7 +1034,7 @@ Precision and Recall are critical metrics for evaluating the effectiveness of th
 % \subsubsection{F1 Score}
 % The F1 Score is the harmonic mean of precision and recall, providing a single measure to balance these metrics. It is especially useful when the costs of false positives and false negatives are similar.
 
-\subsubsection{\ac{MAPE}}
+\subsubsection{MAPE}
 
 For numerical errors, the \ac{MAPE} is used to quantify the accuracy of the extracted values.
 This metric calculates the average percentage difference between the extracted values and the ground truth values, providing insights into the model's performance in capturing the correct numerical data while accounting for scale and magnitude differences.
@@ -1056,7 +1085,7 @@ def extract_data_from_pdf(pdf_file: str):
 This pre-processing step is used to iterate over the pages in the \ac{PDF} document and find the pages of interest so that the core engine is only applied to these pages.
 This is an important step to reduce the processing time and to avoid unnecessary processing of pages that do not contain relevant information, however it is also crucial to make sure that no false negatives are generated, as this could lead to missing pages of interest.
 
-\subsubsection{Parsing \ac{LLM} outputs}
+\subsubsection{Parsing LLMs outputs}
 
 As of the time of writing, the text \ac{GPT}-4 model has a parameter flag to determine the output format of the model while the vision model does not have this feature.
 This means that for text, it is possible to specify \ac{JSON} as the output format, however for the vision model, the output is always a string and that leads to uncertainty whether the output string can be parsed into a \ac{JSON} format by the system.
@@ -1108,12 +1137,12 @@ def consolidate_data(data: list[str]) -> str:
 This is a simple example of how the \ac{GPT}-4 model can be used to consolidate information from different pages of the \ac{PDF} document and can definitely be improved by adding more context and validation steps, such as checking for inconsistencies in the data, before returning the consolidated information.
 
 
-\subsection{Text-only approach with \ac{LLM}s}
+\subsection{Text-only approach with LLMs}
 
 In this experiment, we use the \ac{GPT}-4 architecture, more especifically \textit{gpt-4-0125-preview} released in December 2023, to extract information from the text contained in the financial reports without considering any images or visual data.
 Evidently, this approach is limited to the information that is present in the text and does not take into account any charts or important visual cues that the report might contain, thus it is expected that this system may fail for cases where the indicator are presented in a visual form.
 
-\subsection{Image-only approach with \ac{LLM}s}
+\subsection{Image-only approach with LLMs}
 
 In this experiment, we use the \ac{GPT}-4 Vision model to extract information from the images contained in the financial reports without considering any text data.
 Since OpenAI's visual model is highly accurate in extracting information from images, this approach is expected to have an overall performance superior to the text-only approach because it will be able to generalize the information from images but it is also expected to have an increased proclivity to hallucinations, as the model is not able to validate the information extracted from the images with the text data.
@@ -1137,7 +1166,7 @@ This is important not only for model performance, but also to keep the number of
 The system sends a request to OpenAI's \ac{GPT}-4 Vision model with the pre-processed image and the instructions where the model is asked to extract the key indicators from the image into a predefined JSON schema.
 This is necessary and important because not only does the model need to be able to extract the information from the images, but it also needs to produce the information in a format that can be parsed by the system, otherwise it might raise unexpected errors on the client side.
 
-\subsection{Multimodal \ac{LLM}s to extract information from images and text}
+\subsection{Multimodal LLMs to extract information from images and text}
 
 In this experiment, we use a multimodal approach to extract information from the financial reports, leveraging information from both textual and visual domains.
 This approach combines the strengths of the text-only and image-only methods while mitigating their respective weaknesses by validating the information extracted from the images with the text data and vice versa.
