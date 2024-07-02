@@ -784,13 +784,10 @@ The attention function is computed as follows \cite{Vaswani2017}:
     \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 \end{equation}
 
-
-% Large Language Models (\ac{LLM}s) are a class of artificial intelligence models that have been designed to understand, generate, and interact with human language at a large scale.
-% These models are trained on vast amounts of text data, allowing them to learn language patterns, grammar, context, and even domain-specific knowledge.
-% As a result, \ac{LLM}s can perform a wide range of language-related tasks, such as translation, summarization, question answering, and more, with remarkable proficiency. The development and evolution of \ac{LLM}s have been instrumental in advancing the field of natural language processing (\ac{NLP}), enabling more natural and effective human-computer interactions.
-% The capabilities of \ac{LLM}s have found applications in various sectors, including but not limited to customer service, content creation, and, notably, in extracting and analyzing information from documents in the field known as Document AI \cite{}.
-
 \subsubsection{Visual Transformers}
+
+Before the introduction of the transformer architecture in the visual domain, traditional supervised techniques suffered from the necessity of large amounts of labeled data to learn hierarchical features from images limiting the scalability and generalization of such models.
+The incorporation of models such as BERT, GPT, DALL-E, that are trained on large amounts of text data and generally with a self-supervised learning approach, leads to a decreased dependence on carefully annotated labels, which might allow room for progress on essential cognitive skills that have been challenging in the traditional supervised learning paradigm \cite{Bommasani2021, Zellers2019, Martin2023}.
 
 \subsection{Large Language Models}
 
@@ -839,7 +836,7 @@ Their ability to process and analyze documents at scale significantly reduces th
 \subsection{Question answering with RAG}
 
 \ac{RAG} represents a novel approach in leveraging \ac{LLM}s for the task of question answering.
-\ac{RAG} combines the generative capabilities of models like GPT with retrieval-based methods, which search a large corpus of documents to find relevant information that can aid in generating accurate and informative answers.
+\ac{RAG} combines the generative capabilities of GPT-like models with retrieval-based methods, which search a large corpus of documents to find relevant information that can aid in generating accurate and informative answers.
 This technique involves two main components: a retriever, which identifies relevant documents or passages given a query, and a generator, which synthesizes the retrieved information into a coherent response.
 By integrating these two processes, RAG is able to produce answers that are not only contextually relevant but also enriched with details and insights drawn from a wide range of sources.
 This method has shown significant promise in improving the accuracy and depth of responses provided by AI systems in question answering applications, particularly in domains where detailed and specific knowledge is required, such as academic research and technical support % \cite{}.
@@ -884,7 +881,7 @@ In this study, we show applications of how using defined models with \textit{pyd
 
 \subsubsection{Interpretability and Explainability}
 
-Ever since \ac{DL} models gained popularity in productive environments, many concerns have been raised regarding the interpretability and explainability of these models, particularly in high-stakes applications such as healthcare, finance, and law where accountability and transparency are crucial.
+Ever since \ac{DL} models gained popularity in productive environments, many concerns have been raised regarding the interpretability and explainability of these models, particularly in high-stakes applications such as healthcare, finance, and law where accountability and transparency are crucial and these models can have societal impacts, e.g. inequity, discrimination, misuse, economic and environmental impact, ethical concerns, among others.
 As already demonstrated in several studies, \ac{DL} models are often treated as black boxes, because of the complex and non-linear nature of their architectures, making it difficult to understand how they arrive at their decisions and generate their outputs \cite{castelvecchi2016can, 2018_survey_explaining_black_box}.
 \ac{LLM}s are no exception to this, as their complex attention mechasnisms and deep learning architectures make it challenging to interpret the reasoning behind their predictions and the information they generate.
 
