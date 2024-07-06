@@ -784,10 +784,22 @@ The attention function is computed as follows \cite{Vaswani2017}:
     \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 \end{equation}
 
-\subsubsection{Visual Transformers}
+\subsubsection{Transformers in Vision}
 
 Before the introduction of the transformer architecture in the visual domain, traditional supervised techniques suffered from the necessity of large amounts of labeled data to learn hierarchical features from images limiting the scalability and generalization of such models.
 The incorporation of models such as BERT, GPT, DALL-E, that are trained on large amounts of text data and generally with a self-supervised learning approach, leads to a decreased dependence on carefully annotated labels, which might allow room for progress on essential cognitive skills that have been challenging in the traditional supervised learning paradigm \cite{Bommasani2021, Zellers2019, Martin2023}.
+
+The application of transformer architectures to vision tasks has revolutionized the field.
+Vision Transformers (ViTs) have demonstrated that by treating image patches as sequences of tokens, similar to words in text, one can leverage the powerful sequence modeling capabilities of transformers to process and analyze visual data.
+ViTs have shown remarkable performance across various tasks, including image classification, object detection, and segmentation, often surpassing the performance of traditional \ac{CNN}s \cite{Dosovitskiy2021}.
+
+With such trend of transformers architectures in the visual domain, OpenAI releases GPT-4 Vision, which integrates advanced transformer architectures specifically designed for understanding and generating visual content.
+GPT-4 Vision builds on the principles of its text-based equivalent GPT-4 but adapts the transformer model to handle the unique challenges of image inputs \cite{2023GPT4VisionSC}.
+This includes learning complex spatial relationships and capturing fine-grained details from images, which are crucial for tasks such as image synthesis, enhancement, and interpretation
+
+The integration of multimodal learning in GPT-4 Vision allows for processing of textual and visual information, enhancing the model's ability to understand and generate coherent and contextually enriched content.
+This multimodal capability is particularly valuable in processing documents that contain both text and visual elements, such as financial reports, where information is presented in a variety of formats, including tables, charts, and images.
+For these reasons and for its availability, GPT-4 Vision is the model of choice for multimodality experiments in this study.
 
 \subsection{Large Language Models}
 
@@ -803,7 +815,7 @@ This milestone meant not only a significant improvement in the field of \ac{NLP}
     \label{fig:transformers_milestones}
 \end{figure}
 
-\subsubsection{GPT-4}
+\subsubsection{GPT-4
 
 The fourth \ac{GPT} release by OpenAI, is a large language model with multilingual and multimodal capabilities that allow it to process image and text inputs, producing text outputs.
 The model was developed aiming to improve the ability to comprehend and generate natural language text.
