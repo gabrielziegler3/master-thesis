@@ -815,7 +815,7 @@ This milestone meant not only a significant improvement in the field of \ac{NLP}
     \label{fig:transformers_milestones}
 \end{figure}
 
-\subsubsection{GPT-4
+\subsubsection{GPT-4}
 
 The fourth \ac{GPT} release by OpenAI, is a large language model with multilingual and multimodal capabilities that allow it to process image and text inputs, producing text outputs.
 The model was developed aiming to improve the ability to comprehend and generate natural language text.
@@ -906,34 +906,48 @@ For these reasons, we investigate nuances on the documents that lead to errouneo
 
 \section{Financial Reports Dataset}
 
-TODO: describe the dataset that structure and the challenges of the dataset we are dealing internally. The dataset cannot be fully disclosed, but we can describe the structure and the challenges that we face when dealing with it.
+The dataset used in this study consists of a collection of annual and quarterly reports from various public companies across different industries and different countries.
+% TODO: Add the number of reports in the dataset
+We count with a total of 1000 reports, carefully annotated manually with the \ac{GHG} emissions data present in the reports.
+These reports can contain a wide range of information, including financial statements, management discussions, and analysis, auditor reports, and of course, \ac{ESG} disclosures including \ac{GHG} emissions data, which is the topic of interest in this study.
+The documents are stored in \ac{PDF} format with varying layouts, fonts, structures and number of pages.
 
-Dataset used to benchmark different methods.
+We opted to create a diverse dataset having heterogeneous formats to report \ac{GHG} emission data, including text, tables, charts and images to evaluate the effectiveness of different strategies for extracting information from financial reports as this represents a realistic nature of the data that the system would encounter in a real-world scenario in productive environments.
+Below we present a few samples to illustrate the diversity of formats and layouts used to report \ac{GHG} emissions data in financial reports.
 
-% display 3 images. 2 at the top and 1 at the bottom
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{images/ghg_emissions_bar_chart.png}
-        \caption{Financial report page 1}
-        \label{fig:financial_report_1}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{images/ghg_emissions_bar_chart.png}
-        \caption{Financial report page 2}
-        \label{fig:financial_report_2}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{images/ghg_emissions_bar_chart.png}
-        \caption{Financial report page 3}
-        \label{fig:financial_report_3}
-    \end{subfigure}
-    \caption{Sample pages from the financial reports dataset}
-    \label{fig:financial_reports}
+    \includegraphics[width=0.7\textwidth]{images/ghg_emissions_bar_chart.png}
+    \caption{Document reporting \ac{GHG} emissions data using a bar chart figure.}
+    \label{ghg_emissions_bar_chart}
 \end{figure}
+
+The figure above shows a case where the report presents the \ac{GHG} emissions data using a bar chart figure.
+Although this is visually rich and easy to comprehend for the human eye, it poses a huge challenge for an \ac{OCR} system to extract the data from the chart, as the numbers may be detected and extracted correctly, but the context of the data may be lost leading to an extraction with high uncertainty.
+A visual or multimodal approach would be necessary to extract the data from this type of document.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/ghg_emissions_pie_chart.png}
+    \caption{Document reporting \ac{GHG} emissions data in image with a pie chart.}
+    \label{ghg_emissions_pie_chart}
+\end{figure}
+
+Similarly to figure \ref{ghg_emissions_bar_chart}, the figure above shows a case where the report presents the \ac{GHG} emissions data using a pie chart figure.
+In this case, since we would only be interested in the values presented in the text under the image, the OCR-based approach could lead to a successful extraction of the data, however this is another example to display the diversity of formats that companies use to report key information in their financial reports.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/ghg_emissions_table.png}
+    \caption{Document reporting \ac{GHG} emissions data in a table.}
+    \label{ghg_emissions_table}
+\end{figure}
+
+One of the most common layouts present in the dataset is the table format.
+It is a great way to present structured data over a period of time in a concise, objective and easy-to-read way.
+This is also one of the best formats for an \ac{OCR}-based approach to extract the data, as the data is already structured and there is a less chances of having context loss.
+However, OCRs are not error-free with tables, especially in cases where the table is structured in a non-conventional way, such as merged cells, rotated text, or cells with no borders.
+Additionally, Document AI researchers have extensively studied and developed models to detect, extract and understand tables in documents \cite{TableNet2020, table_extraction_conditional_pinto_2003, Schreiber2017, Li2022, Gilani2017, Shafait2010}.
 
 \clearpage
 
