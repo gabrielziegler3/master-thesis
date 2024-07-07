@@ -949,6 +949,23 @@ This is also one of the best formats for an \ac{OCR}-based approach to extract t
 However, OCRs are not error-free with tables, especially in cases where the table is structured in a non-conventional way, such as merged cells, rotated text, or cells with no borders.
 Additionally, Document AI researchers have extensively studied and developed models to detect, extract and understand tables in documents \cite{TableNet2020, table_extraction_conditional_pinto_2003, Schreiber2017, Li2022, Gilani2017, Shafait2010}.
 
+\subsection{Additional intricacies relevant to our problem}
+
+\textbf{TODO check if these should be in experiment}
+\subsubsection{Unit of measurement}
+
+The diversity in such documents, is not only present in the layouts, but also in the metrics reported.
+Most companies have been seen to disclose their \ac{GHG} emissions data in metric tons of \ce{CO2} equivalent, however, other companies have report their emissions in other units such as kilograms of \ce{CO2}, metric tons of \ce{CO2} per unit of production, and some companies that have very large numbers report their emissions in million metric tons of \ce{CO2} equivalent.
+Since the unit of measurement is crucial for the correct interpretation of the data, it is important to also be able to extract this information from the reports.
+Therefore, if our system correctly detects the values in the document, but fail to output a normalized unit of measurement --- in our case, we use metric tonnes --- the system output will be considered incorrect.
+
+\subsubsection{Scope 2 emissions origin}
+
+The \ac{GHG} Scope 2 emissions are divided into three categories: location-based, market-based, and undefined.
+The location-based emissions are the emissions calculated based on the location of the company's operations, the market-based emissions are the emissions calculated based on the market where the company sells its products, and the undefined emissions are the emissions that are not clearly defined as location-based or market-based.
+It is important to be able to extract this information from the reports, as it is crucial for the correct interpretation of the data.
+Therefore, if our system correctly detects the values in the document, but fail to output the correct category for the Scope 2 emissions, the system output will be considered incorrect.
+
 \clearpage
 
 \section{Strategies for information extraction from financial reports}
