@@ -848,13 +848,14 @@ Below we present a few samples to illustrate the diversity of formats and layout
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/ghg_emissions_bar_chart.png}
+    \includegraphics[width=\textwidth]{images/ghg_emissions_bar_chart.png}
     \caption{Document reporting \ac{GHG} emissions data using a bar chart figure.}
     \label{ghg_emissions_bar_chart}
 \end{figure}
 
 The figure above shows a case where the report presents the \ac{GHG} emissions data using a bar chart figure.
-Although this is visually rich and easy to comprehend for the human eye, it poses a huge challenge for an \ac{OCR} system to extract the data from the chart, as the numbers may be detected and extracted correctly, but the context of the data may be lost leading to an extraction with high uncertainty.
+Although this is visually rich and easy to comprehend for the human eye, it poses a huge challenge for an \ac{OCR} system to extract the data from the chart.
+The text may be detected and extracted correctly by the \ac{OCR} system, but the context of the data will likely be lost, leading to an extraction with high uncertainty.
 A visual or multimodal approach would be necessary to extract the data from this type of document.
 
 \begin{figure}[H]
@@ -933,7 +934,7 @@ Therefore, this challenge focuses on correctly extracting values for the followi
                 \item \textbf{Market-based}: Emissions calculated based on the market where the company sells its products.
                 \item \textbf{Undefined}: Emissions that are not clearly defined as location-based or market-based.
             \end{itemize}
-    \item \textbf{\ac{GHG} Scope 3 emissions}: The total amount of \ac{GHG} emissions produced by in the value chain of a company.
+    \item \textbf{\ac{GHG} Scope 3 emissions}: The total amount of \ac{GHG} emissions produced by in the value chain of a company. Scope 3 emissions can also be broken down into 3.1, 3.3, 3.4, 3.6, 3.7 and 3.11 categories, however, for the purpose of this study, we will only consider the total Scope 3 emissions.
     \item \textbf{Reported unit}: The unit of measurement used for the emissions.
 \end{itemize}
 
