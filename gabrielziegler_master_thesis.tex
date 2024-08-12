@@ -1051,6 +1051,15 @@ The residual is calculated by taking the absolute difference between the extract
 
 The lower the residual, the closer the extracted value is to the ground truth value, indicating a more accurate extraction process.
 
+\subsubsection{Perfect Match Rate}
+
+A especial case when the metric is correctly detected and also perfectly extracted is what the system ultimately aims to maximize and in this study we refer to it as the Perfect Match Rate.
+This metric is calculated as the proportion of documents in which the system correctly identifies and extracts the indicators of interest without any errors.
+
+\begin{equation}
+    \text{Perfect Match Rate} = \frac{\text{Perfect Matches}}{\text{Total Documents}}
+\end{equation}
+
 \subsubsection{Error Types Analysis}
 
 In addition to quantitative metrics, an error analysis is conducted to identify the types of errors made by the system during the extraction process.
@@ -1229,7 +1238,8 @@ This system is expected to have the best performance among the three approaches,
 % scope_3_emissions_residual	65.0	227871.44850769232	1168999.9290390962	0.0	0.0	0.0	0.0	8254000.0
 % scope_3_emissions_perfect_match	65.0	0.8461538461538461
 
-\begin{table*}\centering
+% \begin{table*}\centering
+\begin{table*}[h!]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
@@ -1250,7 +1260,7 @@ This system is expected to have the best performance among the three approaches,
     \label{tab:text_only_metrics}
 \end{table*}
 
-\begin{table*}\centering
+\begin{table*}[h!]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
@@ -1271,7 +1281,7 @@ This system is expected to have the best performance among the three approaches,
     \label{tab:image_only_metrics}
 \end{table*}
 
-\begin{table*}\centering
+\begin{table*}[h!]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
