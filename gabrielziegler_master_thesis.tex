@@ -203,6 +203,17 @@
 \usepackage{textcomp}
 \usepackage{minted}
 \usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\sisetup{
+    round-mode=places,
+    round-precision=2,
+    scientific-notation=false
+}
 
 \usepackage[version=4]{mhchem}
 % \usepackage{fontspec}
@@ -1155,6 +1166,105 @@ This system is expected to have the best performance among the three approaches,
 \section{Results}
 
 TODO: describe the results of each experiment given the defined metrics for evaluation
+
+% Results for multimodal
+% metric                        count	mean	std	min	25%	50%	75%	max
+% scope_1_emissions_residual	65.0	751.5846153846154	3601.290349879417	0.0	0.0	0.0	0.0	25030.0
+% scope_1_emissions_perfect_match	65.0	0.8923076923076924
+% scope_2_emissions_residual	65.0	8431.004769230769	32265.609799814003	0.0	0.0	0.0	82.91	239308.0
+% scope_2_emissions_perfect_match	65.0	0.6923076923076923
+% scope_2_emissions_location_residual	65.0	8680.545938461539	30929.102476856522	0.0	0.0	0.0	4834.0	239308.0
+% scope_2_emissions_location_perfect_match	65.0	0.5692307692307692
+% scope_2_emissions_market_residual	65.0	584.9588307692308	2194.3125415306863	0.0	0.0	0.0	0.0	12560.0
+% scope_2_emissions_market_perfect_match	65.0	0.8769230769230769
+% scope_3_emissions_residual	65.0	227871.44850769232	1168999.9290390962	0.0	0.0	0.0	0.0	8254000.0
+% scope_3_emissions_perfect_match	65.0	0.8461538461538461
+
+\begin{table*}\centering
+    \ra{1.3}
+    \begin{tabular}{@{}llrrrrrrr@{}}\toprule
+        \textbf{KPI} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
+        \textbf{Scope 1 emissions} & residual & 751.58 & 3601.29 & 0.0 & 0.0 & 0.0 & 0.0 & 25030.0 \\
+        & perfect match & 89\% & & & & & & \\
+        \textbf{Scope 2 emissions} & residual & 8431.00 & 32265.61 & 0.0 & 0.0 & 0.0 & 82.91 & 239308.0 \\
+        & perfect match & 69\% & & & & & & \\
+        \textbf{Scope 2 emissions location} & residual & 8680.55 & 30929.10 & 0.0 & 0.0 & 0.0 & 4834.0 & 239308.0 \\
+        & perfect match & 57\% & & & & & & \\
+        \textbf{Scope 2 emissions market} & residual & 584.96 & 2194.31 & 0.0 & 0.0 & 0.0 & 0.0 & 12560.0 \\
+        & perfect match & 88\% & & & & & & \\
+        \textbf{Scope 3 emissions} & residual & 227871.45 & 1168999.93 & 0.0 & 0.0 & 0.0 & 0.0 & 8254000.0 \\
+        & perfect match & 85\% & & & & & & \\
+        \bottomrule
+    \end{tabular}
+    \caption{Residual and perfect match metrics for the multimodal approach.}
+    \label{tab:multimodal_metrics}
+\end{table*}
+
+% kpi,count,mean,std,min,25%,50%,75%,max
+% scope_1_emissions_residual,78.0,621589.3193205129,2617185.8246921287,0.0,0.0,0.0,300.5,16657326.0
+% scope_1_emissions_perfect_match,78.0,0.7051282051282052,0.45893649955381693,0.0,0.0,1.0,1.0,1.0
+% scope_2_emissions_residual,78.0,42701.47448717948,227479.60777079224,0.0,0.0,0.0,72.45,1534000.0
+% scope_2_emissions_perfect_match,78.0,0.7307692307692307,0.4464310689240829,0.0,0.0,1.0,1.0,1.0
+% scope_2_emissions_location_residual,78.0,1093202.0009482051,6180676.237088188,0.0,0.0,0.0,12355.0,49315635.0
+% scope_2_emissions_location_perfect_match,78.0,0.5256410256410257,0.5025741264537528,0.0,0.0,1.0,1.0,1.0
+% scope_2_emissions_market_residual,78.0,358920.4530769231,2260835.1004925235,0.0,0.0,0.0,0.0,16997182.0
+% scope_2_emissions_market_perfect_match,78.0,0.7948717948717948,0.40640886452950953,0.0,1.0,1.0,1.0,1.0
+% scope_3_emissions_residual,78.0,785785.7871794872,5287354.292877068,0.0,0.0,0.0,2.0699999999987995,46199953.8
+% scope_3_emissions_perfect_match,78.0,0.7435897435897436,0.4394771815921655,0.0,0.25,1.0,1.0,1.0
+
+\begin{table*}\centering
+    \ra{1.3}
+    \begin{tabular}{@{}llrrrrrrr@{}}\toprule
+        \textbf{KPI} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
+        \textbf{Scope 1 emissions} & residual & 621589.32 & 2617185.82 & 0.0 & 0.0 & 0.0 & 300.5 & 16657326.0 \\
+        & perfect match & 70\% & & & & & & \\
+        \textbf{Scope 2 emissions} & residual & 42701.47 & 227479.61 & 0.0 & 0.0 & 0.0 & 72.45 & 1534000.0 \\
+        & perfect match & 73\% & & & & & & \\
+        \textbf{Scope 2 emissions location} & residual & 1093202.00 & 6180676.24 & 0.0 & 0.0 & 0.0 & 12355.0 & 49315635.0 \\
+        & perfect match & 53\% & & & & & & \\
+        \textbf{Scope 2 emissions market} & residual & 358920.45 & 2260835.10 & 0.0 & 0.0 & 0.0 & 0.0 & 16997182.0 \\
+        & perfect match & 79\% & & & & & & \\
+        \textbf{Scope 3 emissions} & residual & 785785.79 & 5287354.29 & 0.0 & 0.0 & 0.0 & 2.07 & 46199953.8 \\
+        & perfect match & 74\% & & & & & & \\
+        \bottomrule
+    \end{tabular}
+    \caption{Residual and perfect match metrics for the text-only approach.}
+    \label{tab:text_only_metrics}
+\end{table*}
+
+% vision
+% ,count,mean,std,min,25%,50%,75%,max
+% scope_1_emissions_residual,88.0,1537568.1036363638,12489496.268211324,0.0,0.0,0.0,2435.37525,116455366.0
+% scope_1_emissions_perfect_match,88.0,0.5113636363636364,0.502735463945467,0.0,0.0,1.0,1.0,1.0
+% scope_2_emissions_residual,88.0,28025.09636363637,167960.04619693532,0.0,0.0,0.0,601.3175,1534000.0
+% scope_2_emissions_perfect_match,88.0,0.6704545454545454,0.4727418412673544,0.0,0.0,1.0,1.0,1.0
+% scope_2_emissions_location_residual,88.0,1608246.632715909,12893554.829838974,0.0,0.0,28.1765,5243.06325,119880861.0
+% scope_2_emissions_location_perfect_match,88.0,0.45454545454545453,0.5007830858361343,0.0,0.0,0.0,1.0,1.0
+% scope_2_emissions_market_residual,88.0,127889.60122727272,1142411.2835266204,0.0,0.0,0.0,5.4407499999999995,10718989.281
+% scope_2_emissions_market_perfect_match,88.0,0.7159090909090909,0.45356477281067176,0.0,0.0,1.0,1.0,1.0
+% scope_3_emissions_residual,88.0,859217.5471477273,5387118.979142441,0.0,0.0,0.0,215.17000000000002,46199953.8
+% scope_3_emissions_perfect_match,88.0,0.6590909090909091,0.4767312946227961,0.0,0.0,1.0,1.0,1.0
+
+\begin{table*}\centering
+    \ra{1.3}
+    \begin{tabular}{@{}llrrrrrrr@{}}\toprule
+        \textbf{KPI} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
+        \textbf{Scope 1 emissions} & residual & 1537568.10 & 12489496.27 & 0.0 & 0.0 & 0.0 & 2435.38 & 116455366.0 \\
+        & perfect match & 51\% & & & & & & \\
+        \textbf{Scope 2 emissions} & residual & 28025.10 & 167960.05 & 0.0 & 0.0 & 0.0 & 601.32 & 1534000.0 \\
+        & perfect match & 67\% & & & & & & \\
+        \textbf{Scope 2 emissions location} & residual & 1608246.63 & 12893554.83 & 0.0 & 0.0 & 28.18 & 5243.06 & 119880861.0 \\
+        & perfect match & 45\% & & & & & & \\
+        \textbf{Scope 2 emissions market} & residual & 127889.60 & 1142411.28 & 0.0 & 0.0 & 0.0 & 5.44 & 10718989.28 \\
+        & perfect match & 72\% & & & & & & \\
+        \textbf{Scope 3 emissions} & residual & 859217.55 & 5387118.98 & 0.0 & 0.0 & 0.0 & 215.17 & 46199953.8 \\
+        & perfect match & 66\% & & & & & & \\
+        \bottomrule
+    \end{tabular}
+    \caption{Residual and perfect match metrics for the image-only approach.}
+    \label{tab:image_only_metrics}
+\end{table*}
+
 
 \clearpage
 
