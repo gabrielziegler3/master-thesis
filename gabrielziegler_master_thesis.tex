@@ -914,8 +914,8 @@ Therefore, if our system correctly detects the values in the document, but fail 
 \section{Strategies for information extraction from financial reports}
 
 Different strategies for extracting information from financial reports have been implemented in order to compare their effectiveness across diverse report formats and content types.
-The study brings a strategy that is focused solely on text information, an image-analysis approach that extracts information from images contained in the reports, and a multimodal approach that combines image and text information to validate extracted data from more than one source of truth.
-For these different experiments, we consider that the core engine changes, but we maintain the same pre-processing steps across them to ensure that the comparison only takes into account the core feature of extracting data from a given input.
+The study brings an approach focused solely on text information, an image-analysis approach that treats the PDF page as an image, and a multimodal approach that combines image and text information to infer the correct indicators disclosed in the document from more than one source of truth.
+For these experiments, we maintain the same pre-processing steps to ensure that the comparison only takes into account the core feature of extracting data from a given input.
 
 \subsection{System Specifications}
 
@@ -930,7 +930,7 @@ The experiments proposed in this study were conducted on a machine with the foll
 
 \subsection{Experiments definition}
 
-For the sake of setting up an \ac{OCR} challenge that that is relevant to business cases and provides the opportunity to compare different strategies for extracting information from financial reports, we establish a simple set of indicators of interest, a desired schema for the extracted data, and a set of metrics to evaluate the performance of the different strategies.
+For the sake of setting up an information retrieval challenge that is relevant to our business case and provides the opportunity to compare different strategies for extracting information from financial reports, we establish a simple set of indicators of interest, a desired schema for the extracted data, and a set of metrics to evaluate the performance of the different strategies.
 
 \subsubsection{Indicators of interest}
 
@@ -950,6 +950,7 @@ Therefore, this challenge focuses on correctly extracting values for the followi
 \end{itemize}
 
 These are crucial indicators for assessing a company's environmental impact and sustainability practices, and they are often reported in financial statements as part of the company's \ac{ESG} disclosures.
+In essence, there are three main indicators that are analysed, but since the \ac{GHG} Scope 2 emissions are divided into three categories, we consider them as separate indicators for this study.
 It's also important to be able to extract the unit of measurement used for the emissions, because different companies may report their emissions in different units, such as metric tons of \ce{CO2} equivalent, kilograms of \ce{CO2}, or other units.
 
 \subsection{Extracted data schema}
@@ -995,8 +996,12 @@ To thoroughly assess the performance of the proposed systems for extracting indi
 These metrics are designed to measure both the accuracy of the extracted data and the robustness of the extraction process against various types of errors.
 Here, we delineate the key metrics and evaluation criteria used.
 
-\subsubsection{Precision and Recall}
-Precision and Recall are critical metrics for evaluating the effectiveness of the data extraction system:
+\subsubsection{Detection Rate}
+
+Not only is it important to evaluate the accuracy of the extracted data, but it is also crucial to assess the system's ability to detect the presence of the indicators of interest in the document as well as not to detect false positives.
+The detection rate is calculated as the proportion of documents in which the system correctly identifies the indicators of interest.
+In order to assess the detection rate, we utilize Precision, Recall and Accuracy.
+
 \begin{itemize}
     \item \textbf{Precision} assesses the proportion of data points extracted by the model that are correct and relevant. A high precision rate indicates fewer instances of fabricated metrics and irrelevant data extraction.
 
@@ -1009,22 +1014,42 @@ Precision and Recall are critical metrics for evaluating the effectiveness of th
     \begin{equation}
         \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
     \end{equation}
+
+    \item \textbf{Accuracy} provides an overall measure of the system's performance in detecting the indicators of interest.
+
+    \begin{equation}
+        \text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{True Positives} + \text{True Negatives} + \text{False Positives} + \text{False Negatives}}
+    \end{equation}
 \end{itemize}
 
-% Add formula for precision
+Ideally, the system should achieve high precision and recall rates to ensure that the extracted data is both accurate and comprehensive.
+In practice, there is often a trade-off between precision and recall, and the system must be optimized to balance these metrics effectively.
+In our case, we would prefer to minimize the number of false positives, as those would represent fabricated metrics --- perhaps due to LLM hallucinations --- thus, we would slightly prioritize precision over recall.
 
 
-% \subsubsection{F1 Score}
-% The F1 Score is the harmonic mean of precision and recall, providing a single measure to balance these metrics. It is especially useful when the costs of false positives and false negatives are similar.
+% % \subsubsection{F1 Score}
+% % The F1 Score is the harmonic mean of precision and recall, providing a single measure to balance these metrics. It is especially useful when the costs of false positives and false negatives are similar.
+%
+% \subsubsection{MAPE}
+%
+% For numerical errors, the \ac{MAPE} is used to quantify the accuracy of the extracted values.
+% This metric calculates the average percentage difference between the extracted values and the ground truth values, providing insights into the model's performance in capturing the correct numerical data while accounting for scale and magnitude differences.
+%
+% \begin{equation}
+%     \text{MAPE} = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100
+% \end{equation}
 
-\subsubsection{MAPE}
+\subsubsection{Residual Analysis}
 
-For numerical errors, the \ac{MAPE} is used to quantify the accuracy of the extracted values.
-This metric calculates the average percentage difference between the extracted values and the ground truth values, providing insights into the model's performance in capturing the correct numerical data while accounting for scale and magnitude differences.
+While we want a system that has high recall and precision rates to guarantee that the presence of key information is being detected, it is also fundamental that this information is being extracted correctly (or at least as close as possible to the ground truth).
+For this reason, we also conduct a residual analysis to evaluate how far the extracted values are from the ground truth values.
+The residual is calculated by taking the absolute difference between the extracted value (\texttt{y}) and the ground truth value (\texttt{y\_hat}).
 
 \begin{equation}
-    \text{MAPE} = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100
+    \text{Residual} = |y - \hat{y}|
 \end{equation}
+
+The lower the residual, the closer the extracted value is to the ground truth value, indicating a more accurate extraction process.
 
 \subsubsection{Error Types Analysis}
 
@@ -1032,17 +1057,17 @@ In addition to quantitative metrics, an error analysis is conducted to identify 
 
 \begin{itemize}
     \item \textbf{Missing Data}: Indicates data that should have been extracted but was not. This error impacts the \texttt{recall} metric.
-    \item \textbf{Incorrect Values}: Reflects errors in the value of the data extracted. These are numerical errors that impact the \texttt{MAPE} metric.
     \item \textbf{Fabricated Metrics}: Metrics that are not present in the document but appear in the extracted output --- also referred to as extrinsic hallucination. This error impacts \texttt{precision}.
+    \item \textbf{Incorrect Values}: Reflects errors in the value of the data extracted. These are numerical errors that impact the \texttt{residual} metric.
 \end{itemize}
 
-\subsection{Common processing steps}
+\subsection{Shared processing steps}
 
 For all of the experiments, the system receives a \ac{PDF} as input and common pre and post-processing steps are applied to the data to ensure that the system is able to extract the information from the reports.
 
 \subsubsection{Pre-processing: finding pages of interest}
 
-A common pre-processing step is to find the pages of interest --- those that might contain the information that we are looking for --- in the \ac{PDF} document.
+A shared pre-processing step is to find the pages of interest --- those that might contain the information that we are looking for --- in the \ac{PDF} document.
 
 \begin{minted}{python}
 def extract_data_from_pdf(pdf_file: str):
@@ -1205,9 +1230,10 @@ This system is expected to have the best performance among the three approaches,
 % scope_3_emissions_perfect_match	65.0	0.8461538461538461
 
 \begin{table*}\centering
+    \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
-        \textbf{KPI} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
+        \textbf{Indicator} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
         \textbf{Scope 1 emissions} & residual & 621589.32 & 2617185.82 & 0.0 & 0.0 & 0.0 & 300.5 & 16657326.0 \\
         & perfect match & 70\% & & & & & & \\
         \textbf{Scope 2 emissions} & residual & 42701.47 & 227479.61 & 0.0 & 0.0 & 0.0 & 72.45 & 1534000.0 \\
@@ -1219,15 +1245,16 @@ This system is expected to have the best performance among the three approaches,
         \textbf{Scope 3 emissions} & residual & 785785.79 & 5287354.29 & 0.0 & 0.0 & 0.0 & 2.07 & 46199953.8 \\
         & perfect match & 74\% & & & & & & \\
         \bottomrule
-    \end{tabular}
+    \end{tabular}}
     \caption{Residual and perfect match metrics for the text-only approach.}
     \label{tab:text_only_metrics}
 \end{table*}
 
 \begin{table*}\centering
+    \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
-        \textbf{KPI} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
+        \textbf{Indicator} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
         \textbf{Scope 1 emissions} & residual & 1537568.10 & 12489496.27 & 0.0 & 0.0 & 0.0 & 2435.38 & 116455366.0 \\
         & perfect match & 51\% & & & & & & \\
         \textbf{Scope 2 emissions} & residual & 28025.10 & 167960.05 & 0.0 & 0.0 & 0.0 & 601.32 & 1534000.0 \\
@@ -1239,15 +1266,16 @@ This system is expected to have the best performance among the three approaches,
         \textbf{Scope 3 emissions} & residual & 859217.55 & 5387118.98 & 0.0 & 0.0 & 0.0 & 215.17 & 46199953.8 \\
         & perfect match & 66\% & & & & & & \\
         \bottomrule
-    \end{tabular}
+    \end{tabular}}
     \caption{Residual and perfect match metrics for the image-only approach.}
     \label{tab:image_only_metrics}
 \end{table*}
 
 \begin{table*}\centering
+    \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
-        \textbf{KPI} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
+        \textbf{Indicator} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
         \textbf{Scope 1 emissions} & residual & 751.58 & 3601.29 & 0.0 & 0.0 & 0.0 & 0.0 & 25030.0 \\
         & perfect match & 89\% & & & & & & \\
         \textbf{Scope 2 emissions} & residual & 8431.00 & 32265.61 & 0.0 & 0.0 & 0.0 & 82.91 & 239308.0 \\
@@ -1259,7 +1287,7 @@ This system is expected to have the best performance among the three approaches,
         \textbf{Scope 3 emissions} & residual & 227871.45 & 1168999.93 & 0.0 & 0.0 & 0.0 & 0.0 & 8254000.0 \\
         & perfect match & 85\% & & & & & & \\
         \bottomrule
-    \end{tabular}
+    \end{tabular}}
     \caption{Residual and perfect match metrics for the multimodal approach.}
     \label{tab:multimodal_metrics}
 \end{table*}
