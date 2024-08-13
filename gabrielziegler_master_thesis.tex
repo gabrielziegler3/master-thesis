@@ -847,6 +847,7 @@ For these reasons, we investigate nuances on the documents that lead to errouneo
 \clearpage
 
 \section{Financial Reports Dataset}
+\label{sec:dataset}
 
 The dataset used in this study consists of a collection of annual and quarterly reports from various public companies across different industries and different countries.
 % TODO: Add the number of reports in the dataset
@@ -991,6 +992,7 @@ This schema guarantees that the extracted data can be processed by the system an
 The \texttt{extracted\_pages} field is used to store the page numbers from which the data was extracted, allowing for traceability and validation of the extracted information.
 
 \subsection{Evaluation Criteria}
+\label{sec:evaluation_criteria}
 
 To thoroughly assess the performance of the proposed systems for extracting indicators from financial reports, a combination of quantitative and qualitative metrics is employed.
 These metrics are designed to measure both the accuracy of the extracted data and the robustness of the extraction process against various types of errors.
@@ -1199,6 +1201,11 @@ This system is expected to have the best performance among the three approaches,
 \clearpage
 \section{Results}
 
+In this section, we explore the results of the experiments conducted to extract information from financial reports using different strategies assessing the metrics defined in section \ref{sec:evaluation_criteria}.
+The results are presented in tabular format, showing the performance of each system in terms of detection rate, residual analysis, perfect match rate, and error types analysis and charts are also used to ease the interpretability of the results.
+
+\subsection{Text-only approach with LLMs}
+
 % text
 % kpi,count,mean,std,min,25%,50%,75%,max
 % scope_1_emissions_residual,78.0,621589.3193205129,2617185.8246921287,0.0,0.0,0.0,300.5,16657326.0
@@ -1212,33 +1219,13 @@ This system is expected to have the best performance among the three approaches,
 % scope_3_emissions_residual,78.0,785785.7871794872,5287354.292877068,0.0,0.0,0.0,2.0699999999987995,46199953.8
 % scope_3_emissions_perfect_match,78.0,0.7435897435897436,0.4394771815921655,0.0,0.25,1.0,1.0,1.0
 
-% vision
-% ,count,mean,std,min,25%,50%,75%,max
-% scope_1_emissions_residual,88.0,1537568.1036363638,12489496.268211324,0.0,0.0,0.0,2435.37525,116455366.0
-% scope_1_emissions_perfect_match,88.0,0.5113636363636364,0.502735463945467,0.0,0.0,1.0,1.0,1.0
-% scope_2_emissions_residual,88.0,28025.09636363637,167960.04619693532,0.0,0.0,0.0,601.3175,1534000.0
-% scope_2_emissions_perfect_match,88.0,0.6704545454545454,0.4727418412673544,0.0,0.0,1.0,1.0,1.0
-% scope_2_emissions_location_residual,88.0,1608246.632715909,12893554.829838974,0.0,0.0,28.1765,5243.06325,119880861.0
-% scope_2_emissions_location_perfect_match,88.0,0.45454545454545453,0.5007830858361343,0.0,0.0,0.0,1.0,1.0
-% scope_2_emissions_market_residual,88.0,127889.60122727272,1142411.2835266204,0.0,0.0,0.0,5.4407499999999995,10718989.281
-% scope_2_emissions_market_perfect_match,88.0,0.7159090909090909,0.45356477281067176,0.0,0.0,1.0,1.0,1.0
-% scope_3_emissions_residual,88.0,859217.5471477273,5387118.979142441,0.0,0.0,0.0,215.17000000000002,46199953.8
-% scope_3_emissions_perfect_match,88.0,0.6590909090909091,0.4767312946227961,0.0,0.0,1.0,1.0,1.0
+This experiment focused on extracting the information based only on text data from the document pages.
+Since some documents present the information in a structured way, the text-only approach was able to extract the information with a high precision and recall rate, as shown in table \ref{tab:text_only_metrics}.
+However, as previously discussed in section \ref{sec:dataset}, there are documents that present visual-rich information, such as charts and tables, which might be challenging for the text-only approach to extract the information correctly.
+These documents will often produce a mismatched prediction confusing different metrics i.e. assigning the value of Scope 1 emissions to Scope 3 emissions or vice versa.
+Because of the nature of the indicators that we are analyzing, oftentimes these metrics can be in different orders of magnitude, which can lead to high residuals when the system makes a mistake in the extraction process.
+Therefore, we see that the residual values are high for all the indicators, indicating that the system is not able to extract the information correctly in some cases, however, the perfect match is mostly above 70\% for all the indicators, indicating that the system was able to correctly predict the indicators in a high proportion of the documents.
 
-% Results for multimodal
-% metric                        count	mean	std	min	25%	50%	75%	max
-% scope_1_emissions_residual	65.0	751.5846153846154	3601.290349879417	0.0	0.0	0.0	0.0	25030.0
-% scope_1_emissions_perfect_match	65.0	0.8923076923076924
-% scope_2_emissions_residual	65.0	8431.004769230769	32265.609799814003	0.0	0.0	0.0	82.91	239308.0
-% scope_2_emissions_perfect_match	65.0	0.6923076923076923
-% scope_2_emissions_location_residual	65.0	8680.545938461539	30929.102476856522	0.0	0.0	0.0	4834.0	239308.0
-% scope_2_emissions_location_perfect_match	65.0	0.5692307692307692
-% scope_2_emissions_market_residual	65.0	584.9588307692308	2194.3125415306863	0.0	0.0	0.0	0.0	12560.0
-% scope_2_emissions_market_perfect_match	65.0	0.8769230769230769
-% scope_3_emissions_residual	65.0	227871.44850769232	1168999.9290390962	0.0	0.0	0.0	0.0	8254000.0
-% scope_3_emissions_perfect_match	65.0	0.8461538461538461
-
-% \begin{table*}\centering
 \begin{table*}[h!]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
@@ -1259,6 +1246,24 @@ This system is expected to have the best performance among the three approaches,
     \caption{Residual and perfect match metrics for the text-only approach.}
     \label{tab:text_only_metrics}
 \end{table*}
+
+\subsection{Image-only approach with LLMs}
+
+% vision
+% ,count,mean,std,min,25%,50%,75%,max
+% scope_1_emissions_residual,88.0,1537568.1036363638,12489496.268211324,0.0,0.0,0.0,2435.37525,116455366.0
+% scope_1_emissions_perfect_match,88.0,0.5113636363636364,0.502735463945467,0.0,0.0,1.0,1.0,1.0
+% scope_2_emissions_residual,88.0,28025.09636363637,167960.04619693532,0.0,0.0,0.0,601.3175,1534000.0
+% scope_2_emissions_perfect_match,88.0,0.6704545454545454,0.4727418412673544,0.0,0.0,1.0,1.0,1.0
+% scope_2_emissions_location_residual,88.0,1608246.632715909,12893554.829838974,0.0,0.0,28.1765,5243.06325,119880861.0
+% scope_2_emissions_location_perfect_match,88.0,0.45454545454545453,0.5007830858361343,0.0,0.0,0.0,1.0,1.0
+% scope_2_emissions_market_residual,88.0,127889.60122727272,1142411.2835266204,0.0,0.0,0.0,5.4407499999999995,10718989.281
+% scope_2_emissions_market_perfect_match,88.0,0.7159090909090909,0.45356477281067176,0.0,0.0,1.0,1.0,1.0
+% scope_3_emissions_residual,88.0,859217.5471477273,5387118.979142441,0.0,0.0,0.0,215.17000000000002,46199953.8
+% scope_3_emissions_perfect_match,88.0,0.6590909090909091,0.4767312946227961,0.0,0.0,1.0,1.0,1.0
+
+The image-only approach focuses on extracting information from the \ac{PDF} document pages treating them as images.
+This approach is expected to perform better than the text-only approach for documents that contain visual-rich information, such as charts and tables, as the model is able to interpret the visual nuances of the document but it is also expected to have a higher rate of hallucinations, as the model is not able to validate the information extracted from the images with the text data.
 
 \begin{table*}[h!]\centering
     \resizebox{\textwidth}{!}{
@@ -1281,6 +1286,27 @@ This system is expected to have the best performance among the three approaches,
     \label{tab:image_only_metrics}
 \end{table*}
 
+It is notable that the visual model underperforms the text-only approach in almost all the evaluated metrics.
+This could be due to the fact that rich-visual information is not present in most documents and therefore this model would outperform the text-only approach in subset of the documents present in the dataset while underperforming in the majority of the documents.
+
+\subsection{Multimodal LLMs to extract information from images and text}
+
+% Results for multimodal
+% metric                        count	mean	std	min	25%	50%	75%	max
+% scope_1_emissions_residual	65.0	751.5846153846154	3601.290349879417	0.0	0.0	0.0	0.0	25030.0
+% scope_1_emissions_perfect_match	65.0	0.8923076923076924
+% scope_2_emissions_residual	65.0	8431.004769230769	32265.609799814003	0.0	0.0	0.0	82.91	239308.0
+% scope_2_emissions_perfect_match	65.0	0.6923076923076923
+% scope_2_emissions_location_residual	65.0	8680.545938461539	30929.102476856522	0.0	0.0	0.0	4834.0	239308.0
+% scope_2_emissions_location_perfect_match	65.0	0.5692307692307692
+% scope_2_emissions_market_residual	65.0	584.9588307692308	2194.3125415306863	0.0	0.0	0.0	0.0	12560.0
+% scope_2_emissions_market_perfect_match	65.0	0.8769230769230769
+% scope_3_emissions_residual	65.0	227871.44850769232	1168999.9290390962	0.0	0.0	0.0	0.0	8254000.0
+% scope_3_emissions_perfect_match	65.0	0.8461538461538461
+
+The multimodal approach combines the information extracted from the text and images to predict the indicators of interest from the financial reports.
+This approach is expected to have the best performance among the three approaches, as it is able to use the information from both the text and images to validate the information extracted from the images with the text data and vice versa.
+
 \begin{table*}[h!]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
@@ -1301,6 +1327,20 @@ This system is expected to have the best performance among the three approaches,
     \caption{Residual and perfect match metrics for the multimodal approach.}
     \label{tab:multimodal_metrics}
 \end{table*}
+
+The results confirm that the multimodal approach outperforms the text-only and image-only approaches in almost all the evaluated metrics by a significant margin.
+Additionally, most indicators have 75\% of the documents with a residual of 0, indicating that the system was able to extract the information correctly in most of the cases while also holding a perfect match rate above 85\% for metrics \textit{Scope 1 emissions}, \textit{Scope 2 emissions market} and \textit{Scope 3 emissions}.
+
+\subsection{Considerations}
+
+All experiments present a poorer performance for the sub-indicators under \textit{Scope 2 emissions} compared to the other indicators.
+This happens because the \textit{Scope 2 emissions} are divided into three categories: location-based, market-based, and undefined (whenever the document does not clearly especify the measurement standard), and the system is not able to differentiate between these categories, leading to a higher residual and lower perfect match rate for these indicators.
+Oftentimes, what here is considered a mistake is actually a correct extraction, but it is unclear whether the labeling is correct or not. For instance, the model may infer that company A is reporting $300,349$ MT \ce{CO2} location-based emissions when the document does not especify the nature of the emissions and the label refers to it as undefined.
+This error nature enters a gray area where the labeled dataset would have to be revised in other to make sure that the nature of the emissions is perfectly labeled, but due to time constraints, this will not be possible in this study.
+
+The metrics and labels reported for scopes 1 and 3 should not suffer from this nature uncertainty and therefore the results are more reliable for these indicators making them more suitable for comparison between the different approaches.
+
+\subsection{Comparison of the approaches}
 
 % display image
 \begin{figure}[H]
