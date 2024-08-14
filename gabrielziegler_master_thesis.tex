@@ -1378,7 +1378,7 @@ The best system would have a curve closer to the origin and the worst system wou
         \caption{Scope 3 emissions residual}
         \label{fig:scope_3_residual}
     \end{subfigure}
-    \caption{Residual analysis for the multimodal approach.}
+    \caption{Scopes 1 and 3 emissions residual analysis.}
     \label{fig:residual_analysis}
 \end{figure}
 
@@ -1386,23 +1386,23 @@ The best system would have a curve closer to the origin and the worst system wou
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
-        \includegraphics[width=\textwidth]{images/scope2_residuals.png}
-        \caption{Scope 2 emissions residual}
-        \label{fig:scope_2_residual}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.32\textwidth}
         \includegraphics[width=\textwidth]{images/scope2_location_residuals.png}
-        \caption{Scope 2 emissions location residual}
+        \caption{Location-based}
         \label{fig:scope_2_location_residual}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \includegraphics[width=\textwidth]{images/scope2_market_residuals.png}
-        \caption{Scope 2 emissions market residual}
+        \caption{Market-based}
         \label{fig:scope_2_market_residual}
     \end{subfigure}
-    \caption{Residual analysis for the multimodal approach.}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{images/scope2_residuals.png}
+        \caption{Undefined}
+        \label{fig:scope_2_residual}
+    \end{subfigure}
+    \caption{Scope 2 emissions residual analysis.}
     \label{fig:residual_analysis}
 \end{figure}
 
@@ -1421,8 +1421,34 @@ This is likely because of the loss of information that the text model has when c
 \section{Conclusions}
 \label{sec:summary}
 
-TODO: add conclusion section
+This thesis explored various approaches for extracting \ac{GHG} emissions from financial reports using \ac{LLM}s as the core engine behind the predictions.
+The primary objective was to evaluate the effectiveness of text-only, image-only, and multimodal strategies in accurately identifying and extracting key environmental metrics, from complex financial documents.
+Through a series of experiments, each method was assessed using a robust set of evaluation criteria, including detection rate, residual analysis, and perfect match rate.
+These results provide critical insights into the strengths and limitations of each approach as they allow for a better understanding of the trade-offs posed by each approach.
 
+The text-only approach demonstrated commendable performance, particularly in handling structured text data --- such as tables and indicators disclosed in plain text --- achieving a reasonably high precision and recall across most indicators.
+However, its reliance solely on textual information rendered it less effective in scenarios where critical data was embedded in visual-rich elements, such as charts, illustrations and unconventionable table formats.
+This limitation was evident in the higher residuals and occasional mismatches in indicator predictions, underscoring the challenges of relying on text-based extraction methods for visually complex documents.
+
+The image-only approach, while capable of interpreting visual-rich information, underperformed relative to the text-only method.
+Although it excelled in extracting data from images, its propensity for hallucinations and the absence of textual validation led to lower precision and increased errors in the extracted metrics.
+The inherent weaknesses in the image-only approach highlights the difficulties of extracting accurate data when solely dependent on visual cues, particularly in financial documents where both text and images convey essential information.
+This method also perfomed poorer in the given dataset because as observed when annotating the dataset, oftentimes when the company provides visual-rich features to disclose \ac{GHG} emissions, the same information might also be found in another page of the report in a more traditional table format.
+This gave the text-only approach a leverage since not only there would usually be a text-approach-friendly table, but there would be less confusion having to decide which page has the correct information on the key indicators.
+
+The multimodal approach, which integrates both text and image data, proved to be the most effective strategy.
+By leveraging the complementary strengths of text and image analysis, this method achieved the highest overall accuracy, precision and recall for detections as well as higher perfect match rates exceeding 85\% for some key indicators.
+The multimodal approach also demonstrated superior performance in residual analysis, indicating its capability to extract data with minimal errors keeping the system errors more manageable and less harmful.
+This method's ability to cross-validate information between text and images effectively mitigated the risk of hallucinations and significantly reduced extraction errors, making it the most robust solution for \ac{ESG} data extraction in financial reports across the studied methods.
+
+Despite the overall success of the multimodal approach, the study also identified areas for improvement.
+The challenges associated with differentiating sub-indicators under Scope 2 emissions, due to classification ambiguities, suggest that further refinement of the dataset labeling and a perhaps more forgiving validation for such indicators could enhance the accuracy of the extraction process while maintaining interpretability of the results.
+
+In conclusion, this thesis contributes to the field of information retrieval from financial documents by demonstrating the power of \ac{LLM}s in automating the extraction of \ac{ESG} indicators from such a diverse real-world dataset.
+The findings emphasize the importance of a multimodal approach for achieving high accuracy and reliability in complex document analysis tasks.
+Future research could explore the integration of more advanced models preprocessing techniques to increase the attention on key elements of the page such as cropping the table or infographic with the key indicators to avoid showing the model irrelevant information.
+Moreover, expanding the scope of indicators and refining the evaluation metrics would provide a more comprehensive understanding of \ac{LLM}'s capabilities and limitations in this domain.
+Overall, the insights gained from this study lay the groundwork for further advancements in the automated analysis of financial reports, with significant implications for businesses, regulatory compliance, and sustainability initiatives.
 
 \clearpage
 %% Bibliography/ list of references
