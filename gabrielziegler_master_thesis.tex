@@ -407,7 +407,6 @@ thesis}
 %% the pdf file as well as the abstract page. To have paragraphs in your
 %% abstract rewrite it in the abstarct environment as described below.
 %%
-% TODO REMOVE
 \thesisabstract{%
 The abstract is a short description of the essential contents of the thesis
 usually in one paragraph: what was studied and how and what were the main
@@ -499,6 +498,76 @@ metadata abstract text must be identical to the text on the abstract page.
 %%
 \newpage
 %%
+%% Abstract in Finnish. Delete if you don't need it.
+%%
+%% Respecify those fields that differ from the earlier specification or simply
+%% respecify all fields.
+\thesistitle{Opinnäyteen otsikko}
+\thesissubtitle{Opinnäytteen mahdollinen alaotsikko}
+\supervisor{Prof.\ Pirjo Professori}
+\advisor{TkT Alan Advisor}
+\advisor{DI Elsa Expert}
+\degreeprogram{Elektroniikka ja sähkötekniikka}
+\major{Sopiva pääaine}
+\collaborativepartner{Yhtiön tai laitoksen nimi (tarvittaessa)}
+\date{21.9.2023}
+%% The keywords need not be separated by \spc now.
+\keywords{Vastus, resistanssi, lämpötila}
+%% Abstract text
+\begin{abstractpage}[finnish]
+Tiivistelmä on lyhyt kuvaus työn keskeisestä sisällöstä usein yhtenä kappaleena:
+mitä tutkittiin ja miten sekä mitkä olivat tärkeimmät tulokset. Suomenkielisen
+opinnäytteen tiivistelmä kirjoitetaan suomeksi ja englanniksi ja ruotsinkielisen
+vastaavasti ruotsiksi ja englanniksi. Suomen- tai ruotsinkielisten
+opiskelijoiden, joiden opinnäytteen kieli on englanti, tulee kirjoittaa
+tiivistelmänsä englanniksi ja koulusivistyskielellään. Muiden kuin
+koulusivistyskieleltään suomen- tai ruotsinkielisten tulee kirjoittaa
+tiivistelmänsä vain englanniksi. Opiskelija voi halutessaan lisätä
+opinnäytteeseensä toisen tai kolmannen tiivistelmän omalla äidinkielellään.
+Tämän opinnäytteen tiivistelmäteksti kirjoitetaan opinnäytteen luettavan osan
+lomakkeen lisäksi myös pdf-tiedoston metadataan. Kirjoita tähän metadataan
+kirjoitettavaa teksti. Metadatatekstissa ei saa olla erikoismerkkejä,
+rivinvaiho- tai kappaleenjakomerkkiä, joten näitä merkkeja ei saa käyttää tässä.
+Jos tiivistelmäsi ei sisällä erikoimerkkejä eikä kaipaa kappaleenjakoa, voit
+hyödynttää makroa abstracttext luodessasi lomakkeen tiivistelmää (katso
+kommentti tässä TeX-tiedostossa alla). Metadatatiivistelmatekstin on muuten
+oltava sama kuin lomakkeessa oleva teksti.
+
+\end{abstractpage}
+
+%% Force new page so that the Swedish abstract starts from a new page
+\newpage
+
+%% Swedish abstract. Delete it if you don't need it.
+%%
+%% Respecify those fields that differ from the earlier specification or simply
+%% respecify all fields.
+\thesistitle{Arbetets titel}
+\supervisor{Prof.\ Pirjo Professori}
+\advisor{TkD Alan Advisor} %
+\advisor{DI Elsa Expert}
+\degreeprogram{Electronik och electroteknik}
+\collaborativepartner{Company or institute name in Swedish (if relevant)}
+%\date{21.9.2023}
+%% Abstract keywords
+\keywords{Nyckelord p\aa{} svenska, temperatur}
+%% Abstract text
+\begin{abstractpage}[swedish]
+Sammandraget är en kort beskrivning av arbetets centrala innehåll: vad
+undersöktes, hur undersöktes det och vilka var de viktigaste resultaten?
+
+I lärdomsprov som skrivs på svenska skrivs sammandraget på svenska och engelska,
+på motsvarande sätt skrivs sammandraget på finska och engelska i lärdomsprov på
+finska. Finsk- eller svenskspråkiga studerande som skriver sitt lärdomsprov på
+engelska ska skriva sammandraget på engelska och på sitt skolutbildningsspråk.
+Studerande vars skolutbildningsspråk inte är svenska eller finska skriver
+sammandraget endast på engelska. Den studerande kan om hen så önskar lägga till
+ett andra eller tredje sammandrag på sitt eget modersmål. Sammandraget fungerar
+då ofta som mognadsprov och bör i så fall vara minst 300 ord långt. Information
+om mognadsprov på svenska finns på MyCourses:\\
+\url{https://mycourses.aalto.fi/course/view.php?id=26872}.
+\end{abstractpage}
+
 
 \dothesispagenumbering{}
 
@@ -893,7 +962,7 @@ This is also one of the best formats for an \ac{OCR}-based approach to extract t
 However, OCRs are not error-free with tables, especially in cases where the table is structured in a non-conventional way, such as merged cells, rotated text, or cells with no borders.
 Additionally, Document AI researchers have extensively studied and developed models to detect, extract and understand tables in documents \cite{TableNet2020, table_extraction_conditional_pinto_2003, Schreiber2017, Li2022, Gilani2017, Shafait2010}.
 
-\subsection{Additional data intricacies relevant to our problem}
+\subsection{Additional intricacies relevant to our problem}
 
 \textbf{TODO check if these should be in experiment}
 \subsubsection{Unit of measurement}
