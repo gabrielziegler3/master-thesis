@@ -785,7 +785,7 @@ The development of GPT-4 Vision is a testament to the ongoing advancements in AI
 In the context of Document AI, \ac{LLM}s are utilized to understand the content within documents, ranging from simple text to complex structures like tables and charts, and the relationships between different pieces of information.
 These models leverage their extensive training on diverse datasets to adapt to the specific challenges posed by document analysis, such as varying formats, layouts, and the integration of multimodal data.
 Through techniques such as transfer learning and fine-tuning, \ac{LLM}s can be specialized to perform tasks including but not limited to information extraction, document summarization, and semantic search within documents.
-Their ability to process and analyze documents at scale significantly reduces the time and effort required for data entry, extraction, and analysis, enabling more efficient and accurate handling of document-based information \cite{}.
+Their ability to process and analyze documents at scale significantly reduces the time and effort required for data entry, extraction, and analysis, enabling more efficient and accurate handling of document-based information %\cite{}.
 
 \subsection{Question answering with RAG}
 
@@ -1351,7 +1351,7 @@ In a context where this system is being assessed to be used in a real-world scen
     \centering
     \includegraphics[width=0.8\textwidth]{images/perfect_match_comparison.png}
     \caption{Results of the experiments for the different approaches.}
-    \label{results}
+    \label{fig:perfect_match_comparison}
 \end{figure}
 
 \subsection{How bad does the system fail?}
@@ -1379,7 +1379,7 @@ The best system would have a curve closer to the origin and the worst system wou
         \label{fig:scope_3_residual}
     \end{subfigure}
     \caption{Scopes 1 and 3 emissions residual analysis.}
-    \label{fig:residual_analysis}
+    \label{fig:scope_1_3_residual_analysis}
 \end{figure}
 
 % display three images side by side
@@ -1403,7 +1403,7 @@ The best system would have a curve closer to the origin and the worst system wou
         \label{fig:scope_2_residual}
     \end{subfigure}
     \caption{Scope 2 emissions residual analysis.}
-    \label{fig:residual_analysis}
+    \label{fig:scope_2_residual_analysis}
 \end{figure}
 
 By having a more careful look at the residuals, it is possible to notice that the vision model has samples with higher residuals than the text model although the text model has a higher score overall for perfect.
