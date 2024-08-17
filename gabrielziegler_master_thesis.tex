@@ -1229,23 +1229,9 @@ Accuracy, which provides an overall measure of performance, is consistently high
 
 The findings suggest that in a real-world scenario, where the goal is to either expedite the extraction of information from financial reports or automate the process entirely, the multimodal approach presents the most promising strategy. Its ability to integrate and cross-validate text and visual data makes it particularly well-suited for handling the diverse and complex nature of financial documents.
 
-
 \subsection{Perfect Match Rate}
 
 \subsubsection{Text-only}
-
-% text
-% kpi,count,mean,std,min,25%,50%,75%,max
-% scope_1_emissions_residual,78.0,621589.3193205129,2617185.8246921287,0.0,0.0,0.0,300.5,16657326.0
-% scope_1_emissions_perfect_match,78.0,0.7051282051282052,0.45893649955381693,0.0,0.0,1.0,1.0,1.0
-% scope_2_emissions_residual,78.0,42701.47448717948,227479.60777079224,0.0,0.0,0.0,72.45,1534000.0
-% scope_2_emissions_perfect_match,78.0,0.7307692307692307,0.4464310689240829,0.0,0.0,1.0,1.0,1.0
-% scope_2_emissions_location_residual,78.0,1093202.0009482051,6180676.237088188,0.0,0.0,0.0,12355.0,49315635.0
-% scope_2_emissions_location_perfect_match,78.0,0.5256410256410257,0.5025741264537528,0.0,0.0,1.0,1.0,1.0
-% scope_2_emissions_market_residual,78.0,358920.4530769231,2260835.1004925235,0.0,0.0,0.0,0.0,16997182.0
-% scope_2_emissions_market_perfect_match,78.0,0.7948717948717948,0.40640886452950953,0.0,1.0,1.0,1.0,1.0
-% scope_3_emissions_residual,78.0,785785.7871794872,5287354.292877068,0.0,0.0,0.0,2.0699999999987995,46199953.8
-% scope_3_emissions_perfect_match,78.0,0.7435897435897436,0.4394771815921655,0.0,0.25,1.0,1.0,1.0
 
 This experiment focused on extracting the information based only on text data from the document pages.
 Since some documents present the information in a structured way, the text-only approach was able to extract the information with a high precision and recall rate, as shown in table \ref{tab:text_only_metrics}.
@@ -1277,19 +1263,6 @@ Therefore, we see that the residual values are high for all the indicators, indi
 
 \subsubsection{Image-only}
 
-% vision
-% ,count,mean,std,min,25%,50%,75%,max
-% scope_1_emissions_residual,88.0,1537568.1036363638,12489496.268211324,0.0,0.0,0.0,2435.37525,116455366.0
-% scope_1_emissions_perfect_match,88.0,0.5113636363636364,0.502735463945467,0.0,0.0,1.0,1.0,1.0
-% scope_2_emissions_residual,88.0,28025.09636363637,167960.04619693532,0.0,0.0,0.0,601.3175,1534000.0
-% scope_2_emissions_perfect_match,88.0,0.6704545454545454,0.4727418412673544,0.0,0.0,1.0,1.0,1.0
-% scope_2_emissions_location_residual,88.0,1608246.632715909,12893554.829838974,0.0,0.0,28.1765,5243.06325,119880861.0
-% scope_2_emissions_location_perfect_match,88.0,0.45454545454545453,0.5007830858361343,0.0,0.0,0.0,1.0,1.0
-% scope_2_emissions_market_residual,88.0,127889.60122727272,1142411.2835266204,0.0,0.0,0.0,5.4407499999999995,10718989.281
-% scope_2_emissions_market_perfect_match,88.0,0.7159090909090909,0.45356477281067176,0.0,0.0,1.0,1.0,1.0
-% scope_3_emissions_residual,88.0,859217.5471477273,5387118.979142441,0.0,0.0,0.0,215.17000000000002,46199953.8
-% scope_3_emissions_perfect_match,88.0,0.6590909090909091,0.4767312946227961,0.0,0.0,1.0,1.0,1.0
-
 The image-only approach focuses on extracting information from the \ac{PDF} document pages treating them as images.
 This approach is expected to perform better than the text-only approach for documents that contain visual-rich information, such as charts and tables, as the model is able to interpret the visual nuances of the document but it is also expected to have a higher rate of hallucinations, as the model is not able to validate the information extracted from the images with the text data.
 
@@ -1318,19 +1291,6 @@ It is notable that the visual model underperforms the text-only approach in almo
 This could be due to the fact that rich-visual information is not present in most documents and therefore this model would outperform the text-only approach in subset of the documents present in the dataset while underperforming in the majority of the documents.
 
 \subsubsection{Multimodal}
-
-% Results for multimodal
-% metric                        count	mean	std	min	25%	50%	75%	max
-% scope_1_emissions_residual	65.0	751.5846153846154	3601.290349879417	0.0	0.0	0.0	0.0	25030.0
-% scope_1_emissions_perfect_match	65.0	0.8923076923076924
-% scope_2_emissions_residual	65.0	8431.004769230769	32265.609799814003	0.0	0.0	0.0	82.91	239308.0
-% scope_2_emissions_perfect_match	65.0	0.6923076923076923
-% scope_2_emissions_location_residual	65.0	8680.545938461539	30929.102476856522	0.0	0.0	0.0	4834.0	239308.0
-% scope_2_emissions_location_perfect_match	65.0	0.5692307692307692
-% scope_2_emissions_market_residual	65.0	584.9588307692308	2194.3125415306863	0.0	0.0	0.0	0.0	12560.0
-% scope_2_emissions_market_perfect_match	65.0	0.8769230769230769
-% scope_3_emissions_residual	65.0	227871.44850769232	1168999.9290390962	0.0	0.0	0.0	0.0	8254000.0
-% scope_3_emissions_perfect_match	65.0	0.8461538461538461
 
 The multimodal approach combines the information extracted from the text and images to predict the indicators of interest from the financial reports.
 This approach is expected to have the best performance among the three approaches, as it is able to use the information from both the text and images to validate the information extracted from the images with the text data and vice versa.
@@ -1373,15 +1333,15 @@ In a context where this system is being assessed to be used in a real-world scen
     \label{fig:perfect_match_comparison}
 \end{figure}
 
-\subsection{How bad does the system fail?}
+\subsection{How Significant Are the System's Errors?}
 
-While the perfect match rate represents a meaningful and easier way to compare the experiments, it is crucial to understand how bad the errors from the system can be when a perfect match is not achieved.
-Consider that for instance, a company has reported that their \textit{Scope 1 emissions} are 300,000 MT \ce{CO2} and the system has extracted 300,020 MT \ce{CO2}.
-This is certainly not a perfect match, however, the error is so small that it could be considered negligible in some cases.
-Perhaps, some indicators are more sensitive to errors than others, and that depends on the business context and the use case of the extracted data.
+While the perfect match rate provides a meaningful and straightforward way to compare the experiments, it is crucial to understand the severity of the errors when a perfect match is not achieved.
+For instance, consider a scenario where a company reports its \textit{Scope 1 emissions} as 300,000 MT \ce{CO2}, but the system extracts this value as 300,020 MT \ce{CO2}.
+Although this is not a perfect match, the error is so small that it could be considered negligible in some cases.
+The sensitivity to such errors may vary depending on the specific indicators and the business context in which the extracted data is used.
 
-The charts below represent the residuals for each indicator in each experiment strategy from the highest to the lowest residual value.
-The best system would have a curve closer to the origin and the worst system would have a curve closer to the top right corner of the chart.
+The charts below represent the residuals for each indicator in each experimental strategy, arranged from the highest to the lowest residual value.
+Ideally, the best-performing system would have a curve closer to the origin, indicating smaller errors, while the worst-performing system would have a curve closer to the top-right corner of the chart.
 
 % display two images side by side
 \begin{figure}[H]
@@ -1397,7 +1357,7 @@ The best system would have a curve closer to the origin and the worst system wou
         \caption{Scope 3 emissions residual}
         \label{fig:scope_3_residual}
     \end{subfigure}
-    \caption{Scopes 1 and 3 emissions residual analysis.}
+    \caption{Residual analysis for Scope 1 and Scope 3 emissions.}
     \label{fig:scope_1_3_residual_analysis}
 \end{figure}
 
@@ -1421,28 +1381,34 @@ The best system would have a curve closer to the origin and the worst system wou
         \caption{Undefined}
         \label{fig:scope_2_residual}
     \end{subfigure}
-    \caption{Scope 2 emissions residual analysis.}
+    \caption{Residual analysis for Scope 2 emissions.}
     \label{fig:scope_2_residual_analysis}
 \end{figure}
 
-By having a more careful look at the residuals, it is possible to notice that the vision model has samples with higher residuals than the text model although the text model has a higher score overall for perfect.
-This is an interesting observation as it shows that these models offer different types of errors.
-If maximizing the perfect match rate is the main goal, the text model outperforms the vision model, however, if minimizing the residuals is the main goal, the vision model outperforms the text model.
+A closer examination of the residuals reveals that the vision model produces samples with higher residuals than the text model, despite the text model generally having a higher perfect match rate.
+This observation is interesting as it indicates that these models make different types of errors.
+If the primary goal is to maximize the perfect match rate, the text model outperforms the vision model.
+However, if minimizing residuals is the main objective, the vision model demonstrates better performance.
 
-Overall, the multimodal approach also offers the best performance in terms of residuals.
-In the case of the \textit{Scope 2 Residuals} indicator chart, the vision model seems to produce less samples with high residuals but that is due to the fact that the vision model predicted less samples for this indicator.
+Overall, the multimodal approach offers the best performance in terms of residuals.
+In the case of the \textit{Scope 2 Residuals} indicator chart, the vision model seems to produce fewer samples with high residuals, but this is due to the fact that the vision model predicted fewer samples for this indicator.
 
-For the \textit{Scope 3 Residuals} indicator chart, the vision model performs very closely to the multimodal model highlighting a worsen performance for the text model in this particular indicator.
-This is likely because of the loss of information that the text model has when compared to the vision model and since the \textit{Scope 3 emissions} indicator is one that oftentimes has the largest values --- due to its nature of encompassing all indirect emissions --- the residuals tend to be higher for this indicator if there is a confusion with another indicator.
+For the \textit{Scope 3 Residuals} indicator chart, the vision model performs very closely to the multimodal model, highlighting a weaker performance by the text model for this particular indicator.
+This is likely due to the loss of information that the text model experiences compared to the vision model.
+Since the \textit{Scope 3 emissions} indicator often has the largest values—due to encompassing all indirect emissions—the residuals tend to be higher for this indicator if there is confusion with another indicator.
 
 \subsection{Considerations}
 
-All experiments present a poorer performance for the sub-indicators under \textit{Scope 2 emissions} compared to the other indicators.
-This happens because the \textit{Scope 2 emissions} are divided into three categories: location-based, market-based, and undefined (whenever the document does not clearly especify the measurement standard), and the system is not able to differentiate between these categories, leading to a higher residual and lower perfect match rate for these indicators.
-Oftentimes, what here is considered a mistake is actually a correct extraction, but it is unclear whether the labeling is correct or not. For instance, the model may infer that company A is reporting $300,349$ MT \ce{CO2} location-based emissions when the document does not especify the nature of the emissions and the label refers to it as undefined.
-This error nature enters a gray area where the labeled dataset would have to be revised in other to make sure that the nature of the emissions is perfectly labeled, but due to time constraints, this will not be possible in this study.
+All experiments show poorer performance for the sub-indicators under \textit{Scope 2 emissions} compared to the other indicators.
+This occurs because \textit{Scope 2 emissions} are divided into three categories: location-based, market-based, and undefined (when the document does not clearly specify the measurement standard).
+The system struggles to differentiate between these categories, leading to higher residuals and lower perfect match rates for these indicators.
 
-The metrics and labels reported for scopes 1 and 3 should not suffer from this nature uncertainty and therefore the results are more reliable for these indicators making them more suitable for comparison between the different approaches.
+In many cases, what is considered a mistake may actually be a correct extraction, but the labeling might be unclear.
+For instance, the model may infer that Company A is reporting $300,349$ MT \ce{CO2} as location-based emissions when the document does not specify the nature of the emissions, and the label refers to it as undefined.
+This type of error falls into a gray area, where the labeled dataset would need to be revised to ensure that the nature of the emissions is perfectly labeled.
+However, due to time constraints, this will not be possible in this study.
+
+The metrics and labels reported for Scopes 1 and 3 should not suffer from this uncertainty, making the results more reliable for these indicators and more suitable for comparison between the different approaches.
 
 \clearpage
 
