@@ -206,6 +206,8 @@
 \usepackage{multirow}
 \usepackage{siunitx}
 \usepackage{booktabs}
+\usepackage{float}
+
 
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 
@@ -1205,7 +1207,7 @@ These documents will often produce a mismatched prediction confusing different m
 Because of the nature of the indicators that we are analyzing, oftentimes these metrics can be in different orders of magnitude, which can lead to high residuals when the system makes a mistake in the extraction process.
 Therefore, we see that the residual values are high for all the indicators, indicating that the system is not able to extract the information correctly in some cases, however, the perfect match is mostly above 70\% for all the indicators, indicating that the system was able to correctly predict the indicators in a high proportion of the documents.
 
-\begin{table*}[h!]\centering
+\begin{table}[H]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
@@ -1224,7 +1226,7 @@ Therefore, we see that the residual values are high for all the indicators, indi
     \end{tabular}}
     \caption{Residual and perfect match metrics for the text-only approach.}
     \label{tab:text_only_metrics}
-\end{table*}
+\end{table}
 
 \subsection{Image-only approach with LLMs}
 
@@ -1244,7 +1246,7 @@ Therefore, we see that the residual values are high for all the indicators, indi
 The image-only approach focuses on extracting information from the \ac{PDF} document pages treating them as images.
 This approach is expected to perform better than the text-only approach for documents that contain visual-rich information, such as charts and tables, as the model is able to interpret the visual nuances of the document but it is also expected to have a higher rate of hallucinations, as the model is not able to validate the information extracted from the images with the text data.
 
-\begin{table*}[h!]\centering
+\begin{table}[H]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
@@ -1263,7 +1265,7 @@ This approach is expected to perform better than the text-only approach for docu
     \end{tabular}}
     \caption{Residual and perfect match metrics for the image-only approach.}
     \label{tab:image_only_metrics}
-\end{table*}
+\end{table}
 
 It is notable that the visual model underperforms the text-only approach in almost all the evaluated metrics.
 This could be due to the fact that rich-visual information is not present in most documents and therefore this model would outperform the text-only approach in subset of the documents present in the dataset while underperforming in the majority of the documents.
@@ -1286,7 +1288,7 @@ This could be due to the fact that rich-visual information is not present in mos
 The multimodal approach combines the information extracted from the text and images to predict the indicators of interest from the financial reports.
 This approach is expected to have the best performance among the three approaches, as it is able to use the information from both the text and images to validate the information extracted from the images with the text data and vice versa.
 
-\begin{table*}[ht!]\centering
+\begin{table}[H]\centering
     \resizebox{\textwidth}{!}{
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
@@ -1305,21 +1307,12 @@ This approach is expected to have the best performance among the three approache
     \end{tabular}}
     \caption{Residual and perfect match metrics for the multimodal approach.}
     \label{tab:multimodal_metrics}
-\end{table*}
+\end{table}
 
 The results confirm that the multimodal approach outperforms the text-only and image-only approaches in almost all the evaluated metrics by a significant margin.
 Additionally, most indicators have 75\% of the documents with a residual of 0, indicating that the system was able to extract the information correctly in most of the cases while also holding a perfect match rate above 85\% for metrics \textit{Scope 1 emissions}, \textit{Scope 2 emissions market} and \textit{Scope 3 emissions}.
 
-\subsection{Considerations}
-
-All experiments present a poorer performance for the sub-indicators under \textit{Scope 2 emissions} compared to the other indicators.
-This happens because the \textit{Scope 2 emissions} are divided into three categories: location-based, market-based, and undefined (whenever the document does not clearly especify the measurement standard), and the system is not able to differentiate between these categories, leading to a higher residual and lower perfect match rate for these indicators.
-Oftentimes, what here is considered a mistake is actually a correct extraction, but it is unclear whether the labeling is correct or not. For instance, the model may infer that company A is reporting $300,349$ MT \ce{CO2} location-based emissions when the document does not especify the nature of the emissions and the label refers to it as undefined.
-This error nature enters a gray area where the labeled dataset would have to be revised in other to make sure that the nature of the emissions is perfectly labeled, but due to time constraints, this will not be possible in this study.
-
-The metrics and labels reported for scopes 1 and 3 should not suffer from this nature uncertainty and therefore the results are more reliable for these indicators making them more suitable for comparison between the different approaches.
-
-\subsection{TODO name this sectino}
+\subsection{How the approaches compare}
 
 When analysing the perfect match rates for each indicator in each experiment strategy, it is clear that the multimodal approach outperforms the text-only and image-only approaches that perform similarly with a slight advantage for the text-only approach.
 Considering the scopes that do not have subdivisions, it is observable that there is a considerable improvement in the multimodal approach against the text-approach reaching 19\% improvement in the perfect match rate for the \textit{Scope 1 emissions} indicator and 11\% for the \textit{Scope 3 emissions} indicator.
@@ -1332,6 +1325,44 @@ In a context where this system is being assessed to be used in a real-world scen
     \caption{Results of the experiments for the different approaches.}
     \label{fig:perfect_match_comparison}
 \end{figure}
+
+\begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \ra{1.3}
+    \begin{tabular}{@{}llrrrrr@{}}\toprule
+        \textbf{Approach} & \textbf{Indicator} & \textbf{Recall} & \textbf{Precision} & \textbf{Accuracy} \\ \midrule
+        \textbf{Text Only} & Scope 1 Emissions & 0.97 & 0.90 & 0.88 \\
+        & Scope 2 Emissions & 0.05 & 0.33 & \textbf{0.74} \\
+        & Scope 2 Emissions Location & 0.91 & 0.62 & 0.63 \\
+        & Scope 2 Emissions Market & \textbf{1.00} & 0.48 & 0.81 \\
+        & Scope 3 Emissions & 0.91 & 0.78 & 0.85 \\
+        \textbf{Vision Only} & Scope 1 Emissions & 0.90 & 0.87 & 0.81 \\
+        & Scope 2 Emissions & \textbf{0.08} & 0.33 & 0.68 \\
+        & Scope 2 Emissions Location & 0.82 & \textbf{0.64} & \textbf{0.64} \\
+        & Scope 2 Emissions Market & 0.85 & 0.38 & 0.77 \\
+        & Scope 3 Emissions & 0.77 & 0.83 & 0.83 \\
+        \textbf{Multimodal} & Scope 1 Emissions & \textbf{0.98} & \textbf{0.95} & \textbf{0.94} \\
+        & Scope 2 Emissions & 0.05 & \textbf{1.00} & 0.69 \\
+        & Scope 2 Emissions Location & \textbf{0.97} & 0.60 & 0.63 \\
+        & Scope 2 Emissions Market & 0.92 & \textbf{0.67} & \textbf{0.89} \\
+        & Scope 3 Emissions & \textbf{0.93} & \textbf{0.90} & \textbf{0.92} \\
+        \bottomrule
+    \end{tabular}}
+    \caption{Metrics for different approaches.}
+    \label{tab:approach_metrics}
+\end{table}
+
+In terms of recall, the multimodal approach demonstrates the highest recall rates for most indicators, particularly \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, where it achieves 0.98 and 0.93, respectively.
+The text-only approach, while generally reliable, struggles with indicators that involve visual elements, such as \textit{Scope 2 emissions}, where its recall drops significantly to 0.05.
+The image-only approach performs similarly to the text-only approach in some areas, but it is generally less consistent, with recall rates varying widely across different indicators.
+
+Precision is another area where the multimodal approach excels.
+For most indicators, including \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the multimodal strategy achieves the highest precision, reaching 0.95 and 0.90, respectively. This indicates that the multimodal approach is not only effective in identifying relevant data but also minimizes the extraction of incorrect or irrelevant information. Notably, the precision for \textit{Scope 2 emissions} under the multimodal approach reaches 1.00, suggesting that when the system does detect this indicator, it is highly accurate.
+
+Accuracy, which provides an overall measure of performance, is consistently highest for the multimodal approach across most indicators. For \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the accuracy reaches 0.94 and 0.92, respectively, reinforcing the superiority of the multimodal method in extracting accurate data. The text-only approach, while accurate for certain indicators, suffers in cases where visual data is critical, as seen in its lower accuracy for \textit{Scope 2 emissions}.
+
+The findings suggest that in a real-world scenario, where the goal is to either expedite the extraction of information from financial reports or automate the process entirely, the multimodal approach presents the most promising strategy. Its ability to integrate and cross-validate text and visual data makes it particularly well-suited for handling the diverse and complex nature of financial documents.
 
 \subsection{How bad does the system fail?}
 
@@ -1395,6 +1426,15 @@ In the case of the \textit{Scope 2 Residuals} indicator chart, the vision model 
 For the \textit{Scope 3 Residuals} indicator chart, the vision model performs very closely to the multimodal model highlighting a worsen performance for the text model in this particular indicator.
 This is likely because of the loss of information that the text model has when compared to the vision model and since the \textit{Scope 3 emissions} indicator is one that oftentimes has the largest values --- due to its nature of encompassing all indirect emissions --- the residuals tend to be higher for this indicator if there is a confusion with another indicator.
 
+\subsection{Considerations}
+
+All experiments present a poorer performance for the sub-indicators under \textit{Scope 2 emissions} compared to the other indicators.
+This happens because the \textit{Scope 2 emissions} are divided into three categories: location-based, market-based, and undefined (whenever the document does not clearly especify the measurement standard), and the system is not able to differentiate between these categories, leading to a higher residual and lower perfect match rate for these indicators.
+Oftentimes, what here is considered a mistake is actually a correct extraction, but it is unclear whether the labeling is correct or not. For instance, the model may infer that company A is reporting $300,349$ MT \ce{CO2} location-based emissions when the document does not especify the nature of the emissions and the label refers to it as undefined.
+This error nature enters a gray area where the labeled dataset would have to be revised in other to make sure that the nature of the emissions is perfectly labeled, but due to time constraints, this will not be possible in this study.
+
+The metrics and labels reported for scopes 1 and 3 should not suffer from this nature uncertainty and therefore the results are more reliable for these indicators making them more suitable for comparison between the different approaches.
+
 \clearpage
 
 \section{Conclusions}
@@ -1442,11 +1482,11 @@ Overall, the insights gained from this study lay the groundwork for further adva
 %% If you don't have appendices, your thesis ends here. Remove \clearpage,
 %% \thesisappendix and the following text below. The last command of this file
 %% is \end{document}.
-\clearpage
+% \clearpage
 
-\thesisappendix
+% \thesisappendix
 
-\section{Contents of an appendix}
-\label{app:contents}
+% \section{Contents of an appendix}
+% \label{app:contents}
 
 \end{document}
