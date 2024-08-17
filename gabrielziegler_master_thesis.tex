@@ -408,23 +408,16 @@ thesis}
 %% abstract rewrite it in the abstarct environment as described below.
 %%
 \thesisabstract{%
-The abstract is a short description of the essential contents of the thesis
-usually in one paragraph: what was studied and how and what were the main
-findings. For a Finnish thesis, the abstract should be written in both Finnish
-and English; for a Swedish thesis, in Swedish and English. The abstracts for
-English theses written by Finnish or Swedish speakers should be written in
-English and either in Finnish or in Swedish, depending on the student’s language
-of basic education. Students educated in languages other than Finnish or Swedish
-write the abstract only in English. Students may include a second or third
-abstract in their native language, if they wish.
-The abstract text of this thesis is written on the readable abstract page as
-well as into the pdf file’ metadata via the thesisabstract macro (see the
-comment in the TeX file). Write here the text that goes into the metadata. The
-metadata cannot contain special characters, linebreak or paragraph break
-characters, so these must not be used here. If your abstract does not contain
-special characters and it does not require paragraphs, you may take advantage of
-the abstracttext macro (see the comment in the TeX file below). Otherwise, the
 metadata abstract text must be identical to the text on the abstract page.
+This thesis investigates the application of the latest \ac{LLM}s for the automated extraction of \ac{ESG} indicators from financial reports, a critical task for companies focused on keeping up-to-date sustainability reporting.
+The study explores the trade-offs in three distinct approaches: text-only, image-only, and multimodal, to evaluate their effectiveness in a real-world diverse dataset of financial reports.
+The text-only approach, although effective for documents with structured textual data, struggled with visual-rich content, leading to high residual difference between the extracted and actual values.
+The image-only approach, while adept at interpreting visual elements, faced challenges with hallucinations and lacked the accuracy of text-based methods that tend to get more perfect matches than the image-based counterparts.
+The multimodal approach, which combines text and image data, demonstrated superior performance, achieving the highest accuracy with a perfect match rate exceeding 85\% for key indicators like Scope 1 and Scope 3 emissions.
+This method effectively mitigated errors through cross-validation between text and image data, resulting in minimal residuals and reliable data extraction.
+The study's findings underscore the possibility of using the three approaches according to the nature of the dataset having a more confident usage when applying the combined multimodal approach in DocumentAI, particularly in format-agnostic scenarios such as the one presented in this study.
+The thesis also identifies challenges, such as the ambiguity in sub-indicators under Scope 2 emissions, and the importance of examining the tolerance for errors in the context of the application, where residuals can be acceptable or make the system completely unusable.
+This work contributes to the growing field of DocumentAI, offering insights into the capabilities and limitations of \ac{LLM} for financial report analysis, and suggests pathways for future advancements in automated information retrieval systems.
 }
 
 %% You can prevent LaTeX from writing into the xmpdata file (it contains all the
@@ -462,28 +455,17 @@ metadata abstract text must be identical to the text on the abstract page.
 %% well.
 %%
 \begin{abstractpage}[english]
-  The abstract is a short description of the essential contents of the thesis,
-  usually in one paragraph: what was studied and how and what were the main
-  findings.
+This thesis investigates the application of the latest \ac{LLM}s for the automated extraction of \ac{ESG} indicators from financial reports, a critical task for companies focused on keeping up-to-date sustainability reporting.
+The study explores the trade-offs in three distinct approaches: text-only, image-only, and multimodal, to evaluate their effectiveness in a real-world diverse dataset of financial reports.
 
-  For a Finnish thesis, the abstract should be written in both Finnish and
-  English; for a Swedish thesis, in Swedish and English. The abstracts for
-  English theses written by Finnish or Swedish speakers should be written in
-  English and either in Finnish or in Swedish, depending on the student’s
-  language of basic education. Students educated in languages other than Finnish
-  or Swedish write the abstract only in English. Students may include a second
-  or third abstract in their native language, if they wish.
+The text-only approach, although effective for documents with structured textual data, struggled with visual-rich content, leading to high residual difference between the extracted and actual values.
+The image-only approach, while adept at interpreting visual elements, faced challenges with hallucinations and lacked the accuracy of text-based methods that tend to get more perfect matches than the image-based counterparts.
+The multimodal approach, which combines text and image data, demonstrated superior performance, achieving the highest accuracy with a perfect match rate exceeding 85\% for key indicators like Scope 1 and Scope 3 emissions.
+This method effectively mitigated errors through cross-validation between text and image data, resulting in minimal residuals and reliable data extraction.
 
-  The abstract text of this thesis is written on the readable abstract page as
-  well as into the pdf file’ metadata via the \verb+\thesisabstract+ macro
-  (see comment in this \TeX{} file above). Write here the text that goes onto
-  the readable abstract page. You can have special characters, linebreaks, and
-  paragraphs here. Otherwise, this abstract text must be identical to the
-  metadata abstract text.
-
-  If your abstract does not contain special characters and it does not require
-  paragraphs, you may take advantage of the \verb+\abstracttext+ macro (see the
-  comment in this \TeX{} file below).
+The study's findings underscore the possibility of using the three approaches according to the nature of the dataset having a more confident usage when applying the combined multimodal approach in DocumentAI, particularly in format-agnostic scenarios such as the one presented in this study.
+The thesis also identifies challenges, such as the ambiguity in sub-indicators under Scope 2 emissions, and the importance of examining the tolerance for errors in the context of the application, where residuals can be acceptable or make the system completely unusable.
+This work contributes to the growing field of DocumentAI, offering insights into the capabilities and limitations of \ac{LLM} for financial report analysis, and suggests pathways for future advancements in automated information retrieval systems.
 \end{abstractpage}
 
 %% The text in the \thesisabstract macro is stored in the macro \abstractext, so
@@ -493,81 +475,8 @@ metadata abstract text must be identical to the text on the abstract page.
 %	\abstracttext{}
 %\end{abstractpage}
 
-%% Force a new page so that the possible Finnish or Swedish abstract does not
-%% begin on the same page
-%%
-\newpage
-%%
-%% Abstract in Finnish. Delete if you don't need it.
-%%
-%% Respecify those fields that differ from the earlier specification or simply
-%% respecify all fields.
-\thesistitle{Opinnäyteen otsikko}
-\thesissubtitle{Opinnäytteen mahdollinen alaotsikko}
-\supervisor{Prof.\ Pirjo Professori}
-\advisor{TkT Alan Advisor}
-\advisor{DI Elsa Expert}
-\degreeprogram{Elektroniikka ja sähkötekniikka}
-\major{Sopiva pääaine}
-\collaborativepartner{Yhtiön tai laitoksen nimi (tarvittaessa)}
-\date{21.9.2023}
-%% The keywords need not be separated by \spc now.
-\keywords{Vastus, resistanssi, lämpötila}
-%% Abstract text
 \begin{abstractpage}[finnish]
-Tiivistelmä on lyhyt kuvaus työn keskeisestä sisällöstä usein yhtenä kappaleena:
-mitä tutkittiin ja miten sekä mitkä olivat tärkeimmät tulokset. Suomenkielisen
-opinnäytteen tiivistelmä kirjoitetaan suomeksi ja englanniksi ja ruotsinkielisen
-vastaavasti ruotsiksi ja englanniksi. Suomen- tai ruotsinkielisten
-opiskelijoiden, joiden opinnäytteen kieli on englanti, tulee kirjoittaa
-tiivistelmänsä englanniksi ja koulusivistyskielellään. Muiden kuin
-koulusivistyskieleltään suomen- tai ruotsinkielisten tulee kirjoittaa
-tiivistelmänsä vain englanniksi. Opiskelija voi halutessaan lisätä
-opinnäytteeseensä toisen tai kolmannen tiivistelmän omalla äidinkielellään.
-Tämän opinnäytteen tiivistelmäteksti kirjoitetaan opinnäytteen luettavan osan
-lomakkeen lisäksi myös pdf-tiedoston metadataan. Kirjoita tähän metadataan
-kirjoitettavaa teksti. Metadatatekstissa ei saa olla erikoismerkkejä,
-rivinvaiho- tai kappaleenjakomerkkiä, joten näitä merkkeja ei saa käyttää tässä.
-Jos tiivistelmäsi ei sisällä erikoimerkkejä eikä kaipaa kappaleenjakoa, voit
-hyödynttää makroa abstracttext luodessasi lomakkeen tiivistelmää (katso
-kommentti tässä TeX-tiedostossa alla). Metadatatiivistelmatekstin on muuten
-oltava sama kuin lomakkeessa oleva teksti.
-
 \end{abstractpage}
-
-%% Force new page so that the Swedish abstract starts from a new page
-\newpage
-
-%% Swedish abstract. Delete it if you don't need it.
-%%
-%% Respecify those fields that differ from the earlier specification or simply
-%% respecify all fields.
-\thesistitle{Arbetets titel}
-\supervisor{Prof.\ Pirjo Professori}
-\advisor{TkD Alan Advisor} %
-\advisor{DI Elsa Expert}
-\degreeprogram{Electronik och electroteknik}
-\collaborativepartner{Company or institute name in Swedish (if relevant)}
-%\date{21.9.2023}
-%% Abstract keywords
-\keywords{Nyckelord p\aa{} svenska, temperatur}
-%% Abstract text
-\begin{abstractpage}[swedish]
-Sammandraget är en kort beskrivning av arbetets centrala innehåll: vad
-undersöktes, hur undersöktes det och vilka var de viktigaste resultaten?
-
-I lärdomsprov som skrivs på svenska skrivs sammandraget på svenska och engelska,
-på motsvarande sätt skrivs sammandraget på finska och engelska i lärdomsprov på
-finska. Finsk- eller svenskspråkiga studerande som skriver sitt lärdomsprov på
-engelska ska skriva sammandraget på engelska och på sitt skolutbildningsspråk.
-Studerande vars skolutbildningsspråk inte är svenska eller finska skriver
-sammandraget endast på engelska. Den studerande kan om hen så önskar lägga till
-ett andra eller tredje sammandrag på sitt eget modersmål. Sammandraget fungerar
-då ofta som mognadsprov och bör i så fall vara minst 300 ord långt. Information
-om mognadsprov på svenska finns på MyCourses:\\
-\url{https://mycourses.aalto.fi/course/view.php?id=26872}.
-\end{abstractpage}
-
 
 \dothesispagenumbering{}
 
@@ -823,7 +732,7 @@ This milestone meant not only a significant improvement in the field of \ac{NLP}
     \centering
     \includegraphics[width=0.9\textwidth]{images/llms_milestones.png}
     \caption{Key milestones of large language models from the task-solving perspective \cite{Zhao2023}.}
-    \label{fig:transformers_milestones}
+    \label{fig:llms_milestones}
 \end{figure}
 
 \subsubsection{GPT-4}
@@ -845,7 +754,7 @@ The development of GPT-4 Vision is a testament to the ongoing advancements in AI
     \centering
     \includegraphics[width=0.9\textwidth]{images/gpt_exam_results.png}
     \caption{}
-    \label{fig:transformers_milestones}
+    \label{fig:gpt_exam_results}
 \end{figure}
 
 \subsection{LLMs for Document AI}
