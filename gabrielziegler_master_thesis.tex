@@ -1185,7 +1185,54 @@ This system is expected to have the best performance among the three approaches,
 In this section, we explore the results of the experiments conducted to extract information from financial reports using different strategies assessing the metrics defined in section \ref{sec:evaluation_criteria}.
 The results are presented in tabular format, showing the performance of each system in terms of detection rate, residual analysis, perfect match rate, and error types analysis and charts are also used to ease the interpretability of the results.
 
-\subsection{Text-only approach with LLMs}
+\subsection{Detection Rate}
+
+The detection rate is a crucial metric for evaluating the system's ability to identify the indicators of interest in the financial reports while also accounting for the presence of false positives, which could lead to fabricated indicators.
+
+\begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \ra{1.3}
+    \begin{tabular}{@{}llrrrrr@{}}\toprule
+        \textbf{Approach} & \textbf{Indicator} & \textbf{Recall} & \textbf{Precision} & \textbf{Accuracy} \\ \midrule
+        \textbf{Text Only} & Scope 1 Emissions & 0.97 & 0.90 & 0.88 \\
+        & Scope 2 Emissions & 0.05 & 0.33 & \textbf{0.74} \\
+        & Scope 2 Emissions Location & 0.91 & 0.62 & 0.63 \\
+        & Scope 2 Emissions Market & \textbf{1.00} & 0.48 & 0.81 \\
+        & Scope 3 Emissions & 0.91 & 0.78 & 0.85 \\
+        \midrule
+        \textbf{Vision Only} & Scope 1 Emissions & 0.90 & 0.87 & 0.81 \\
+        & Scope 2 Emissions & \textbf{0.08} & 0.33 & 0.68 \\
+        & Scope 2 Emissions Location & 0.82 & \textbf{0.64} & \textbf{0.64} \\
+        & Scope 2 Emissions Market & 0.85 & 0.38 & 0.77 \\
+        & Scope 3 Emissions & 0.77 & 0.83 & 0.83 \\
+        \midrule
+        \textbf{Multimodal} & Scope 1 Emissions & \textbf{0.98} & \textbf{0.95} & \textbf{0.94} \\
+        & Scope 2 Emissions & 0.05 & \textbf{1.00} & 0.69 \\
+        & Scope 2 Emissions Location & \textbf{0.97} & 0.60 & 0.63 \\
+        & Scope 2 Emissions Market & 0.92 & \textbf{0.67} & \textbf{0.89} \\
+        & Scope 3 Emissions & \textbf{0.93} & \textbf{0.90} & \textbf{0.92} \\
+        \bottomrule
+    \end{tabular}}
+    \caption{Metrics for different approaches.}
+    \label{tab:approach_metrics}
+\end{table}
+
+In terms of recall, the multimodal approach demonstrates the highest recall rates for most indicators, particularly \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, where it achieves 0.98 and 0.93, respectively.
+The text-only approach, while generally reliable, struggles with indicators that involve visual elements, such as \textit{Scope 2 emissions}, where its recall drops significantly to 0.05.
+The image-only approach performs similarly to the text-only approach in some areas, but it is generally less consistent, with recall rates varying widely across different indicators.
+
+Precision is another area where the multimodal approach excels.
+For most indicators, including \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the multimodal strategy achieves the highest precision, reaching 0.95 and 0.90, respectively. This indicates that the multimodal approach is not only effective in identifying relevant data but also minimizes the extraction of incorrect or irrelevant information. Notably, the precision for \textit{Scope 2 emissions} under the multimodal approach reaches 1.00, suggesting that when the system does detect this indicator, it is highly accurate.
+
+Accuracy, which provides an overall measure of performance, is consistently highest for the multimodal approach across most indicators. For \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the accuracy reaches 0.94 and 0.92, respectively, reinforcing the superiority of the multimodal method in extracting accurate data. The text-only approach, while accurate for certain indicators, suffers in cases where visual data is critical, as seen in its lower accuracy for \textit{Scope 2 emissions}.
+
+The findings suggest that in a real-world scenario, where the goal is to either expedite the extraction of information from financial reports or automate the process entirely, the multimodal approach presents the most promising strategy. Its ability to integrate and cross-validate text and visual data makes it particularly well-suited for handling the diverse and complex nature of financial documents.
+
+
+\subsection{Perfect Match Rate}
+
+\subsubsection{Text-only}
 
 % text
 % kpi,count,mean,std,min,25%,50%,75%,max
@@ -1228,7 +1275,7 @@ Therefore, we see that the residual values are high for all the indicators, indi
     \label{tab:text_only_metrics}
 \end{table}
 
-\subsection{Image-only approach with LLMs}
+\subsubsection{Image-only}
 
 % vision
 % ,count,mean,std,min,25%,50%,75%,max
@@ -1270,7 +1317,7 @@ This approach is expected to perform better than the text-only approach for docu
 It is notable that the visual model underperforms the text-only approach in almost all the evaluated metrics.
 This could be due to the fact that rich-visual information is not present in most documents and therefore this model would outperform the text-only approach in subset of the documents present in the dataset while underperforming in the majority of the documents.
 
-\subsection{Multimodal LLMs to extract information from images and text}
+\subsubsection{Multimodal}
 
 % Results for multimodal
 % metric                        count	mean	std	min	25%	50%	75%	max
@@ -1312,7 +1359,7 @@ This approach is expected to have the best performance among the three approache
 The results confirm that the multimodal approach outperforms the text-only and image-only approaches in almost all the evaluated metrics by a significant margin.
 Additionally, most indicators have 75\% of the documents with a residual of 0, indicating that the system was able to extract the information correctly in most of the cases while also holding a perfect match rate above 85\% for metrics \textit{Scope 1 emissions}, \textit{Scope 2 emissions market} and \textit{Scope 3 emissions}.
 
-\subsection{How the approaches compare}
+\subsubsection{How the approaches compare}
 
 When analysing the perfect match rates for each indicator in each experiment strategy, it is clear that the multimodal approach outperforms the text-only and image-only approaches that perform similarly with a slight advantage for the text-only approach.
 Considering the scopes that do not have subdivisions, it is observable that there is a considerable improvement in the multimodal approach against the text-approach reaching 19\% improvement in the perfect match rate for the \textit{Scope 1 emissions} indicator and 11\% for the \textit{Scope 3 emissions} indicator.
@@ -1325,46 +1372,6 @@ In a context where this system is being assessed to be used in a real-world scen
     \caption{Results of the experiments for the different approaches.}
     \label{fig:perfect_match_comparison}
 \end{figure}
-
-\begin{table}[H]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \ra{1.3}
-    \begin{tabular}{@{}llrrrrr@{}}\toprule
-        \textbf{Approach} & \textbf{Indicator} & \textbf{Recall} & \textbf{Precision} & \textbf{Accuracy} \\ \midrule
-        \textbf{Text Only} & Scope 1 Emissions & 0.97 & 0.90 & 0.88 \\
-        & Scope 2 Emissions & 0.05 & 0.33 & \textbf{0.74} \\
-        & Scope 2 Emissions Location & 0.91 & 0.62 & 0.63 \\
-        & Scope 2 Emissions Market & \textbf{1.00} & 0.48 & 0.81 \\
-        & Scope 3 Emissions & 0.91 & 0.78 & 0.85 \\
-        \midrule
-        \textbf{Vision Only} & Scope 1 Emissions & 0.90 & 0.87 & 0.81 \\
-        & Scope 2 Emissions & \textbf{0.08} & 0.33 & 0.68 \\
-        & Scope 2 Emissions Location & 0.82 & \textbf{0.64} & \textbf{0.64} \\
-        & Scope 2 Emissions Market & 0.85 & 0.38 & 0.77 \\
-        & Scope 3 Emissions & 0.77 & 0.83 & 0.83 \\
-        \midrule
-        \textbf{Multimodal} & Scope 1 Emissions & \textbf{0.98} & \textbf{0.95} & \textbf{0.94} \\
-        & Scope 2 Emissions & 0.05 & \textbf{1.00} & 0.69 \\
-        & Scope 2 Emissions Location & \textbf{0.97} & 0.60 & 0.63 \\
-        & Scope 2 Emissions Market & 0.92 & \textbf{0.67} & \textbf{0.89} \\
-        & Scope 3 Emissions & \textbf{0.93} & \textbf{0.90} & \textbf{0.92} \\
-        \bottomrule
-    \end{tabular}}
-    \caption{Metrics for different approaches.}
-    \label{tab:approach_metrics}
-\end{table}
-
-In terms of recall, the multimodal approach demonstrates the highest recall rates for most indicators, particularly \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, where it achieves 0.98 and 0.93, respectively.
-The text-only approach, while generally reliable, struggles with indicators that involve visual elements, such as \textit{Scope 2 emissions}, where its recall drops significantly to 0.05.
-The image-only approach performs similarly to the text-only approach in some areas, but it is generally less consistent, with recall rates varying widely across different indicators.
-
-Precision is another area where the multimodal approach excels.
-For most indicators, including \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the multimodal strategy achieves the highest precision, reaching 0.95 and 0.90, respectively. This indicates that the multimodal approach is not only effective in identifying relevant data but also minimizes the extraction of incorrect or irrelevant information. Notably, the precision for \textit{Scope 2 emissions} under the multimodal approach reaches 1.00, suggesting that when the system does detect this indicator, it is highly accurate.
-
-Accuracy, which provides an overall measure of performance, is consistently highest for the multimodal approach across most indicators. For \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the accuracy reaches 0.94 and 0.92, respectively, reinforcing the superiority of the multimodal method in extracting accurate data. The text-only approach, while accurate for certain indicators, suffers in cases where visual data is critical, as seen in its lower accuracy for \textit{Scope 2 emissions}.
-
-The findings suggest that in a real-world scenario, where the goal is to either expedite the extraction of information from financial reports or automate the process entirely, the multimodal approach presents the most promising strategy. Its ability to integrate and cross-validate text and visual data makes it particularly well-suited for handling the diverse and complex nature of financial documents.
 
 \subsection{How bad does the system fail?}
 
