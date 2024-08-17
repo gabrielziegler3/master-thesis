@@ -832,9 +832,10 @@ For these reasons, we investigate nuances on the documents that lead to errouneo
 
 The dataset used in this study consists of a collection of annual and quarterly reports from various public companies across different industries and different countries.
 % TODO: Add the number of reports in the dataset
-We count with a total of 1000 reports, carefully annotated manually with the \ac{GHG} emissions data present in the reports.
+We count with a total of 1,000 reports -- over 32,580 pages across all documents in the dataset -- carefully annotated manually with the \ac{GHG} emissions data reported by the companies for the specified periods.
 These reports can contain a wide range of information, including financial statements, management discussions, and analysis, auditor reports, and of course, \ac{ESG} disclosures including \ac{GHG} emissions data, which is the topic of interest in this study.
 The documents are stored in \ac{PDF} format with varying layouts, fonts, structures and number of pages.
+
 
 We opted to create a diverse dataset having heterogeneous formats to report \ac{GHG} emission data, including text, tables, charts and images to evaluate the effectiveness of different strategies for extracting information from financial reports as this represents a realistic nature of the data that the system would encounter in a real-world scenario in productive environments.
 Below we present a few samples to illustrate the diversity of formats and layouts used to report \ac{GHG} emissions data in financial reports.
@@ -874,15 +875,14 @@ This is also one of the best formats for an \ac{OCR}-based approach to extract t
 However, OCRs are not error-free with tables, especially in cases where the table is structured in a non-conventional way, such as merged cells, rotated text, or cells with no borders.
 Additionally, Document AI researchers have extensively studied and developed models to detect, extract and understand tables in documents \cite{TableNet2020, table_extraction_conditional_pinto_2003, Schreiber2017, Li2022, Gilani2017, Shafait2010}.
 
-\subsection{Additional intricacies relevant to our problem}
+\subsection{Additional relevant data intricacies}
 
-\textbf{TODO check if these should be in experiment}
 \subsubsection{Unit of measurement}
 
-The diversity in such documents, is not only present in the layouts, but also in the metrics reported.
-Most companies have been seen to disclose their \ac{GHG} emissions data in metric tons of \ce{CO2} equivalent, however, other companies have report their emissions in other units such as kilograms of \ce{CO2}, metric tons of \ce{CO2} per unit of production, and some companies that have very large numbers report their emissions in million metric tons of \ce{CO2} equivalent.
+The diversity in such documents, is not only noticed in the layouts, but also in the selection of units reported.
+Most companies disclose their \ac{GHG} emissions data in \textit{metric tons of \ce{CO2}} equivalent, however, other companies have report their emissions in other units such as kilograms of \ce{CO2}, metric tons of \ce{CO2} per unit of production, and some companies that have very large numbers report their emissions in million metric tons of \ce{CO2} equivalent.
 Since the unit of measurement is crucial for the correct interpretation of the data, it is important to also be able to extract this information from the reports.
-Therefore, if our system correctly detects the values in the document, but fail to output a normalized unit of measurement --- in our case, we use metric tonnes --- the system output will be considered incorrect.
+Therefore, if our system correctly detects the values in the document, but fail to output a normalized unit of measurement --- in our case, we use metric tonnes --- the system output will be considered incorrect and will likely lead to a large residual error since the values will be in different magnitudes.
 
 \subsubsection{Scope 2 emissions origin}
 
@@ -1337,11 +1337,13 @@ In a context where this system is being assessed to be used in a real-world scen
         & Scope 2 Emissions Location & 0.91 & 0.62 & 0.63 \\
         & Scope 2 Emissions Market & \textbf{1.00} & 0.48 & 0.81 \\
         & Scope 3 Emissions & 0.91 & 0.78 & 0.85 \\
+        \midrule
         \textbf{Vision Only} & Scope 1 Emissions & 0.90 & 0.87 & 0.81 \\
         & Scope 2 Emissions & \textbf{0.08} & 0.33 & 0.68 \\
         & Scope 2 Emissions Location & 0.82 & \textbf{0.64} & \textbf{0.64} \\
         & Scope 2 Emissions Market & 0.85 & 0.38 & 0.77 \\
         & Scope 3 Emissions & 0.77 & 0.83 & 0.83 \\
+        \midrule
         \textbf{Multimodal} & Scope 1 Emissions & \textbf{0.98} & \textbf{0.95} & \textbf{0.94} \\
         & Scope 2 Emissions & 0.05 & \textbf{1.00} & 0.69 \\
         & Scope 2 Emissions Location & \textbf{0.97} & 0.60 & 0.63 \\
