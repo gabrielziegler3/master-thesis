@@ -49,10 +49,10 @@ def main():
     elif len(sys.argv) == 2 and sys.argv[1] == 'bibtex':
         os.system(f'bibtex {FILENAME}')
     elif len(sys.argv) == 2 and sys.argv[1] == 'full':
-        os.system(f'pdflatex -interaction=nonstopmode {FILENAME}')
+        os.system(f'pdflatex -shell-escape -interaction=nonstopmode {FILENAME}')
         os.system(f'bibtex {FILENAME}')
-        os.system(f'pdflatex -interaction=nonstopmode {FILENAME}')
-        os.system(f'pdflatex -interaction=nonstopmode {FILENAME}')
+        os.system(f'pdflatex -shell-escape -interaction=nonstopmode {FILENAME}')
+        os.system(f'pdflatex -shell-escape -interaction=nonstopmode {FILENAME}')
     transfer_files_to_compilation_folder(FILENAME)
 
 
