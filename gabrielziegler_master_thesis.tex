@@ -566,47 +566,68 @@ Otaniemi, 26 September 2024\\
 %% This text will be translated to English soon.
 %%
 
-\newpage
-\section{Introduction}
-\label{sec:intro}
 
 %% Leave page number of the first page empty
 %%
 \thispagestyle{empty}
 
-\subsection{Structure of the thesis}
+\newpage
+\section{Introduction}
+\label{sec:intro}
 
-The thesis is composed by a comprehensive comparison of methods for extracting information from financial reports, with a focus on non-standard reports. The thesis is structured as follows:
+\subsection{Overview}
 
+The digital age has transformed how information is stored, accessed, and analyzed, with financial reports being a critical source of data for businesses, regulators, and investors. Traditionally, extracting meaningful information from these reports required manual labor or rule-based systems, which were not only time-consuming but also prone to errors. The advent of machine learning, particularly the development of large language models (\acp{LLM}), has brought about significant advancements in this field. These models, such as \ac{GPT} and \ac{BERT}, offer unprecedented capabilities in processing unstructured data, making it possible to automate the extraction of complex financial metrics with improved accuracy and efficiency.
+
+\subsection{Context and Motivation}
+
+Financial reports are rich sources of information, encompassing a wide range of data including financial statements, management discussions, and \ac{ESG} disclosures. Among these, the extraction of \ac{GHG} emissions data has gained particular importance due to increasing regulatory requirements and the growing emphasis on sustainability. However, the diverse formats and layouts used in these reports pose significant challenges for automated data extraction systems. The need for a robust solution that can handle such variability is more pressing than ever as businesses and stakeholders demand faster and more accurate insights from financial documents.
+
+\subsection{Problem Definition}
+
+The core challenge addressed in this thesis is the development and comparison of methodologies for extracting \ac{GHG} emissions data from non-standardized financial reports. This problem is compounded by the variety of ways in which companies present their data, ranging from structured tables to complex visual elements such as charts and infographics. Traditional approaches, whether manual or rule-based, often fall short in dealing with this complexity, leading to incomplete or inaccurate data extraction. The rise of \acp{LLM} offers a promising avenue to overcome these limitations by leveraging advanced text and image processing capabilities.
+
+\subsection{Objectives of the Study}
+
+The primary objective of this study is to conduct a comprehensive evaluation of different \ac{LLM}-based approaches for extracting information from financial reports, particularly focusing on non-standard report formats. The study aims to:
 \begin{enumerate}
-    \item \label{list:intro} Introduction (Context, Problem Definition, Objectives)
-    \item Literature review (Concepts, State of the Art)
-    \item Methodology (Dataset, Detail how experiments were conducted)
-    \item Results (Present the results of the experiments)
-    \item Conclusion (Interpretation of results, implications, limitations)
-    \item References
+\item Compare the effectiveness of text-only, image-only, and multimodal approaches in extracting \ac{GHG} emissions data.
+\item Enhance the precision and efficiency of data extraction by optimizing \ac{LLM} techniques for handling diverse document layouts.
+\item Develop a scalable system capable of processing large volumes of financial reports while maintaining high accuracy.
+\item Identify the limitations and challenges associated with current \ac{LLM} technologies in the context of financial data extraction.
 \end{enumerate}
 
-\subsection{Background of the Field of Study}
+By achieving these objectives, this thesis seeks to contribute to the broader field of automated document analysis and provide actionable insights for improving data extraction processes in real-world applications.
 
-The field of data extraction from financial reports has evolved significantly with advancements in text processing and machine learning technologies. Historically, this task involved manual data entry or rule-based systems that were labor-intensive and prone to errors. The emergence of \ac{LLM}s, such as \ac{GPT} and \ac{BERT}, has revolutionized this domain. These models have the ability to understand and extract complex financial information from unstructured data, thereby increasing accuracy and efficiency. Recent studies have demonstrated the potential of \ac{LLM}s in automating financial data extraction, highlighting improvements in processing time and data accuracy over traditional methods.
+\subsection{Research Questions}
 
-\subsection{General Objective}
+The central research question guiding this thesis is: \textit{``What are the most effective strategies for utilizing \acp{LLM} to accurately and efficiently extract financial data from unstructured reports?''} To address this question, several sub-questions are explored:
+\begin{itemize}
+\item What \ac{LLM} architectures are most effective for recognizing and extracting financial data?
+\item How can context-aware data extraction methodologies be developed to improve the accuracy of \ac{GHG} emissions data extraction?
+\item What are the best practices for handling the diverse formats and layouts of financial reports?
+\item How does the quality and volume of training data impact the performance of \ac{LLM}-based extraction systems?
+\end{itemize}
 
-This study aims to extend the current capabilities of data extraction systems by incorporating advanced \ac{LLM}s and exploring novel methodologies in the field.
-The primary goals include: ellaborating a comprehensive comparison of methods for extracting information from financial reports, with a focus on non-standard reports,
+These research questions are essential for developing a comprehensive understanding of how \acp{LLM} can be effectively applied to the task of financial data extraction, particularly in the context of non-standard report formats.
 
-enhancing the precision and efficiency of data extraction from financial reports, developing a scalable system capable of processing large volumes of data, and comparing the effectiveness of various \ac{LLM}s and extraction techniques. By achieving these goals, the study seeks to contribute to the broader understanding of automated data extraction and its application in financial analysis.
+\subsection{Scope and Limitations}
 
-\subsection{Research Question and Sub-Problems}
+This study is focused on the extraction of financial data, specifically \ac{GHG} emissions metrics, from English-language financial reports. The reports used in this study are publicly available and include annual and quarterly statements from a variety of industries. The scope is deliberately confined to \ac{GHG} emissions data to maintain a clear focus, although the methodologies developed could be extended to other types of financial data in future research. The primary constraints include the variability in report formats, the complexity of financial and environmental terminology, and the current limitations of \ac{LLM} technologies in fully understanding and processing domain-specific contexts. Additionally, the study is limited by the computational resources available, which may affect the scalability and speed of the proposed solutions.
 
-The primary research question of this study focuses on: ``What are the best strategies for using \ac{LLM}s for more accurate and efficient extraction of financial data from unstructured reports?''.
-Sub-problems in this line of inquiry include: identifying the most effective LLM architectures for financial data recognition, developing methodologies for context-aware data extraction, enhancing the system’ ability to handle diverse report formats, and evaluating the impact of training data quality and volume on model performance.
-These sub-problems are essential for understanding the intricacies of applying \ac{LLM}s to financial data extraction and for developing a comprehensive solution.
+\subsection{Structure of the Thesis}
 
-\subsection{Scope and Constraints}
+This thesis is organized to systematically explore and address the challenges of financial data extraction using \acp{LLM}. The structure is as follows:
+\begin{enumerate}
+\item \textbf{Introduction}: Provides the context, problem definition, and objectives of the study.
+\item \textbf{Literature Review}: Discusses the concepts and state of the art in document analysis, \ac{LLM}s, and information retrieval from financial reports.
+\item \textbf{Methodology}: Details the dataset used, the experimental setup, and the methodologies implemented for data extraction.
+\item \textbf{Results}: Presents and analyzes the results of the experiments, comparing the performance of different approaches.
+\item \textbf{Conclusion}: Summarizes the findings, discusses the implications and limitations, and suggests directions for future research.
+\item \textbf{References}: Lists the academic and technical sources cited throughout the thesis.
+\end{enumerate}
 
-The scope of this study is limited to the extraction of financial data from English-language reports, focusing on publicly available annual and quarterly financial statements. Key constraints include the variability in report formats, the complexity of financial terminology, and the inherent limitations of current LLM technologies in understanding domain-specific contexts. The study primarily revolves around the use of GPT and BERT models, considering their widespread adoption and state-of-the-art performance in text processing tasks. Main concepts involved include \ac{NLP}, machine learning, data extraction, and financial analysis, with a particular emphasis on the adaptation and optimization of LLMs for specialized data extraction tasks.
+This structure is designed to provide a logical flow of information, guiding the reader through the development, implementation, and evaluation of the research conducted in this thesis.
 
 \clearpage
 \section{Concepts and State of the Art}
