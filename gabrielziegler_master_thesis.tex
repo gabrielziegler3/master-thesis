@@ -1182,8 +1182,9 @@ This system is expected to have the best performance among the three approaches,
 \clearpage
 \section{Results}
 
-In this section, we explore the results of the experiments conducted to extract information from financial reports using different strategies assessing the metrics defined in section \ref{sec:evaluation_criteria}.
-The results are presented in tabular format, showing the performance of each system in terms of detection rate, residual analysis, perfect match rate, and error types analysis and charts are also used to ease the interpretability of the results.
+In this section, we explore the results of the experiments conducted to extract information from financial reports using different strategies, assessing the metrics defined in Section \ref{sec:evaluation_criteria}.
+The results are presented in tabular format, showing the performance of each system in terms of detection rate, residual analysis, perfect match rate, and error type analysis.
+Charts are also used to ease the interpretability of the results.
 
 \subsection{Detection Rate}
 
@@ -1223,22 +1224,28 @@ The text-only approach, while generally reliable, struggles with indicators that
 The image-only approach performs similarly to the text-only approach in some areas, but it is generally less consistent, with recall rates varying widely across different indicators.
 
 Precision is another area where the multimodal approach excels.
-For most indicators, including \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the multimodal strategy achieves the highest precision, reaching 0.95 and 0.90, respectively. This indicates that the multimodal approach is not only effective in identifying relevant data but also minimizes the extraction of incorrect or irrelevant information. Notably, the precision for \textit{Scope 2 emissions} under the multimodal approach reaches 1.00, suggesting that when the system does detect this indicator, it is highly accurate.
+For most indicators, including \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the multimodal strategy achieves the highest precision, reaching 0.95 and 0.90, respectively.
+This indicates that the multimodal approach is not only effective in identifying relevant data but also minimizes the extraction of incorrect or irrelevant information.
+Notably, the precision for \textit{Scope 2 emissions} under the multimodal approach reaches 1.00, suggesting that when the system does detect this indicator, it is highly accurate.
 
-Accuracy, which provides an overall measure of performance, is consistently highest for the multimodal approach across most indicators. For \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the accuracy reaches 0.94 and 0.92, respectively, reinforcing the superiority of the multimodal method in extracting accurate data. The text-only approach, while accurate for certain indicators, suffers in cases where visual data is critical, as seen in its lower accuracy for \textit{Scope 2 emissions}.
+Accuracy, which provides an overall measure of performance, is consistently highest for the multimodal approach across most indicators.
+For \textit{Scope 1 emissions} and \textit{Scope 3 emissions}, the accuracy reaches 0.94 and 0.92, respectively, reinforcing the superiority of the multimodal method in extracting accurate data.
+The text-only approach, while accurate for certain indicators, suffers in cases where visual data is critical, as seen in its lower accuracy for \textit{Scope 2 emissions}.
 
-The findings suggest that in a real-world scenario, where the goal is to either expedite the extraction of information from financial reports or automate the process entirely, the multimodal approach presents the most promising strategy. Its ability to integrate and cross-validate text and visual data makes it particularly well-suited for handling the diverse and complex nature of financial documents.
+The findings suggest that in a real-world scenario, where the goal is to either expedite the extraction of information from financial reports or automate the process entirely, the multimodal approach presents the most promising strategy.
+Its ability to integrate and cross-validate text and visual data makes it particularly well-suited for handling the diverse and complex nature of financial documents.
 
 \subsection{Perfect Match Rate}
 
 \subsubsection{Text-only}
 
 This experiment focused on extracting the information based only on text data from the document pages.
-Since some documents present the information in a structured way, the text-only approach was able to extract the information with a high precision and recall rate, as shown in table \ref{tab:text_only_metrics}.
-However, as previously discussed in section \ref{sec:dataset}, there are documents that present visual-rich information, such as charts and tables, which might be challenging for the text-only approach to extract the information correctly.
-These documents will often produce a mismatched prediction confusing different metrics i.e. assigning the value of Scope 1 emissions to Scope 3 emissions or vice versa.
-Because of the nature of the indicators that we are analyzing, oftentimes these metrics can be in different orders of magnitude, which can lead to high residuals when the system makes a mistake in the extraction process.
-Therefore, we see that the residual values are high for all the indicators, indicating that the system is not able to extract the information correctly in some cases, however, the perfect match is mostly above 70\% for all the indicators, indicating that the system was able to correctly predict the indicators in a high proportion of the documents.
+Since some documents present the information in a structured way, the text-only approach was able to extract the information with a high precision and recall rate, as shown in Table \ref{tab:text_only_metrics}.
+However, as previously discussed in Section \ref{sec:dataset}, there are documents that present visually rich information, such as charts and tables, which might be challenging for the text-only approach to extract the information correctly.
+These documents will often produce a mismatched prediction, confusing different metrics (e.g., assigning the value of Scope 1 emissions to Scope 3 emissions or vice versa).
+Because of the nature of the indicators being analyzed, these metrics can often be in different orders of magnitude, which can lead to high residuals when the system makes a mistake in the extraction process.
+Therefore, we see that the residual values are high for all the indicators, indicating that the system is not able to extract the information correctly in some cases.
+However, the perfect match rate is mostly above 70\% for all the indicators, indicating that the system was able to correctly predict the indicators in a high proportion of the documents.
 
 \begin{table}[H]\centering
     \resizebox{\textwidth}{!}{
@@ -1263,8 +1270,9 @@ Therefore, we see that the residual values are high for all the indicators, indi
 
 \subsubsection{Image-only}
 
-The image-only approach focuses on extracting information from the \ac{PDF} document pages treating them as images.
-This approach is expected to perform better than the text-only approach for documents that contain visual-rich information, such as charts and tables, as the model is able to interpret the visual nuances of the document but it is also expected to have a higher rate of hallucinations, as the model is not able to validate the information extracted from the images with the text data.
+The image-only approach focuses on extracting information from the \ac{PDF} document pages, treating them as images.
+This approach is expected to perform better than the text-only approach for documents that contain visually rich information, such as charts and tables, as the model is able to interpret the visual nuances of the document.
+However, it is also expected to have a higher rate of hallucinations, as the model is not able to validate the information extracted from the images with the text data.
 
 \begin{table}[H]\centering
     \resizebox{\textwidth}{!}{
@@ -1288,7 +1296,7 @@ This approach is expected to perform better than the text-only approach for docu
 \end{table}
 
 It is notable that the visual model underperforms the text-only approach in almost all the evaluated metrics.
-This could be due to the fact that rich-visual information is not present in most documents and therefore this model would outperform the text-only approach in subset of the documents present in the dataset while underperforming in the majority of the documents.
+This could be due to the fact that rich-visual information is not present in most documents and therefore this model would outperform the text-only approach in a subset of the documents present in the dataset while underperforming in the majority of the documents.
 
 \subsubsection{Multimodal}
 
@@ -1319,11 +1327,11 @@ This approach is expected to have the best performance among the three approache
 The results confirm that the multimodal approach outperforms the text-only and image-only approaches in almost all the evaluated metrics by a significant margin.
 Additionally, most indicators have 75\% of the documents with a residual of 0, indicating that the system was able to extract the information correctly in most of the cases while also holding a perfect match rate above 85\% for metrics \textit{Scope 1 emissions}, \textit{Scope 2 emissions market} and \textit{Scope 3 emissions}.
 
-\subsubsection{How the approaches compare}
+\subsubsection{How the Approaches Compare}
 
-When analysing the perfect match rates for each indicator in each experiment strategy, it is clear that the multimodal approach outperforms the text-only and image-only approaches that perform similarly with a slight advantage for the text-only approach.
-Considering the scopes that do not have subdivisions, it is observable that there is a considerable improvement in the multimodal approach against the text-approach reaching 19\% improvement in the perfect match rate for the \textit{Scope 1 emissions} indicator and 11\% for the \textit{Scope 3 emissions} indicator.
-In a context where this system is being assessed to be used in a real-world scenario whether it is to speed up the process of extracting information from financial reports or to automate the process, the multimodal approach appears to be the right strategy to fine-tune and build upon.
+When analyzing the perfect match rates for each indicator in each experiment strategy, it is clear that the multimodal approach outperforms the text-only and image-only approaches, which perform similarly, with a slight advantage for the text-only approach.
+Considering the scopes that do not have subdivisions, it is observable that there is a considerable improvement in the multimodal approach against the text approach, reaching a 19\% improvement in the perfect match rate for the \textit{Scope 1 emissions} indicator and an 11\% improvement for the \textit{Scope 3 emissions} indicator.
+In a context where this system is being assessed for use in a real-world scenario—whether to expedite the process of extracting information from financial reports or to automate the process—the multimodal approach appears to be the right strategy to fine-tune and build upon.
 
 % display image
 \begin{figure}[H]
