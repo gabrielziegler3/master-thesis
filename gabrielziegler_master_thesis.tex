@@ -318,8 +318,8 @@
 %% The logo language is set to be the same as the thesis language.
 %%
 %\uselogo{?}
+\uselogo{''}
 %\uselogo{!}
-\uselogo{!}
 %%
 
 %%%%%%%%%%%%%%%%%%               COPYRIGHT TEXT               %%%%%%%%%%%%%%%%%%
@@ -577,19 +577,30 @@ Otaniemi, 26 September 2024\\
 
 \subsection{Overview}
 
-The digital age has transformed how information is stored, accessed, and analyzed, with financial reports being a critical source of data for businesses, regulators, and investors. Traditionally, extracting meaningful information from these reports required manual labor or rule-based systems, which were not only time-consuming but also prone to errors. The advent of machine learning, particularly the development of large language models (\acp{LLM}), has brought about significant advancements in this field. These models, such as \ac{GPT} and \ac{BERT}, offer unprecedented capabilities in processing unstructured data, making it possible to automate the extraction of complex financial metrics with improved accuracy and efficiency.
+The digital age has transformed how information is stored, accessed, and analyzed, with financial reports being a critical source of data for businesses, regulators, and investors.
+Traditionally, extracting meaningful information from these reports required manual labor or rule-based systems, which were not only time-consuming but also prone to errors.
+The advent of machine learning, particularly the development of large language models (\acp{LLM}), has brought about significant advancements in this field.
+These models, such as \ac{GPT} and \ac{BERT}, offer unprecedented capabilities in processing unstructured data, making it possible to automate some information extraction tasks with high accuracy and efficiency.
 
 \subsection{Context and Motivation}
 
-Financial reports are rich sources of information, encompassing a wide range of data including financial statements, management discussions, and \ac{ESG} disclosures. Among these, the extraction of \ac{GHG} emissions data has gained particular importance due to increasing regulatory requirements and the growing emphasis on sustainability. However, the diverse formats and layouts used in these reports pose significant challenges for automated data extraction systems. The need for a robust solution that can handle such variability is more pressing than ever as businesses and stakeholders demand faster and more accurate insights from financial documents.
+Financial reports are rich sources of information, encompassing a wide range of data including financial statements, management discussions, and \ac{ESG} disclosures.
+Among these, the extraction of \ac{GHG} emissions data has gained particular importance due to increasing regulatory requirements and the growing emphasis on sustainability.
+However, the diverse formats and layouts used in these reports pose significant challenges for automated data extraction systems.
+The need for a robust solution that can handle such variability is more pressing than ever as businesses and stakeholders demand faster and more accurate insights from financial documents.
 
 \subsection{Problem Definition}
 
-The core challenge addressed in this thesis is the development and comparison of methodologies for extracting \ac{GHG} emissions data from non-standardized financial reports. This problem is compounded by the variety of ways in which companies present their data, ranging from structured tables to complex visual elements such as charts and infographics. Traditional approaches, whether manual or rule-based, often fall short in dealing with this complexity, leading to incomplete or inaccurate data extraction. The rise of \acp{LLM} offers a promising avenue to overcome these limitations by leveraging advanced text and image processing capabilities.
+The core challenge addressed in this thesis is the development and comparison of methodologies for extracting \ac{GHG} emissions data from non-standardized financial reports.
+This problem is compounded by the variety of ways in which companies present their data, ranging from structured tables to complex visual elements such as charts and infographics.
+Traditional approaches, whether manual or rule-based, often fall short in dealing with this complexity, leading to incomplete or inaccurate data extraction.
+The rise of \acp{LLM} offers a promising avenue to overcome these limitations by leveraging advanced text and image processing capabilities.
 
 \subsection{Objectives of the Study}
 
-The primary objective of this study is to conduct a comprehensive evaluation of different \ac{LLM}-based approaches for extracting information from financial reports, particularly focusing on non-standard report formats. The study aims to:
+The primary objective of this study is to conduct a comprehensive evaluation of different \ac{LLM}-based approaches for extracting information from financial reports, particularly focusing on non-standard report formats.
+
+The study aims to:
 \begin{enumerate}
 \item Compare the effectiveness of text-only, image-only, and multimodal approaches in extracting \ac{GHG} emissions data.
 \item Enhance the precision and efficiency of data extraction by optimizing \ac{LLM} techniques for handling diverse document layouts.
@@ -613,11 +624,16 @@ These research questions are essential for developing a comprehensive understand
 
 \subsection{Scope and Limitations}
 
-This study is focused on the extraction of financial data, specifically \ac{GHG} emissions metrics, from English-language financial reports. The reports used in this study are publicly available and include annual and quarterly statements from a variety of industries. The scope is deliberately confined to \ac{GHG} emissions data to maintain a clear focus, although the methodologies developed could be extended to other types of financial data in future research. The primary constraints include the variability in report formats, the complexity of financial and environmental terminology, and the current limitations of \ac{LLM} technologies in fully understanding and processing domain-specific contexts. Additionally, the study is limited by the computational resources available, which may affect the scalability and speed of the proposed solutions.
+This study is focused on the extraction of financial data, specifically \ac{GHG} emissions metrics, from financial reports.
+The reports used in this study are publicly available and include annual and quarterly statements from a variety of industries.
+The scope is deliberately confined to \ac{GHG} emissions data to maintain a clear focus, although the methodologies developed could be extended to other types of financial data in future research.
+The primary constraints include the variability in report formats, the complexity of financial and environmental terminology, and the current limitations of \ac{LLM} technologies in fully understanding and processing domain-specific contexts.
+Additionally, the study is limited by the computational resources available, which may affect the scalability and speed of the proposed solutions.
 
 \subsection{Structure of the Thesis}
 
-This thesis is organized to systematically explore and address the challenges of financial data extraction using \acp{LLM}. The structure is as follows:
+This thesis is organized to systematically explore and address the challenges of financial data extraction using \acp{LLM}.
+The structure is as follows:
 \begin{enumerate}
 \item \textbf{Introduction}: Provides the context, problem definition, and objectives of the study.
 \item \textbf{Literature Review}: Discusses the concepts and state of the art in document analysis, \ac{LLM}s, and information retrieval from financial reports.
