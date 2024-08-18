@@ -910,13 +910,13 @@ The experiments proposed in this study were conducted on a machine with the foll
     \item \textbf{Python}: 3.11.5
 \end{itemize}
 
-\subsection{Experiments definition}
+\subsection{Experiments Definition}
 
-For the sake of setting up an information retrieval challenge that is relevant to our business case and provides the opportunity to compare different strategies for extracting information from financial reports, we establish a simple set of indicators of interest, a desired schema for the extracted data, and a set of metrics to evaluate the performance of the different strategies.
+To set up an information retrieval challenge relevant to our business case and provide an opportunity to compare different strategies for extracting information from financial reports, we establish a simple set of indicators of interest, a desired schema for the extracted data, and a set of metrics to evaluate the performance of the different strategies.
 
-\subsubsection{Indicators of interest}
+\subsubsection{Indicators of Interest}
 
-Given Datia's strong presence in the \ac{ESG} domain, we have chosen to focus on a set of \ac{ESG} indicators that are commonly reported in financial statements.
+Given Datia's strong presence in the \ac{ESG} domain, we have chosen to focus on a set of \ac{ESG} indicators commonly reported in financial statements.
 Therefore, this challenge focuses on correctly extracting values for the following indicators:
 
 \begin{itemize}
@@ -927,15 +927,17 @@ Therefore, this challenge focuses on correctly extracting values for the followi
                 \item \textbf{Market-based}: Emissions calculated based on the market where the company sells its products.
                 \item \textbf{Undefined}: Emissions that are not clearly defined as location-based or market-based.
             \end{itemize}
-    \item \textbf{\ac{GHG} Scope 3 emissions}: The total amount of \ac{GHG} emissions produced by in the value chain of a company. Scope 3 emissions can also be broken down into 3.1, 3.3, 3.4, 3.6, 3.7 and 3.11 categories, however, for the purpose of this study, we will only consider the total Scope 3 emissions.
-    \item \textbf{Reported unit}: The unit of measurement used for the emissions.
+    \item \textbf{\ac{GHG} Scope 3 emissions}: The total amount of \ac{GHG} emissions produced in the value chain of a company.
+    Scope 3 emissions can also be broken down into 3.1, 3.3, 3.4, 3.6, 3.7, and 3.11 categories.
+    However, for the purpose of this study, we will only consider the total Scope 3 emissions.
+    \item \textbf{Reported Unit}: The unit of measurement used for the emissions.
 \end{itemize}
 
-These are crucial indicators for assessing a company's environmental impact and sustainability practices, and they are often reported in financial statements as part of the company's \ac{ESG} disclosures.
-In essence, there are three main indicators that are analysed, but since the \ac{GHG} Scope 2 emissions are divided into three categories, we consider them as separate indicators for this study.
-It's also important to be able to extract the unit of measurement used for the emissions, because different companies may report their emissions in different units, such as metric tons of \ce{CO2} equivalent, kilograms of \ce{CO2}, or other units.
+These indicators are crucial for assessing a company's environmental impact and sustainability practices, and they are often reported in financial statements as part of the company's \ac{ESG} disclosures.
+In essence, there are three main indicators analyzed, but since the \ac{GHG} Scope 2 emissions are divided into three categories, we consider them as separate indicators for this study.
+It is also important to be able to extract the unit of measurement used for the emissions because different companies may report their emissions in different units, such as metric tons of \ce{CO2} equivalent, kilograms of \ce{CO2}, or other units.
 
-\subsection{Extracted data schema}
+\subsection{Extracted Data Schema}
 
 The extracted data from the financial reports should follow a specific schema to ensure consistency and comparability across different strategies.
 Since most of the strategies are \ac{LLM}-based, defining a schema adds complexity to the system, as hallucination could lead to correct data being extracted but in the wrong format.
@@ -969,7 +971,7 @@ Here is an example of the \ac{JSON} schema for the extracted data:
 }
 \end{minted}
 
-This schema guarantees that the extracted data can be processed by the system and also be represented in the same unit of measurement, ensuring that the comparison between the different strategies is fair and accurate.
+This schema ensures that the extracted data can be processed by the system and represented in the same unit of measurement, ensuring that the comparison between the different strategies is fair and accurate.
 The \texttt{extracted\_pages} field is used to store the page numbers from which the data was extracted, allowing for traceability and validation of the extracted information.
 
 \subsection{Evaluation Criteria}
@@ -981,18 +983,20 @@ Here, we delineate the key metrics and evaluation criteria used.
 
 \subsubsection{Detection Rate}
 
-Not only is it important to evaluate the accuracy of the extracted data, but it is also crucial to assess the system's ability to detect the presence of the indicators of interest in the document as well as not to detect false positives.
+Not only is it important to evaluate the accuracy of the extracted data, but it is also crucial to assess the system's ability to detect the presence of the indicators of interest in the document, as well as avoid detecting false positives.
 The detection rate is calculated as the proportion of documents in which the system correctly identifies the indicators of interest.
-In order to assess the detection rate, we utilize Precision, Recall and Accuracy.
+In order to assess the detection rate, we utilize Precision, Recall, and Accuracy.
 
 \begin{itemize}
-    \item \textbf{Precision} assesses the proportion of data points extracted by the model that are correct and relevant. A high precision rate indicates fewer instances of fabricated metrics and irrelevant data extraction.
+    \item \textbf{Precision} assesses the proportion of data points extracted by the model that are correct and relevant.
+    A high precision rate indicates fewer instances of fabricated metrics and irrelevant data extraction.
 
     \begin{equation}
         \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
     \end{equation}
 
-    \item \textbf{Recall} measures the system's ability to retrieve all relevant data points from the document. High recall is essential to ensure no significant data is missed.
+    \item \textbf{Recall} measures the system's ability to retrieve all relevant data points from the document.
+    High recall is essential to ensure no significant data is missed.
 
     \begin{equation}
         \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
@@ -1007,20 +1011,7 @@ In order to assess the detection rate, we utilize Precision, Recall and Accuracy
 
 Ideally, the system should achieve high precision and recall rates to ensure that the extracted data is both accurate and comprehensive.
 In practice, there is often a trade-off between precision and recall, and the system must be optimized to balance these metrics effectively.
-In our case, we would prefer to minimize the number of false positives, as those would represent fabricated metrics --- perhaps due to LLM hallucinations --- thus, we would slightly prioritize precision over recall.
-
-
-% % \subsubsection{F1 Score}
-% % The F1 Score is the harmonic mean of precision and recall, providing a single measure to balance these metrics. It is especially useful when the costs of false positives and false negatives are similar.
-%
-% \subsubsection{MAPE}
-%
-% For numerical errors, the \ac{MAPE} is used to quantify the accuracy of the extracted values.
-% This metric calculates the average percentage difference between the extracted values and the ground truth values, providing insights into the model's performance in capturing the correct numerical data while accounting for scale and magnitude differences.
-%
-% \begin{equation}
-%     \text{MAPE} = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100
-% \end{equation}
+In our case, we would prefer to minimize the number of false positives, as those would represent fabricated metrics --- perhaps due to \ac{LLM} hallucinations --- thus, we would slightly prioritize precision over recall.
 
 \subsubsection{Residual Analysis}
 
@@ -1036,7 +1027,7 @@ The lower the residual, the closer the extracted value is to the ground truth va
 
 \subsubsection{Perfect Match Rate}
 
-A especial case when the metric is correctly detected and also perfectly extracted is what the system ultimately aims to maximize and in this study we refer to it as the Perfect Match Rate.
+A special case when the metric is correctly detected and also perfectly extracted is what the system ultimately aims to maximize, and in this study, we refer to it as the Perfect Match Rate.
 This metric is calculated as the proportion of documents in which the system correctly identifies and extracts the indicators of interest without any errors.
 
 \begin{equation}
@@ -1048,16 +1039,19 @@ This metric is calculated as the proportion of documents in which the system cor
 In addition to quantitative metrics, an error analysis is conducted to identify the types of errors made by the system during the extraction process.
 
 \begin{itemize}
-    \item \textbf{Missing Data}: Indicates data that should have been extracted but was not. This error impacts the \texttt{recall} metric.
-    \item \textbf{Fabricated Metrics}: Metrics that are not present in the document but appear in the extracted output --- also referred to as extrinsic hallucination. This error impacts \texttt{precision}.
-    \item \textbf{Incorrect Values}: Reflects errors in the value of the data extracted. These are numerical errors that impact the \texttt{residual} metric.
+    \item \textbf{Missing Data}: Indicates data that should have been extracted but was not.
+    This error impacts the \texttt{recall} metric.
+    \item \textbf{Fabricated Metrics}: Metrics that are not present in the document but appear in the extracted output --- also referred to as extrinsic hallucination.
+    This error impacts \texttt{precision}.
+    \item \textbf{Incorrect Values}: Reflects errors in the value of the data extracted.
+    These are numerical errors that impact the \texttt{residual} metric.
 \end{itemize}
 
-\subsection{Shared processing steps}
+\subsection{Shared Processing Steps}
 
-For all of the experiments, the system receives a \ac{PDF} as input and common pre and post-processing steps are applied to the data to ensure that the system is able to extract the information from the reports.
+For all of the experiments, the system receives a \ac{PDF} as input, and common pre and post-processing steps are applied to the data to ensure that the system is able to extract the information from the reports.
 
-\subsubsection{Pre-processing: finding pages of interest}
+\subsubsection{Pre-processing: Finding Pages of Interest}
 
 A shared pre-processing step is to find the pages of interest --- those that might contain the information that we are looking for --- in the \ac{PDF} document.
 
@@ -1083,26 +1077,26 @@ def extract_data_from_pdf(pdf_file: str):
 \end{minted}
 
 This pre-processing step is used to iterate over the pages in the \ac{PDF} document and find the pages of interest so that the core engine is only applied to these pages.
-This is an important step to reduce the processing time and to avoid unnecessary processing of pages that do not contain relevant information, however it is also crucial to make sure that no false negatives are generated, as this could lead to missing pages of interest.
+This is an important step to reduce the processing time and avoid unnecessary processing of pages that do not contain relevant information.
+However, it is also crucial to ensure that no false negatives are generated, as this could lead to missing pages of interest.
 
-\subsubsection{Parsing LLMs outputs}
+\subsubsection{Parsing LLM Outputs}
 
-As of the time of writing, the text \ac{GPT}-4 model has a parameter flag to determine the output format of the model while the vision model does not have this feature.
-This means that for text, it is possible to specify \ac{JSON} as the output format, however for the vision model, the output is always a string and that leads to uncertainty whether the output string can be parsed into a \ac{JSON} format by the system.
+As of the time of writing, the text \ac{GPT}-4 model has a parameter flag to determine the output format of the model, while the vision model does not have this feature.
+This means that for text, it is possible to specify \ac{JSON} as the output format.
+However, for the vision model, the output is always a string, which leads to uncertainty about whether the output string can be parsed into a \ac{JSON} format by the system.
 Additionally, the parameter flag does not guarantee that the output \ac{JSON} will contain the correct keys and meet the desired schema.
 For these reasons, it is important to have a parsing step that validates the output of the \ac{LLM} models and ensures that the extracted data is in the expected format.
 
-This is where the \textit{pydantic} and \textit{instructor} library comes into play, as we can use \textit{pydantic} to define the model schema and validate fields and types, and \textit{instructor} will handle any imperfections in the model by retrying the generation process $n$ times and validating the output against the defined schema.
+This is where the \textit{pydantic} and \textit{instructor} libraries come into play.
+We can use \textit{pydantic} to define the model schema and validate fields and types, and \textit{instructor} will handle any imperfections in the model by retrying the generation process $n$ times and validating the output against the defined schema.
 
-% draw the diagram here
+\subsubsection{Post-processing: Consolidating Information from Different Pages}
 
-
-\subsubsection{Post-processing: consolidating information from different pages}
-
-In an ideal world, all the information that we are looking for would be contained in one and only one page of the \ac{PDF} document and our system would be able to find the page, extract and return.
-However, this is not the case in practice, as different companies choose different designs to display their information and sometimes the indicators are spread across different pages, or even repeated in different sections of the report.
-Since our system needs to be able to resolve conflicts in the scenario of having multiple pages with the same information (potentially with different values due to different local regulations, units, and so forth), a strategy for consolidating the information is needed.
-After testing out different strategies like frequency bags, picking the output with most found values, and \ac{LLM}s, we have decided to stick with the \ac{LLM}-approach by using \ac{GPT}-4 model, to consolidate the information from different pages.
+In an ideal scenario, all the information we are looking for would be contained on a single page of the \ac{PDF} document, allowing our system to find the page, extract the data, and return it.
+However, this is not the case in practice, as different companies use varying designs to display their information, sometimes spreading the indicators across multiple pages or even repeating them in different sections of the report.
+Since our system needs to resolve conflicts in scenarios where multiple pages contain the same information (potentially with different values due to local regulations, units, and so forth), a strategy for consolidating the information is required.
+After testing various strategies like frequency bags, selecting the output with the most found values, and \ac{LLM}s, we decided to use the \ac{LLM}-based approach, leveraging the \ac{GPT}-4 model to consolidate the information from different pages.
 Here is a demonstration of how this can be done:
 
 \begin{minted}{python}
@@ -1118,7 +1112,7 @@ def consolidate_data(data: list[str]) -> str:
     consolidated_data: Unique JSON string containing
                        the consolidated data
   """
-  # Send request with data and instructions to GPT4
+  # Send request with data and instructions to GPT-4
   consolidated_data = openai.chat.completions.create(
     model="gpt-4-turbo-preview",
       response_format={"type": "json"},
@@ -1134,50 +1128,59 @@ def consolidate_data(data: list[str]) -> str:
   return consolidated_data
 \end{minted}
 
-This is a simple example of how the \ac{GPT}-4 model can be used to consolidate information from different pages of the \ac{PDF} document and can definitely be improved by adding more context and validation steps, such as checking for inconsistencies in the data, before returning the consolidated information.
+This is a simple example of how the \ac{GPT}-4 model can be used to consolidate information from different pages of the \ac{PDF} document.
+This process can be further improved by adding more context and validation steps, such as checking for inconsistencies in the data before returning the consolidated information.
 
+\subsection{Text-Only Approach with LLMs}
 
-\subsection{Text-only approach with LLMs}
+In this experiment, we use the \ac{GPT}-4 architecture, specifically \textit{gpt-4-0125-preview} released in December 2023, to extract information from the text contained in the financial reports without considering any images or visual data.
+Evidently, this approach is limited to the information present in the text and does not account for any charts or important visual cues that the report might contain.
+Therefore, it is expected that this system may fail in cases where the indicators are presented in a visual form.
 
-In this experiment, we use the \ac{GPT}-4 architecture, more especifically \textit{gpt-4-0125-preview} released in December 2023, to extract information from the text contained in the financial reports without considering any images or visual data.
-Evidently, this approach is limited to the information that is present in the text and does not take into account any charts or important visual cues that the report might contain, thus it is expected that this system may fail for cases where the indicator are presented in a visual form.
-
-\subsection{Image-only approach with LLMs}
+\subsection{Image-Only Approach with LLMs}
 
 In this experiment, we use the \ac{GPT}-4 Vision model to extract information from the images contained in the financial reports without considering any text data.
-Since OpenAI's visual model is highly accurate in extracting information from images, this approach is expected to have an overall performance superior to the text-only approach because it will be able to generalize the information from images but it is also expected to have an increased proclivity to hallucinations, as the model is not able to validate the information extracted from the images with the text data.
+Since OpenAI's visual model is highly accurate in extracting information from images, this approach is expected to have an overall performance superior to the text-only approach because it can generalize the information from images.
+However, it is also expected to have an increased propensity for hallucinations, as the model cannot validate the information extracted from the images with the text data.
 
-For this experiment, after the preprocessing step, for each of the pages of interest, the system applies the following image-processing transforms:
+For this experiment, after the preprocessing step, the system applies the following image-processing transforms to each of the pages of interest:
 
 \begin{itemize}
 \label{list:image_transforms}
-    \item \ac{DPI}: The image is set to 300 \ac{DPI} to ensure that the model can extract the information with high quality. This setting has shown to be one of the optimal settings for \ac{OCR} tasks \cite{ocr_preprocessing2007}.
+    \item \ac{DPI}: The image is set to 300 \ac{DPI} to ensure that the model can extract the information with high quality.
+    This setting has been shown to be one of the optimal settings for \ac{OCR} tasks \cite{ocr_preprocessing2007}.
     \item Grayscale: The image is converted to grayscale to reduce the amount of information that the model needs to process.
-    \item Downscaling: The image is downscaled such that they fit OpenAI's \ac{GPT}-4 Vision criteria:
+    \item Downscaling: The image is downscaled to fit OpenAI's \ac{GPT}-4 Vision criteria:
     \begin{quote}
         \textit{...images are first scaled to fit within a 2048 x 2048 square, maintaining their aspect ratio. Then, they are scaled such that the shortest side of the image is 768px long \cite{OpenAIVisionAPI}.}
     \end{quote}
-    \item Compression: The image is compressed to a 90\% quality to significantly reduce the size of the image while keeping sufficient quality for image analysis.
+    \item Compression: The image is compressed to a 90\% quality to significantly reduce the size of the image while maintaining sufficient quality for image analysis.
 \end{itemize}
 
-These transforms have the goal of reducing the amount of information that the model needs to process, while maintaining the quality of the information extracted from the images.
-This is important not only for model performance, but also to keep the number of tokens processed lower, reducing the cost of the operation.
+These transforms aim to reduce the amount of information that the model needs to process while maintaining the quality of the information extracted from the images.
+This is important not only for model performance but also to keep the number of tokens processed lower, reducing the cost of the operation.
 
-The system sends a request to OpenAI's \ac{GPT}-4 Vision model with the pre-processed image and the instructions where the model is asked to extract the key indicators from the image into a predefined JSON schema.
-This is necessary and important because not only does the model need to be able to extract the information from the images, but it also needs to produce the information in a format that can be parsed by the system, otherwise it might raise unexpected errors on the client side.
+The system sends a request to OpenAI's \ac{GPT}-4 Vision model with the pre-processed image and instructions for the model to extract the key indicators from the image into a predefined JSON schema.
+This is necessary and important because not only does the model need to be able to extract the information from the images, but it also needs to produce the information in a format that can be parsed by the system, otherwise, it might raise unexpected errors on the client side.
 
-\subsection{Multimodal LLMs to extract information from images and text}
+\subsection{Multimodal LLMs to Extract Information from Images and Text}
 
 In this experiment, we use a multimodal approach to extract information from the financial reports, leveraging information from both textual and visual domains.
 This approach combines the strengths of the text-only and image-only methods while mitigating their respective weaknesses by validating the information extracted from the images with the text data and vice versa.
 
-The system follows the same pre-processing steps as the image-only approach before \ref{list:image_transforms} sending the image and instructions to the \ac{GPT}-4 Vision model.
-The difference for this experiment is that the system also extracts the text from the page and creates a set of all the numbers mentioned in the page, which will be used to validate if the information given by the model is consistent with the text data or if it is an extrinsic hallucination.
+The system follows the same preprocessing steps as the image-only approach before sending the image and instructions to the \ac{GPT}-4 Vision model as described in \ref{list:image_transforms}.
+The difference in this experiment is that the system also extracts the text from the page and creates a set of all the numbers mentioned in the text, which will be used to validate whether the information provided by the model is consistent with the text data or if it is an extrinsic hallucination.
 
-In order to mitigate intrinsic and extrinsic hallucinations, we implement a simple lookup method that will search for the closest value in the text data to the one extracted from the image that is within a threshold limit so that the values that are within the threshold are considered valids and are readjusted while the ones that are not are considered hallucinations and are discarded.
+To mitigate intrinsic and extrinsic hallucinations, we implement a simple lookup method that searches for the closest value in the text data to the one extracted from the image, within a defined threshold limit.
+Values within the threshold are considered valid and are readjusted, while those that fall outside the threshold are considered hallucinations and are discarded.
 
-This system is expected to have the best performance among the three approaches, as it is able to validate the information extracted from the images with the text data and vice versa, however it is also expected to have the highest processing time due to the increased complexity of the system.
-% TODO Mention the behaviour noticed from hallucinations. i.e. erroring the last digits
+This system is expected to have the best performance among the three approaches, as it can validate the information extracted from the images with the text data and vice versa.
+However, it is also expected to have the highest processing time due to the increased complexity of the system.
+
+% TODO check below
+
+To address the observed hallucination behavior --- particularly errors in the last digits of numeric values --- the system could benefit from additional validation checks.
+For example, implementing a rule that flags unusually large discrepancies in the last digits could help mitigate such errors, ensuring greater accuracy in the final extracted values.
 
 \clearpage
 \section{Results}
@@ -1331,7 +1334,7 @@ Additionally, most indicators have 75\% of the documents with a residual of 0, i
 
 When analyzing the perfect match rates for each indicator in each experiment strategy, it is clear that the multimodal approach outperforms the text-only and image-only approaches, which perform similarly, with a slight advantage for the text-only approach.
 Considering the scopes that do not have subdivisions, it is observable that there is a considerable improvement in the multimodal approach against the text approach, reaching a 19\% improvement in the perfect match rate for the \textit{Scope 1 emissions} indicator and an 11\% improvement for the \textit{Scope 3 emissions} indicator.
-In a context where this system is being assessed for use in a real-world scenario—whether to expedite the process of extracting information from financial reports or to automate the process—the multimodal approach appears to be the right strategy to fine-tune and build upon.
+In a context where this system is being assessed for use in a real-world scenario --- whether to expedite the process of extracting information from financial reports or to automate the process --- the multimodal approach appears to be the right strategy to fine-tune and build upon.
 
 % display image
 \begin{figure}[H]
@@ -1403,7 +1406,7 @@ In the case of the \textit{Scope 2 Residuals} indicator chart, the vision model 
 
 For the \textit{Scope 3 Residuals} indicator chart, the vision model performs very closely to the multimodal model, highlighting a weaker performance by the text model for this particular indicator.
 This is likely due to the loss of information that the text model experiences compared to the vision model.
-Since the \textit{Scope 3 emissions} indicator often has the largest values—due to encompassing all indirect emissions—the residuals tend to be higher for this indicator if there is confusion with another indicator.
+Since the \textit{Scope 3 emissions} indicator often has the largest values --- due to encompassing all indirect emissions --- the residuals tend to be higher for this indicator if there is confusion with another indicator.
 
 \subsection{Considerations}
 
