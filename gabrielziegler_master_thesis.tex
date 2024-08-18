@@ -830,15 +830,14 @@ For these reasons, we investigate nuances on the documents that lead to errouneo
 \section{Financial Reports Dataset}
 \label{sec:dataset}
 
-The dataset used in this study consists of a collection of annual and quarterly reports from various public companies across different industries and different countries.
-% TODO: Add the number of reports in the dataset
-We count with a total of 1,000 reports -- over 32,580 pages across all documents in the dataset -- carefully annotated manually with the \ac{GHG} emissions data reported by the companies for the specified periods.
-These reports can contain a wide range of information, including financial statements, management discussions, and analysis, auditor reports, and of course, \ac{ESG} disclosures including \ac{GHG} emissions data, which is the topic of interest in this study.
-The documents are stored in \ac{PDF} format with varying layouts, fonts, structures and number of pages.
+The dataset used in this study consists of a collection of annual and quarterly reports from various public companies across different industries and countries.
+We have a total of 1,000 reports—comprising over 32,580 pages across all documents in the dataset—carefully annotated manually with the \ac{GHG} emissions data reported by the companies for the specified periods.
+These reports contain a wide range of information, including financial statements, management discussions and analysis, auditor reports, and \ac{ESG} disclosures, including \ac{GHG} emissions data, which is the primary focus of this study.
+The documents are stored in \ac{PDF} format, with varying layouts, fonts, structures, and number of pages.
 
-
-We opted to create a diverse dataset having heterogeneous formats to report \ac{GHG} emission data, including text, tables, charts and images to evaluate the effectiveness of different strategies for extracting information from financial reports as this represents a realistic nature of the data that the system would encounter in a real-world scenario in productive environments.
-Below we present a few samples to illustrate the diversity of formats and layouts used to report \ac{GHG} emissions data in financial reports.
+We opted to create a diverse dataset with heterogeneous formats to report \ac{GHG} emission data, including text, tables, charts, and images, to evaluate the effectiveness of different strategies for extracting information from financial reports.
+This approach reflects the realistic nature of the data that the system would encounter in a real-world scenario in productive environments.
+Below, we present a few samples to illustrate the diversity of formats and layouts used to report \ac{GHG} emissions data in financial reports.
 
 \begin{figure}[H]
     \centering
@@ -847,20 +846,21 @@ Below we present a few samples to illustrate the diversity of formats and layout
     \label{ghg_emissions_bar_chart}
 \end{figure}
 
-The figure above shows a case where the report presents the \ac{GHG} emissions data using a bar chart figure.
-Although this is visually rich and easy to comprehend for the human eye, it poses a huge challenge for an \ac{OCR} system to extract the data from the chart.
+The figure above shows a case where the report presents the \ac{GHG} emissions data using a bar chart.
+Although this is visually rich and easy to comprehend for the human eye, it poses a significant challenge for an \ac{OCR} system to extract the data from the chart.
 The text may be detected and extracted correctly by the \ac{OCR} system, but the context of the data will likely be lost, leading to an extraction with high uncertainty.
 A visual or multimodal approach would be necessary to extract the data from this type of document.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{images/ghg_emissions_pie_chart.png}
-    \caption{Document reporting \ac{GHG} emissions data in image with a pie chart.}
+    \caption{Document reporting \ac{GHG} emissions data using a pie chart figure.}
     \label{ghg_emissions_pie_chart}
 \end{figure}
 
-Similarly to figure \ref{ghg_emissions_bar_chart}, the figure above shows a case where the report presents the \ac{GHG} emissions data using a pie chart figure.
-In this case, since we would only be interested in the values presented in the text under the image, the OCR-based approach could lead to a successful extraction of the data, however this is another example to display the diversity of formats that companies use to report key information in their financial reports.
+Similar to figure \ref{ghg_emissions_bar_chart}, the figure above shows a case where the report presents the \ac{GHG} emissions data using a pie chart.
+In this case, since we would only be interested in the values presented in the text under the image, the \ac{OCR}-based approach could lead to a successful extraction of the data.
+However, this is another example that illustrates the diversity of formats companies use to report key information in their financial reports.
 
 \begin{figure}[H]
     \centering
@@ -870,33 +870,34 @@ In this case, since we would only be interested in the values presented in the t
 \end{figure}
 
 One of the most common layouts present in the dataset is the table format.
-It is a great way to present structured data over a period of time in a concise, objective and easy-to-read way.
-This is also one of the best formats for an \ac{OCR}-based approach to extract the data, as the data is already structured and there is a less chances of having context loss.
-However, OCRs are not error-free with tables, especially in cases where the table is structured in a non-conventional way, such as merged cells, rotated text, or cells with no borders.
-Additionally, Document AI researchers have extensively studied and developed models to detect, extract and understand tables in documents \cite{TableNet2020, table_extraction_conditional_pinto_2003, Schreiber2017, Li2022, Gilani2017, Shafait2010}.
+It is an effective way to present structured data over a period in a concise, objective, and easy-to-read manner.
+This is also one of the best formats for an \ac{OCR}-based approach to extract the data, as the data is already structured, reducing the likelihood of context loss.
+However, \ac{OCR}s are not error-free with tables, especially in cases where the table is structured in a non-conventional way, such as merged cells, rotated text, or cells with no borders.
+Additionally, Document \ac{AI} researchers have extensively studied and developed models to detect, extract, and understand tables in documents \cite{TableNet2020, table_extraction_conditional_pinto_2003, Schreiber2017, Li2022, Gilani2017, Shafait2010}.
 
-\subsection{Additional relevant data intricacies}
+\subsection{Additional Relevant Data Intricacies}
 
-\subsubsection{Unit of measurement}
+\subsubsection{Unit of Measurement}
 
-The diversity in such documents, is not only noticed in the layouts, but also in the selection of units reported.
-Most companies disclose their \ac{GHG} emissions data in \textit{metric tons of \ce{CO2}} equivalent, however, other companies have report their emissions in other units such as kilograms of \ce{CO2}, metric tons of \ce{CO2} per unit of production, and some companies that have very large numbers report their emissions in million metric tons of \ce{CO2} equivalent.
+The diversity in such documents is not only evident in the layouts but also in the selection of units reported.
+Most companies disclose their \ac{GHG} emissions data in \textit{metric tons of \ce{CO2}} equivalent.
+However, other companies report their emissions in different units, such as kilograms of \ce{CO2}, metric tons of \ce{CO2} per unit of production, and some companies with very large numbers report their emissions in million metric tons of \ce{CO2} equivalent.
 Since the unit of measurement is crucial for the correct interpretation of the data, it is important to also be able to extract this information from the reports.
-Therefore, if our system correctly detects the values in the document, but fail to output a normalized unit of measurement --- in our case, we use metric tonnes --- the system output will be considered incorrect and will likely lead to a large residual error since the values will be in different magnitudes.
+Therefore, if our system correctly detects the values in the document but fails to output a normalized unit of measurement—in our case, we use metric tonnes—the system output will be considered incorrect and will likely lead to a large residual error since the values will be in different magnitudes.
 
-\subsubsection{Scope 2 emissions origin}
+\subsubsection{Scope 2 Emissions Origin}
 
 The \ac{GHG} Scope 2 emissions are divided into three categories: location-based, market-based, and undefined.
-The location-based emissions are the emissions calculated based on the location of the company's operations, the market-based emissions are the emissions calculated based on the market where the company sells its products, and the undefined emissions are the emissions that are not clearly defined as location-based or market-based.
+Location-based emissions are calculated based on the location of the company's operations, market-based emissions are calculated based on the market where the company sells its products, and undefined emissions are those not clearly defined as location-based or market-based.
 It is important to be able to extract this information from the reports, as it is crucial for the correct interpretation of the data.
-Therefore, if our system correctly detects the values in the document, but fail to output the correct category for the Scope 2 emissions, the system output will be considered incorrect.
+Therefore, if our system correctly detects the values in the document but fails to output the correct category for the Scope 2 emissions, the system output will be considered incorrect.
 
 \clearpage
 
-\section{Strategies for information extraction from financial reports}
+\section{Strategies for Information Extraction from Financial Reports}
 
-Different strategies for extracting information from financial reports have been implemented in order to compare their effectiveness across diverse report formats and content types.
-The study brings an approach focused solely on text information, an image-analysis approach that treats the PDF page as an image, and a multimodal approach that combines image and text information to infer the correct indicators disclosed in the document from more than one source of truth.
+Different strategies for extracting information from financial reports have been implemented to compare their effectiveness across diverse report formats and content types.
+The study brings an approach focused solely on text information, an image-analysis approach that treats the \ac{PDF} page as an image, and a multimodal approach that combines image and text information to infer the correct indicators disclosed in the document from more than one source of truth.
 For these experiments, we maintain the same pre-processing steps to ensure that the comparison only takes into account the core feature of extracting data from a given input.
 
 \subsection{System Specifications}
