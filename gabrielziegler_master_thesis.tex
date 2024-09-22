@@ -1242,7 +1242,7 @@ The detection rate is a crucial metric for evaluating the system's ability to id
 
 \begin{table}[H]
     \centering
-    \resizebox{\textwidth}{!}{
+    \scriptsize % Reduces font size for the entire table
     \ra{1.3}
     \begin{tabular}{@{}llrrrrr@{}}\toprule
         \textbf{Approach} & \textbf{Indicator} & \textbf{Recall} & \textbf{Precision} & \textbf{Accuracy} \\ \midrule
@@ -1264,7 +1264,7 @@ The detection rate is a crucial metric for evaluating the system's ability to id
         & Scope 2 Emissions Market & 0.92 & \textbf{0.67} & \textbf{0.89} \\
         & Scope 3 Emissions & \textbf{0.93} & \textbf{0.90} & \textbf{0.92} \\
         \bottomrule
-    \end{tabular}}
+    \end{tabular}
     \caption{Metrics for different approaches.}
     \label{tab:approach_metrics}
 \end{table}
@@ -1297,24 +1297,25 @@ Because of the nature of the indicators being analyzed, these metrics can often 
 Therefore, we see that the residual values are high for all the indicators, indicating that the system is not able to extract the information correctly in some cases.
 However, the perfect match rate is mostly above 70\% for all the indicators, indicating that the system was able to correctly predict the indicators in a high proportion of the documents.
 
-\begin{table}[H]\centering
-    \resizebox{\textwidth}{!}{
+\begin{table}[H]
+    \centering
+    \scriptsize
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
         \textbf{Indicator} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
-        \textbf{Scope 1 emissions} & residual & 621589.32 & 2617185.82 & 0.0 & 0.0 & 0.0 & 300.5 & 16657326.0 \\
+        \textbf{Scope 1 Emissions} & residual & 621589 & 2617186 & 0 & 0 & 0 & 301 & 16657326 \\
         & perfect match & 70\% & & & & & & \\
-        \textbf{Scope 2 emissions} & residual & 42701.47 & 227479.61 & 0.0 & 0.0 & 0.0 & 72.45 & 1534000.0 \\
+        \textbf{Scope 2 Emissions} & residual & 42701 & 227480 & 0 & 0 & 0 & 72 & 1534000 \\
         & perfect match & 73\% & & & & & & \\
-        \textbf{Scope 2 emissions location} & residual & 1093202.00 & 6180676.24 & 0.0 & 0.0 & 0.0 & 12355.0 & 49315635.0 \\
+        \textbf{Scope 2 Emissions Location} & residual & 1093202 & 6180676 & 0 & 0 & 0 & 12355 & 49315635 \\
         & perfect match & 53\% & & & & & & \\
-        \textbf{Scope 2 emissions market} & residual & 358920.45 & 2260835.10 & 0.0 & 0.0 & 0.0 & 0.0 & 16997182.0 \\
+        \textbf{Scope 2 Emissions Market} & residual & 358920 & 2260835 & 0 & 0 & 0 & 0 & 16997182 \\
         & perfect match & 79\% & & & & & & \\
-        \textbf{Scope 3 emissions} & residual & 785785.79 & 5287354.29 & 0.0 & 0.0 & 0.0 & 2.07 & 46199953.8 \\
+        \textbf{Scope 3 Emissions} & residual & 785786 & 5287354 & 0 & 0 & 0 & 2 & 46199954 \\
         & perfect match & 74\% & & & & & & \\
         \bottomrule
-    \end{tabular}}
-    \caption{Residual and perfect match metrics for the text-only approach.}
+    \end{tabular}
+    \caption{Residual and perfect match metrics for the text-only approach (rounded).}
     \label{tab:text_only_metrics}
 \end{table}
 
@@ -1324,24 +1325,25 @@ The image-only approach focuses on extracting information from the \ac{PDF} docu
 This approach is expected to perform better than the text-only approach for documents that contain visually rich information, such as charts and tables, as the model is able to interpret the visual nuances of the document.
 However, it is also expected to have a higher rate of hallucinations, as the model is not able to validate the information extracted from the images with the text data.
 
-\begin{table}[H]\centering
-    \resizebox{\textwidth}{!}{
+\begin{table}[H]
+    \centering
+    \scriptsize
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
         \textbf{Indicator} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
-        \textbf{Scope 1 emissions} & residual & 1537568.10 & 12489496.27 & 0.0 & 0.0 & 0.0 & 2435.38 & 116455366.0 \\
+        \textbf{Scope 1 Emissions} & residual & 1537568 & 12489496 & 0 & 0 & 0 & 2435 & 116455366 \\
         & perfect match & 51\% & & & & & & \\
-        \textbf{Scope 2 emissions} & residual & 28025.10 & 167960.05 & 0.0 & 0.0 & 0.0 & 601.32 & 1534000.0 \\
+        \textbf{Scope 2 Emissions} & residual & 28025 & 167960 & 0 & 0 & 0 & 601 & 1534000 \\
         & perfect match & 67\% & & & & & & \\
-        \textbf{Scope 2 emissions location} & residual & 1608246.63 & 12893554.83 & 0.0 & 0.0 & 28.18 & 5243.06 & 119880861.0 \\
+        \textbf{Scope 2 Emissions Location} & residual & 1608247 & 12893555 & 0 & 0 & 28 & 5243 & 119880861 \\
         & perfect match & 45\% & & & & & & \\
-        \textbf{Scope 2 emissions market} & residual & 127889.60 & 1142411.28 & 0.0 & 0.0 & 0.0 & 5.44 & 10718989.28 \\
+        \textbf{Scope 2 Emissions Market} & residual & 127890 & 1142411 & 0 & 0 & 0 & 5 & 10718989 \\
         & perfect match & 72\% & & & & & & \\
-        \textbf{Scope 3 emissions} & residual & 859217.55 & 5387118.98 & 0.0 & 0.0 & 0.0 & 215.17 & 46199953.8 \\
+        \textbf{Scope 3 Emissions} & residual & 859218 & 5387119 & 0 & 0 & 0 & 215 & 46199954 \\
         & perfect match & 66\% & & & & & & \\
         \bottomrule
-    \end{tabular}}
-    \caption{Residual and perfect match metrics for the image-only approach.}
+    \end{tabular}
+    \caption{Residual and perfect match metrics for the image-only approach (rounded).}
     \label{tab:image_only_metrics}
 \end{table}
 
@@ -1353,24 +1355,25 @@ This could be due to the fact that rich-visual information is not present in mos
 The multimodal approach combines the information extracted from the text and images to predict the indicators of interest from the financial reports.
 This approach is expected to have the best performance among the three approaches, as it is able to use the information from both the text and images to validate the information extracted from the images with the text data and vice versa.
 
-\begin{table}[H]\centering
-    \resizebox{\textwidth}{!}{
+\begin{table}[H]
+    \centering
+    \scriptsize
     \ra{1.3}
     \begin{tabular}{@{}llrrrrrrr@{}}\toprule
         \textbf{Indicator} & \textbf{Metric} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{Max} \\ \midrule
-        \textbf{Scope 1 emissions} & residual & 751.58 & 3601.29 & 0.0 & 0.0 & 0.0 & 0.0 & 25030.0 \\
+        \textbf{Scope 1 Emissions} & residual & 752 & 3601 & 0 & 0 & 0 & 0 & 25030 \\
         & perfect match & 89\% & & & & & & \\
-        \textbf{Scope 2 emissions} & residual & 8431.00 & 32265.61 & 0.0 & 0.0 & 0.0 & 82.91 & 239308.0 \\
+        \textbf{Scope 2 Emissions} & residual & 8431 & 32266 & 0 & 0 & 0 & 83 & 239308 \\
         & perfect match & 69\% & & & & & & \\
-        \textbf{Scope 2 emissions location} & residual & 8680.55 & 30929.10 & 0.0 & 0.0 & 0.0 & 4834.0 & 239308.0 \\
+        \textbf{Scope 2 Emissions Location} & residual & 8681 & 30929 & 0 & 0 & 0 & 4834 & 239308 \\
         & perfect match & 57\% & & & & & & \\
-        \textbf{Scope 2 emissions market} & residual & 584.96 & 2194.31 & 0.0 & 0.0 & 0.0 & 0.0 & 12560.0 \\
+        \textbf{Scope 2 Emissions Market} & residual & 585 & 2194 & 0 & 0 & 0 & 0 & 12560 \\
         & perfect match & 88\% & & & & & & \\
-        \textbf{Scope 3 emissions} & residual & 227871.45 & 1168999.93 & 0.0 & 0.0 & 0.0 & 0.0 & 8254000.0 \\
+        \textbf{Scope 3 Emissions} & residual & 227871 & 1169000 & 0 & 0 & 0 & 0 & 8254000 \\
         & perfect match & 85\% & & & & & & \\
         \bottomrule
-    \end{tabular}}
-    \caption{Residual and perfect match metrics for the multimodal approach.}
+    \end{tabular}
+    \caption{Residual and perfect match metrics for the multimodal approach (rounded).}
     \label{tab:multimodal_metrics}
 \end{table}
 
