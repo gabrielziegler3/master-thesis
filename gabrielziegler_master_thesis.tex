@@ -630,6 +630,22 @@ The scope is deliberately confined to \ac{GHG} emissions data to maintain a clea
 The primary constraints include the variability in report formats, the complexity of financial and environmental terminology, and the current limitations of \ac{LLM} technologies in fully understanding and processing domain-specific contexts.
 Additionally, the study is limited by the computational resources available, which may affect the scalability and speed of the proposed solutions.
 
+\textbf{Scope}
+
+\begin{enumerate}
+    \item Analysing the effectiveness of text-only, image-only, and multimodal approaches for extracting \ac{GHG} emissions data from financial reports using GPT-4 models.
+    \item Evaluating the types of errors and trade-offs posed by different approaches in the context of non-standard report formats.
+    \item Identifying the challenges and limitations of current \ac{LLM} technologies in handling financial data extraction tasks.
+\end{enumerate}
+
+\textbf{Limitations}
+
+\begin{enumerate}
+    \item Due to the lack of more human resource for labeling the dataset, the experiments in this thesis count with a number of samples below the ideal for a more robust analysis.
+    \item Due to strict time constraints, models from competitors were not included in the study.
+    \item The study is limited to GHG emissions in sustainability and financial reports. Other types of indicators and reports are not considered.
+\end{enumerate}
+
 \subsection{Structure of the Thesis}
 
 This thesis is organized to systematically explore and address the challenges of financial data extraction using \acp{LLM}.
@@ -1468,8 +1484,7 @@ The multimodal approach, which combines text and image data, proved to be the mo
 Despite the multimodal approach's success, challenges remain. Differentiating sub-indicators under Scope 2 emissions revealed classification ambiguities, suggesting that refining dataset labeling or validation methods could improve extraction accuracy.
 
 In conclusion, this thesis demonstrates the potential of \acp{LLM} in automating \ac{ESG} data extraction from financial documents. The findings emphasize the importance of multimodal approaches for achieving reliable results in complex document analysis.
-Future research could focus on better preprocessing techniques, such as identifying key tables and infographics, to reduce irrelevant information and improve the context window usage.
-Expanding the scope of indicators and refining evaluation metrics would further advance the understanding of \acp{LLM}'s capabilities in this field.
+Future research could focus on better preprocessing techniques, such as identifying key tables and infographics, to reduce irrelevant information. Expanding the scope of indicators and refining evaluation metrics would further advance the understanding of \acp{LLM}'s capabilities in this field.
 These insights lay the groundwork for future developments in automated financial report analysis, with significant implications for business and regulatory compliance.
 
 \clearpage
