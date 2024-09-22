@@ -1345,7 +1345,7 @@ However, it is also expected to have a higher rate of hallucinations, as the mod
     \label{tab:image_only_metrics}
 \end{table}
 
-It is notable that the visual model underperforms the text-only approach in almost all the evaluated metrics.
+From the results above, it is notable that the visual model underperforms compared to the text-only approach all the metrics.
 This could be due to the fact that rich-visual information is not present in most documents and therefore this model would outperform the text-only approach in a subset of the documents present in the dataset while underperforming in the majority of the documents.
 
 \subsubsection{Multimodal}
@@ -1386,7 +1386,7 @@ In a context where this system is being assessed for use in a real-world scenari
 % display image
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/perfect_match_comparison.png}
+    \includegraphics[width=1\textwidth]{images/perfect_match_comparison.png}
     \caption{Results of the experiments for the different approaches.}
     \label{fig:perfect_match_comparison}
 \end{figure}
@@ -1401,46 +1401,40 @@ The sensitivity to such errors may vary depending on the specific indicators and
 The charts below represent the residuals for each indicator in each experimental strategy, arranged from the highest to the lowest residual value.
 Ideally, the best-performing system would have a curve closer to the origin, indicating smaller errors, while the worst-performing system would have a curve closer to the top-right corner of the chart.
 
-% display two images side by side
+
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{images/scope1_residuals.png}
-        \caption{Scope 1 emissions residual}
-        \label{fig:scope_1_residual}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{images/scope3_residuals.png}
-        \caption{Scope 3 emissions residual}
-        \label{fig:scope_3_residual}
-    \end{subfigure}
-    \caption{Residual analysis for Scope 1 and Scope 3 emissions.}
-    \label{fig:scope_1_3_residual_analysis}
+    \includegraphics[width=0.8\textwidth]{images/scope1_residuals.png}
+    \caption{Scope 1 emissions residual}
+    \label{fig:scope_1_residual}
 \end{figure}
 
-% display three images side by side
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.32\textwidth}
-        \includegraphics[width=\textwidth]{images/scope2_location_residuals.png}
-        \caption{Location-based}
-        \label{fig:scope_2_location_residual}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.32\textwidth}
-        \includegraphics[width=\textwidth]{images/scope2_market_residuals.png}
-        \caption{Market-based}
-        \label{fig:scope_2_market_residual}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.32\textwidth}
-        \includegraphics[width=\textwidth]{images/scope2_residuals.png}
-        \caption{Undefined}
-        \label{fig:scope_2_residual}
-    \end{subfigure}
-    \caption{Residual analysis for Scope 2 emissions.}
-    \label{fig:scope_2_residual_analysis}
+    \includegraphics[width=0.8\textwidth]{images/scope2_location_residuals.png}
+    \caption{Scope 2 emissions location residual}
+    \label{fig:scope_2_location_residual}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/scope2_market_residuals.png}
+    \caption{Scope 2 emissions market residual}
+    \label{fig:scope_2_market_residual}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/scope2_residuals.png}
+    \caption{Scope 2 undefined emissions residual}
+    \label{fig:scope_2_residual}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/scope3_residuals.png}
+    \caption{Scope 3 emissions residual}
+    \label{fig:scope_3_residual}
 \end{figure}
 
 A closer examination of the residuals reveals that the vision model produces samples with higher residuals than the text model, despite the text model generally having a higher perfect match rate.
