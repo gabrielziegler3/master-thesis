@@ -584,10 +584,7 @@ These models, such as \ac{GPT} and \ac{BERT}, offer unprecedented capabilities i
 
 \subsection{Context and Motivation}
 
-Financial reports are rich sources of information, encompassing a wide range of data including financial statements, management discussions, and \ac{ESG} disclosures.
-Among these, the extraction of \ac{GHG} emissions data has gained particular importance due to increasing regulatory requirements and the growing emphasis on sustainability.
-However, the diverse formats and layouts used in these reports pose significant challenges for automated data extraction systems.
-The need for a robust solution that can handle such variability is more pressing than ever as businesses and stakeholders demand faster and more accurate insights from financial documents.
+Financial reports are rich sources of information, encompassing a wide range of data, including financial statements, management discussions, and \ac{ESG} disclosures. In companies that aim to provide up-to-date analysis on financial resources, keeping a database with key indicators from companies all over the world is essential. Since there are many companies and reports are released with high frequency throughout the year, it is not feasible to manually extract this information. Therefore, there is a huge demand for automated systems that can extract this information from documents or at least speed up the process of acquiring and structuring this information. Among these, the extraction of \ac{GHG} emissions data has gained particular importance due to increasing regulatory requirements and the growing emphasis on sustainability. However, the diverse formats and layouts used in these reports pose significant challenges for automated data extraction systems. The need for a robust solution that can handle such variability is more pressing than ever, as businesses and stakeholders demand faster and more accurate insights from financial documents. For these reasons, in this study, we focus on the extraction of \ac{GHG} emissions data from financial reports, aiming to develop and evaluate methodologies to understand the effectiveness, issues, and trade-offs to consider when implementing automated systems in this process.
 
 \subsection{Problem Definition}
 
@@ -626,9 +623,6 @@ These research questions are essential for developing a comprehensive understand
 \label{sec:scope-limitations}
 
 This study focuses on the extraction of financial data, specifically \ac{GHG} emissions metrics, from financial reports. The reports used in this study are publicly available and include annual and quarterly statements from various industries. The scope is deliberately confined to \ac{GHG} emissions data to maintain a clear focus, although the methodologies developed could be extended to other types of financial data in future research. The primary constraints include the variability in report formats, the complexity of financial and environmental terminology, and the current limitations of \ac{LLM} technologies in fully understanding and processing domain-specific contexts. Additionally, the study is constrained by the computational resources available, which may affect the scalability and speed of the proposed solutions.
-
-% break the pages
-\clearpage
 
 \textbf{Scope}
 
@@ -1183,6 +1177,10 @@ This process can be further improved by adding more context and validation steps
 In this experiment, we use the \ac{GPT}-4 architecture, specifically \textit{gpt-4-0125-preview} released in December 2023, to extract information from the text contained in the financial reports without considering any images or visual data.
 Evidently, this approach is limited to the information present in the text and does not account for any charts or important visual cues that the report might contain.
 Therefore, it is expected that this system may fail in cases where the indicators are presented in a visual form.
+This is also the cheapest approach in terms of processing time and cost, as it only requires the \ac{GPT}-4 model to process the text data.
+Depending on the use case, if this approach performs sufficiently well, it could be the most cost-effective solution for extracting information from financial reports.
+
+This approach can also be replaced by the usage of \ac{RAG} systems where the information from the document is stored in a database and the system can perform queries using embeddings to find the most similar documents, or pages, to the query
 
 \subsection{Image-Only Approach with LLMs}
 
