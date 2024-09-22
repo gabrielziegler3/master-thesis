@@ -1457,33 +1457,20 @@ The metrics and labels reported for Scopes 1 and 3 should not suffer from this u
 \section{Conclusions}
 \label{sec:summary}
 
-This thesis explored various approaches for extracting \ac{GHG} emissions from financial reports using \acp{LLM} as the core engine behind the predictions.
-The primary objective was to evaluate the effectiveness of text-only, image-only, and multimodal strategies in accurately identifying and extracting key environmental metrics from complex financial documents.
-Through a series of experiments, each method was assessed using a robust set of evaluation criteria, including detection rate, residual analysis, and perfect match rate.
-The results provide critical insights into the strengths and limitations of each approach, allowing for a better understanding of the trade-offs posed by each method.
+This thesis investigated several approaches for extracting \ac{GHG} emissions from financial reports using \acp{LLM} as the core engine for predictions. The primary goal was to evaluate the effectiveness of text-only, image-only, and multimodal strategies in identifying key environmental metrics from complex financial documents. Each method was assessed based on detection rate, residual analysis, and perfect match rate, providing insights into the strengths and weaknesses of each approach.
 
-The text-only approach demonstrated commendable performance, particularly in handling structured text data --- such as tables and indicators disclosed in plain text --- achieving reasonably high precision and recall across most indicators.
-However, its reliance solely on textual information rendered it less effective in scenarios where critical data was embedded in visually rich elements, such as charts, illustrations, and unconventional table formats.
-This limitation was evident in the higher residuals and occasional mismatches in indicator predictions, underscoring the challenges of relying on text-based extraction methods for visually complex documents.
+The text-only approach performed well, especially when handling structured data like tables and text-based indicators. It achieved high precision and recall for most indicators, but struggled with visually rich elements like charts and complex tables, leading to higher residuals and mismatches. This highlights the challenges of relying solely on text-based methods for visually complex documents.
 
-The image-only approach, while capable of interpreting visually rich information, underperformed relative to the text-only method.
-Although it excelled in extracting data from images, its propensity for hallucinations and the absence of textual validation led to lower precision and increased errors in the extracted metrics.
-The inherent weaknesses in the image-only approach highlight the difficulties of extracting accurate data when solely dependent on visual cues, particularly in financial documents where both text and images convey essential information.
-This method also performed poorly on the given dataset because, as observed during the annotation process, when companies provide visual-rich features to disclose \ac{GHG} emissions, the same information is often found on another page of the report in a more traditional table format.
-This gave the text-only approach an advantage, as there would usually be a text-friendly table, reducing confusion in deciding which page contains the correct information on the key indicators.
+The image-only approach excelled at interpreting visual data but underperformed overall. While effective at extracting data from images, it suffered from hallucinations and errors due to the lack of textual validation. This method's weaknesses were particularly evident as financial documents often present visual information alongside textual descriptions, with the latter providing more reliable data for extraction.
 
-The multimodal approach, which integrates both text and image data, proved to be the most effective strategy.
-By leveraging the complementary strengths of text and image analysis, this method achieved the highest overall accuracy, precision, and recall for detections, as well as higher perfect match rates exceeding 85\% for some key indicators.
-The multimodal approach also demonstrated superior performance in residual analysis, indicating its capability to extract data with minimal errors, keeping the system's errors more manageable and less harmful.
-This method's ability to cross-validate information between text and images effectively mitigated the risk of hallucinations and significantly reduced extraction errors, making it the most robust solution for \ac{ESG} data extraction in financial reports across the studied methods.
+The multimodal approach, which combines text and image data, proved to be the most effective. By leveraging both sources of information, it achieved the highest accuracy, precision, and recall, with perfect match rates exceeding 85\% for key indicators. It also performed well in residual analysis, minimizing errors by cross-validating between text and images, making it the most robust solution for \ac{ESG} data extraction.
 
-Despite the overall success of the multimodal approach, the study also identified areas for improvement.
-The challenges associated with differentiating sub-indicators under Scope 2 emissions, due to classification ambiguities, suggest that further refinement of the dataset labeling and perhaps a more forgiving validation for such indicators could enhance the accuracy of the extraction process while maintaining the interpretability of the results.
+Despite the multimodal approach's success, challenges remain. Differentiating sub-indicators under Scope 2 emissions revealed classification ambiguities, suggesting that refining dataset labeling or validation methods could improve extraction accuracy.
 
-In conclusion, this thesis contributes to the field of information retrieval from financial documents by demonstrating the power of \acp{LLM} in automating the extraction of \ac{ESG} indicators from such a diverse real-world dataset.
-The findings emphasize the importance of a multimodal approach for achieving high accuracy and reliability in complex document analysis tasks.
-Future research could explore the integration of more advanced model preprocessing techniques to increase the focus on key elements of the page, such as cropping tables or infographics containing the key indicators to avoid showing the model irrelevant information. Moreover, expanding the scope of indicators and refining the evaluation metrics would provide a more comprehensive understanding of \acp{LLM}'s capabilities and limitations in this domain.
-Overall, the insights gained from this study lay the groundwork for further advancements in the automated analysis of financial reports, with significant implications for businesses, regulatory compliance, and sustainability initiatives.
+In conclusion, this thesis demonstrates the potential of \acp{LLM} in automating \ac{ESG} data extraction from financial documents. The findings emphasize the importance of multimodal approaches for achieving reliable results in complex document analysis.
+Future research could focus on better preprocessing techniques, such as identifying key tables and infographics, to reduce irrelevant information and improve the context window usage.
+Expanding the scope of indicators and refining evaluation metrics would further advance the understanding of \acp{LLM}'s capabilities in this field.
+These insights lay the groundwork for future developments in automated financial report analysis, with significant implications for business and regulatory compliance.
 
 \clearpage
 %% Bibliography/ list of references
